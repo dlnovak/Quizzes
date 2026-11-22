@@ -322,6 +322,79 @@ input{font:inherit}
 .fatal{margin:auto;max-width:560px;padding:28px;font-size:17px;line-height:1.5}
 .fatal pre{white-space:pre-wrap;font-size:13px;background:rgba(0,0,0,.35);padding:12px;border-radius:3px}
 
+/* =====================================================================
+   ONLINE
+   ===================================================================== */
+.online h3{margin:0;font-family:var(--f-display);font-weight:900;font-size:24px;color:var(--ink);width:100%}
+.online{flex-direction:column;align-items:stretch;gap:10px}
+.onote{margin:0;font-size:14px;color:#5a5146}
+.olabel{display:grid;gap:4px;font-weight:600;font-size:14px;color:var(--ink)}
+.olabel input,.ojoin input{height:44px;padding:0 12px;border:2px solid var(--ink);border-radius:2px;background:rgba(255,255,255,.55);font-family:var(--f-hand);font-size:20px;color:var(--ink);min-width:0}
+.olabel input:focus,.ojoin input:focus{outline:none;background:#fff}
+.obtns{display:flex;gap:8px;flex-wrap:wrap}
+.online .btn{background:var(--ink);color:var(--paper);font-size:17px;padding:9px 16px}
+.online .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.ojoin{display:flex;gap:8px}
+.ojoin input{flex:1;font-family:var(--f-display);font-weight:900;font-size:26px;letter-spacing:.18em;text-transform:uppercase}
+.omsg{margin:0;padding:8px 10px;border-radius:2px;background:rgba(195,32,44,.12);color:#8e1520;font-weight:600;font-size:14px}
+.online .addp{align-self:flex-start;margin:0}
+
+.room{width:min(560px,100%);padding:26px 24px 22px;border-radius:2px;rotate:-.4deg;box-shadow:0 30px 60px -25px rgba(0,0,0,.9);text-align:center;color:var(--ink)}
+.room .rlead{margin:0;font-weight:600;color:#5a5146}
+.room .code{font-family:var(--f-display);font-weight:900;font-size:clamp(84px,22vw,140px);line-height:.9;letter-spacing:.08em;margin:4px 0 6px}
+.room .rhint{margin:6px auto 12px;max-width:34ch;font-size:15px;line-height:1.4;color:#4d453b}
+.room .btn{background:var(--ink);color:var(--paper)}
+.room .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.room .opts{text-align:left}
+.room .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.roster{list-style:none;margin:18px 0 6px;padding:0;display:grid;gap:8px;text-align:left}
+.roster li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-left:6px solid var(--pc);background:rgba(255,255,255,.45);border-radius:2px}
+.roster .nm{flex:1;font-family:var(--f-hand);font-size:21px;line-height:1.1}
+.roster .dot{width:10px;height:10px;border-radius:50%;background:#b9ae95;flex:none}
+.roster .dot.on{background:var(--stamp-green);box-shadow:0 0 0 3px rgba(29,116,72,.18)}
+.rtag{font-size:12px;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--ink);color:var(--paper)}
+.rtag.you{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.rwait{font-family:var(--f-hand);font-size:22px;margin:16px 0}
+
+.netpill{display:inline-block;padding:5px 12px;border-radius:14px;font-size:13px;font-weight:700;background:#ffd36b;color:var(--ink);animation:pulse 1.6s ease-in-out infinite}
+.room .netpill{margin-bottom:12px}
+@keyframes pulse{50%{opacity:.55}}
+.top .rcode{font-size:13px;font-weight:700;padding:3px 9px;border-radius:12px;box-shadow:inset 0 0 0 1.5px rgba(247,245,240,.4);color:rgba(247,245,240,.8);margin-left:6px}
+
+.pl.me{background:rgba(255,255,255,.07)}
+.pl .nm small{font-family:var(--f-body);font-size:12px;opacity:.7}
+.pl.off{opacity:.55}
+.pl .tag.offt{background:#5a5146;color:#fff}
+
+.choice .ct{flex:1}
+.choice.mine{background:var(--ink);color:var(--paper);box-shadow:none;opacity:1}
+.choice.mine .k{background:var(--paper);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+.chip{display:inline-block;max-width:9ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:1px 7px;border-radius:9px;background:var(--pc);color:var(--ink);font-family:var(--f-body);font-weight:700;font-size:12px;line-height:1.5}
+.choice.right .chip{box-shadow:0 0 0 1.5px #fff}
+.who .lockrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;width:100%;font-size:14px}
+.who .lockrow.dim{color:#7a7065}
+.who b.plain{background:none;padding:0;font-family:var(--f-body);font-weight:700;font-size:16px}
+.who .deltas{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+.who .dl{font-weight:700;font-size:14px;padding:2px 9px;border-radius:3px;border-left:5px solid var(--pc);background:rgba(27,23,20,.07)}
+.who .dl.up{color:var(--stamp-green)}.who .dl.down{color:var(--stamp-red)}
+.mnote{font-size:14px;color:#5a5146;margin:12px 0 0}
+.rowbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.rowbtns .btn{margin-top:20px}
+
+@media (max-width:560px){
+  .top{gap:6px;padding:8px 8px 2px}
+  .top .mark{font-size:22px;white-space:nowrap}
+  .top .left{display:none}
+  .top .rcode{white-space:nowrap;font-size:12px;padding:2px 7px;margin-left:0}
+  .top:has(.netpill) .rcode{display:none}
+  .netpill{font-size:12px;padding:4px 9px;white-space:nowrap}
+  .iconbtn{width:36px;height:36px}
+  .card .foot{margin-top:24px}
+  .stamp{font-size:28px;bottom:16px}
+  .chip{max-width:7ch}
+}
+
 /* ---------- responsive ---------- */
 @media (max-width:820px){
   .lobby-inner{grid-template-columns:minmax(0,1fr);gap:20px}
@@ -341,7 +414,7 @@ input{font:inherit}
   .top .round{display:none}
   .head{min-height:46px}
   .tile::before{width:12px;top:4px}
-  .stamp{top:auto;right:auto;left:16px;bottom:20px;font-size:34px;rotate:-6deg}
+  .stamp{top:auto;right:auto;left:16px;bottom:16px;font-size:28px;rotate:-6deg}
 }
 @media (max-height:520px) and (orientation:landscape){
   .players{padding-top:4px;padding-bottom:4px}
@@ -362,14 +435,15 @@ input{font:inherit}
 /* =====================================================================
    DEEP CUTS — game code (plain JS, no libraries, no build step)
    ---------------------------------------------------------------------
-   Architecture (kept this way on purpose so online play can be added):
    - All game rules live in reduce(state, action). It is pure: no clock,
      no randomness, no DOM. Time ("now") and shuffles arrive inside the
-     action. Online mode will run the same reducer on the host and
-     mirror the state to every player.
-   - The UI only ever calls dispatch(action) and re-renders from state.
-   - Storage writes to localStorage under deepcuts:<uid>:*, uid = "guest"
-     until sign-in exists.
+     action, so the host can run it and every other device just mirrors
+     the resulting state.
+   - Local play: this device runs the reducer and saves to localStorage.
+   - Online play (only if Firebase loaded): the HOST device runs the
+     reducer and writes the whole state to the room as one JSON string.
+     Guests never change state directly; they push small "actions"
+     (pick, answer, wager, continue) that the host applies.
    ===================================================================== */
 (function(){
 'use strict';
@@ -388,16 +462,19 @@ var ROUNDS=[
   {name:'Side A',values:[200,400,600,800,1000,1200],tiers:[1,1,2,2,3,3],deep:1},
   {name:'Side B',values:[400,800,1200,1600,2000,2400],tiers:[1,2,2,3,3,3],deep:2}
 ];
-var TIME={open:15000,answer:10000,direct:20000,deep:25000};
+var TIME={open:15000,answer:10000,direct:20000,deep:25000,all:20000};
+var CODE_CHARS='BCDFGHJKLMNPQRSTVWXZ';
 
 /* ---------- utils ---------- */
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function fmt(n){return (n<0?'−':'')+Math.abs(n).toLocaleString('en-US')}
+function signed(n){return (n>=0?'+':'')+fmt(n)}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 function uid(){return Math.random().toString(36).slice(2,10)}
 function clone(o){return JSON.parse(JSON.stringify(o))}
 function hashRot(i){var x=Math.sin(i*12.9898)*43758.5453;return ((x-Math.floor(x))-.5)*1.6}
 function norm(s){return String(s).toLowerCase().replace(/[^a-z0-9]/g,'')}
+function reduced(){return window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches}
 
 /* ---------- storage (localStorage, namespaced by uid) ---------- */
 var CURRENT_UID='guest';
@@ -434,7 +511,6 @@ function makeDeal(length,seen){
       var q=take(c,R.tiers[row]); var op=options(q);
       tiles.push({c:c,r:row,v:R.values[row],q:q.id,o:op.o,k:op.k,dd:false,used:false});
     }
-    // hide Deep Cuts in rows 3-6, never two in one column
     var cols=shuffle([0,1,2,3]).slice(0,R.deep);
     cols.forEach(function(c){var row=2+Math.floor(Math.random()*4);tiles[row*4+c].dd=true});
     rounds.push(tiles);
@@ -445,6 +521,8 @@ function makeDeal(length,seen){
 
 /* =====================================================================
    REDUCER — every rule of the game. Pure function.
+   Online rules: a.pid is the player who sent the action; a.host marks
+   actions from the host device (allowed to unstick a game).
    ===================================================================== */
 function newState(){return {v:1,phase:'lobby'}}
 function tileOf(s){return s.rounds[s.round][s.clue.t]}
@@ -452,17 +530,24 @@ function roundLeft(s){return s.rounds[s.round].filter(function(t){return !t.used
 function lowestScorer(s){var m=0;s.players.forEach(function(p,i){if(p.score<s.players[m].score)m=i});return m}
 function deepMax(s,p){return Math.max(s.players[p].score,ROUNDS[s.round].values[5])}
 function finalMax(s,p){return Math.max(0,s.players[p].score)}
+function isOnline(s){return !!(s.settings&&s.settings.online)}
 
 function reduce(s0,a){
-  var s=clone(s0), now=a.now||0, P, t, c;
+  var s=reduceInner(s0,a);
+  if(s!==s0)s.rev=(s0.rev||0)+1;
+  return s;
+}
+function reduceInner(s0,a){
+  var s=clone(s0), now=a.now||0, P, t, c, on=isOnline(s0);
   switch(a.type){
   case 'NEW_GAME':
     return {v:1,id:a.id,phase:'intro',settings:a.settings,
-      players:a.players.map(function(p,i){return {id:i,name:p.name,color:PCOLORS[i],score:0}}),
+      players:a.players.map(function(p,i){return {id:i,uid:p.uid||null,name:p.name,color:PCOLORS[i],score:0}}),
       control:a.control||0,round:0,rounds:a.deal.rounds,final:{b:a.deal.final.b,q:a.deal.final.q,o:a.deal.final.o,k:a.deal.final.k,wagers:{},answers:{},step:0,order:[]},
       clue:null,seq:0};
 
   case 'CONTINUE':
+    if(a.rev!=null&&a.rev!==s0.rev)return s0;   // stale double-tap from another phone
     if(s.phase==='intro'){s.phase='board';return s}
     if(s.phase==='reveal'){
       tileOf(s).used=true; s.clue=null;
@@ -480,16 +565,18 @@ function reduce(s0,a){
 
   case 'PICK':
     if(s.phase!=='board')return s0;
+    if(on&&a.pid!==s.control&&!a.host)return s0;
     t=s.rounds[s.round][a.tile]; if(!t||t.used)return s0;
     s.seq++;
-    s.clue={t:a.tile,token:s.seq,value:t.v,dd:t.dd,mode:null,buzzed:null,locked:[],struck:[],picked:null,result:null,deadline:null,timed:!!s.settings.timer};
+    s.clue={t:a.tile,token:s.seq,value:t.v,dd:t.dd,mode:null,buzzed:null,locked:[],struck:[],picked:null,result:null,deadline:null,answers:{},order:[]};
     if(t.dd){s.phase='wager';return s}
-    s.clue.mode=s.players.length>1?'buzz':'direct';
-    s.clue.deadline=s.settings.timer?now+(s.clue.mode==='buzz'?TIME.open:TIME.direct):null;
+    s.clue.mode=on?'all':(s.players.length>1?'buzz':'direct');
+    s.clue.deadline=s.settings.timer?now+TIME[s.clue.mode==='buzz'?'open':s.clue.mode]:null;
     s.phase='clue';return s;
 
   case 'WAGER':
     if(s.phase!=='wager')return s0;
+    if(on&&a.pid!==s.control&&!a.host)return s0;
     var max=deepMax(s,s.control), w=Math.round(Math.max(5,Math.min(max,a.amount|0)));
     s.clue.value=w; s.clue.mode='solo'; s.seq++; s.clue.token=s.seq;
     s.clue.deadline=s.settings.timer?now+TIME.deep:null;
@@ -504,6 +591,15 @@ function reduce(s0,a){
 
   case 'ANSWER':
     c=s.clue; if(s.phase!=='clue'||!c)return s0;
+    if(a.opt==null||a.opt<0||a.opt>3)return s0;
+    if(c.mode==='all'){
+      var ap=a.pid;
+      if(ap==null||!s.players[ap]||c.answers[ap]!=null)return s0;
+      c.answers[ap]=a.opt; c.order.push(ap);
+      if(c.order.length>=s.players.length)resolveAll(s);
+      return s;
+    }
+    if(c.mode==='solo'&&on&&a.pid!==s.control)return s0;
     var who = c.mode==='buzz'?c.buzzed:(c.mode==='solo'?s.control:0);
     if(who==null)return s0;
     if(c.struck.indexOf(a.opt)>=0)return s0;
@@ -524,8 +620,12 @@ function reduce(s0,a){
     return s;
 
   case 'TIMEOUT':
-    c=s.clue; if(s.phase!=='clue'||!c||a.token!==c.token)return s0;
+  case 'REVEAL_NOW':
+    c=s.clue; if(s.phase!=='clue'||!c)return s0;
+    if(a.type==='TIMEOUT'&&a.token!==c.token)return s0;
+    if(c.mode==='all'){resolveAll(s);return s}
     if(c.mode==='buzz'){
+      if(a.type==='REVEAL_NOW'){c.result={pid:null,correct:false,delta:0};s.phase='reveal';return s}
       if(c.buzzed!=null){
         s.players[c.buzzed].score-=c.value; c.locked.push(c.buzzed); c.last={pid:c.buzzed,delta:-c.value,opt:null}; c.buzzed=null;
         if(c.locked.length>=s.players.length){c.result={pid:null,correct:false,delta:0};s.phase='reveal';return s}
@@ -541,19 +641,21 @@ function reduce(s0,a){
     c.result={pid:null,correct:false,delta:0}; s.phase='reveal'; return s;
 
   case 'FINAL_WAGER':
-    if(s.phase!=='finalWager')return s0;
+    if(s.phase!=='finalWager'||!s.players[a.pid]||s.final.wagers[a.pid]!=null)return s0;
     s.final.wagers[a.pid]=Math.max(0,Math.min(finalMax(s,a.pid),a.amount|0));
     if(Object.keys(s.final.wagers).length>=s.players.length){s.phase='finalQ'}
     return s;
 
   case 'FINAL_ANSWER':
-    if(s.phase!=='finalQ'||s.final.answers[a.pid]!=null)return s0;
+    if(s.phase!=='finalQ'||!s.players[a.pid]||s.final.answers[a.pid]!=null)return s0;
     s.final.answers[a.pid]=a.opt;
-    if(Object.keys(s.final.answers).length>=s.players.length){
-      s.final.order=s.players.map(function(p,i){return i}).sort(function(x,y){return s.players[x].score-s.players[y].score});
-      s.final.step=0; s.phase='finalReveal'; applyFinal(s);
-    }
+    if(Object.keys(s.final.answers).length>=s.players.length)finishFinal(s);
     return s;
+
+  case 'FINAL_FORCE':   // host: stop waiting for players who dropped
+    if(s.phase==='finalWager'){s.players.forEach(function(p,i){if(s.final.wagers[i]==null)s.final.wagers[i]=0});s.phase='finalQ';return s}
+    if(s.phase==='finalQ'){s.players.forEach(function(p,i){if(s.final.answers[i]==null)s.final.answers[i]=-1});finishFinal(s);return s}
+    return s0;
 
   case 'ADJUST':
     if(!s.players||!s.players[a.pid])return s0;
@@ -561,7 +663,7 @@ function reduce(s0,a){
 
   case 'RESUME':
     if(s.clue&&s.clue.deadline&&s.phase==='clue'){
-      var span=s.clue.mode==='buzz'?(s.clue.buzzed!=null?TIME.answer:TIME.open):(s.clue.mode==='solo'?TIME.deep:TIME.direct);
+      var span=s.clue.mode==='buzz'?(s.clue.buzzed!=null?TIME.answer:TIME.open):TIME[s.clue.mode==='solo'?'deep':s.clue.mode];
       s.seq++;s.clue.token=s.seq;s.clue.deadline=now+span;
     }
     return s;
@@ -569,10 +671,25 @@ function reduce(s0,a){
   case 'SET_TIMER':
     if(!s.settings)return s0;
     s.settings.timer=!!a.on;
-    if(s.clue){s.clue.timed=!!a.on; s.clue.deadline=a.on&&s.phase==='clue'?now+TIME.open:null; s.seq++; s.clue.token=s.seq}
+    if(s.clue){s.clue.deadline=a.on&&s.phase==='clue'?now+TIME.all:null; s.seq++; s.clue.token=s.seq}
     return s;
   }
   return s0;
+}
+function resolveAll(s){
+  var c=s.clue, t=tileOf(s), d={}, first=null;
+  c.order.forEach(function(pid){if(first==null&&c.answers[pid]===t.k)first=pid});
+  s.players.forEach(function(p,i){
+    var o=c.answers[i];
+    d[i]=o==null?0:(o===t.k?c.value:-c.value);
+    p.score+=d[i];
+  });
+  if(first!=null)s.control=first;
+  c.result={all:true,deltas:d,first:first,pid:null,correct:first!=null}; s.phase='reveal';
+}
+function finishFinal(s){
+  s.final.order=s.players.map(function(p,i){return i}).sort(function(x,y){return s.players[x].score-s.players[y].score});
+  s.final.step=0; s.phase='finalReveal'; applyFinal(s);
 }
 function applyFinal(s){
   var pid=s.final.order[s.final.step], ok=s.final.answers[pid]===s.final.k, w=s.final.wagers[pid]||0;
@@ -605,6 +722,7 @@ var Sfx={ctx:null,on:true,
       case 'wrong':this.t(220,.45,'sawtooth',.1,0,92);this.t(226,.45,'sawtooth',.07,0,95);break;
       case 'deep':this.n(.18,.5,1800,3,0,500);this.n(.22,.5,500,3,.2,2200);this.t(110,.9,'sawtooth',.06,.35,440);break;
       case 'tick':this.t(1400,.03,'square',.04);break;
+      case 'lock':this.t(660,.08,'square',.05);this.t(990,.1,'triangle',.06,.05);break;
       case 'stamp':this.n(.08,.6,180,.8);break;
       case 'win':[392,523,659,784,659,784,1047].forEach(function(f,i){Sfx.t(f,.3,'triangle',.13,i*.11)});break;
     }
@@ -612,43 +730,220 @@ var Sfx={ctx:null,on:true,
 };
 
 /* =====================================================================
-   APP / UI STATE
+   APP STATE
    ===================================================================== */
 var S=newState();
-var UI={menu:false,lastEvent:null,prevScores:null,priv:null,wagerAmt:null,setup:null,flipFrom:null,lastTick:-1};
+var UI={menu:false,lastEvent:null,prevScores:null,priv:null,wagerAmt:null,setup:null,flipFrom:null,lastTick:-1,
+  joinOpen:false,joinCode:'',netMsg:'',busy:false,pendingAns:null,pendingTok:null,copied:false};
+/* ROOM is set while connected to an online room:
+   {code, role:'host'|'guest', members:{uid:{name,online,joined}}, hostUid, unsub:[], loaded} */
+var ROOM=null;
+function NET(){return window.__netState==='ready'?window.__net:null}
+function isHost(){return !!(ROOM&&ROOM.role==='host')}
+function isGuest(){return !!(ROOM&&ROOM.role==='guest')}
+function myPid(){
+  if(!ROOM||!S.players||!NET())return null;
+  for(var i=0;i<S.players.length;i++)if(S.players[i].uid===NET().uid)return i;
+  return -1;
+}
+function clock(){var n=NET();return ROOM&&n?n.now():Date.now()}
+function member(uid){return ROOM&&ROOM.members?ROOM.members[uid]:null}
+function playerOffline(p){if(!ROOM||!p.uid)return false;var m=member(p.uid);return !m||m.online===false}
 
-function saveGame(){ if(S.phase&&S.phase!=='lobby') store.set('game',S); else store.del('game'); }
-function markSeen(qid){var seen=store.get('seen',{});seen[qid]=1;
+function saveGame(){ if(ROOM)return; if(S.phase&&S.phase!=='lobby') store.set('game',S); else store.del('game'); }
+function markSeen(qid){var seen=store.get('seen',{});
   if(Object.keys(seen).length>BANK.length*0.8)seen={};seen[qid]=1;store.set('seen',seen)}
 
-function dispatch(a){
-  a.now=a.now||Date.now();
-  var before=S, next=reduce(S,a);
-  if(next===before)return;
-  UI.prevScores=before.players?before.players.map(function(p){return p.score}):null;
+/* ---------- applying a new state (local, host, or mirrored from host) ---------- */
+function applyState(before,next,a){
+  captureFlip(before,next);
+  UI.prevScores=before.players&&next.players&&before.id===next.id?before.players.map(function(p){return p.score}):null;
   UI.lastEvent=eventFor(before,next,a);
+  if(next.phase!==before.phase||(next.clue&&before.clue&&next.clue.token!==before.clue.token)){UI.pendingAns=null}
+  if(next.phase!==before.phase&&(next.phase==='finalWager'||next.phase==='finalQ'||next.phase==='wager')){UI.priv=null;UI.wagerAmt=null;UI.pendingAns=null}
   S=next; saveGame(); sideEffects(before,next,a); render();
 }
-function eventFor(b,n,a){
-  if(a.type==='NEW_GAME'||(a.type==='CONTINUE'&&b.phase==='intro'))return {dealt:true};
-  if(a.type==='ANSWER'||a.type==='TIMEOUT'){
-    if(n.phase==='reveal'&&n.clue.result&&n.clue.result.pid!=null)return {stamp:true,opt:a.opt};
-    if(n.clue&&n.clue.last&&(!b.clue.last||n.clue.token!==b.clue.token))return {wrong:true,opt:a.opt};
+function dispatch(a){
+  if(isGuest()){sendRemote(a);return}
+  if(isHost()){a.host=true; if(a.pid==null)a.pid=myPid()}
+  a.now=clock();
+  var before=S, next=reduce(S,a);
+  if(next===before)return;
+  applyState(before,next,a);
+  if(isHost())pushState();
+}
+function captureFlip(b,n){
+  UI.flipFrom=null;
+  if(b.phase==='board'&&n.phase==='clue'&&n.clue&&!reduced()){
+    var el=app.querySelector('[data-t="'+n.clue.t+'"]');
+    if(el){var r=el.getBoundingClientRect();UI.flipFrom={left:r.left,top:r.top,width:r.width,height:r.height}}
   }
-  if(a.type==='CONTINUE'&&n.phase==='finalReveal')return {finalStep:true};
-  if(a.type==='FINAL_ANSWER'&&n.phase==='finalReveal')return {finalStep:true};
+}
+function eventFor(b,n,a){
+  if(n.phase==='intro'&&b.phase!=='intro')return {dealt:true};
+  if(b.phase==='intro'&&n.phase==='board')return {dealt:true};
+  if(b.phase==='clue'&&n.phase==='reveal')return {stamp:true,opt:a&&a.opt};
+  if(a&&(a.type==='ANSWER'||a.type==='TIMEOUT')&&n.clue&&n.clue.last&&b.clue&&n.clue.token!==b.clue.token)return {wrong:true,opt:a.opt};
+  if(n.phase==='finalReveal'&&(b.phase!=='finalReveal'||b.final.step!==n.final.step))return {finalStep:true};
   return null;
 }
 function sideEffects(b,n,a){
-  if(a.type==='PICK'){var t=n.rounds[n.round][a.tile];markSeen(t.q);Sfx.play(t.dd?'deep':'pick')}
-  if(a.type==='BUZZ')Sfx.play('buzz');
-  if(n.phase==='reveal'&&b.phase==='clue'){var r=n.clue.result;Sfx.play(r.correct?'right':'wrong');if(r.pid!=null)setTimeout(function(){Sfx.play('stamp')},120)}
-  else if(UI.lastEvent&&UI.lastEvent.wrong)Sfx.play('wrong');
+  if(b.phase==='board'&&(n.phase==='clue'||n.phase==='wager')&&n.clue){
+    var t=n.rounds[n.round][n.clue.t];
+    if(!ROOM||isHost())markSeen(t.q);
+    Sfx.play(t.dd?'deep':'pick');
+  }
+  if(a&&a.type==='BUZZ')Sfx.play('buzz');
+  if(b.phase==='clue'&&n.phase==='reveal'){
+    var r=n.clue.result, me=myPid(), good=r.correct;
+    if(r.all&&me!=null&&me>=0)good=r.deltas[me]>0;
+    Sfx.play(good?'right':'wrong');
+    if(r.pid!=null||(r.all&&me>=0&&n.clue.answers[me]!=null))setTimeout(function(){Sfx.play('stamp')},120);
+  }else if(UI.lastEvent&&UI.lastEvent.wrong)Sfx.play('wrong');
   if(UI.lastEvent&&UI.lastEvent.finalStep){var pid=n.final.order[n.final.step];Sfx.play(n.final.answers[pid]===n.final.k?'right':'wrong')}
   if(n.phase==='over'&&b.phase!=='over')setTimeout(function(){Sfx.play('win')},200);
-  if(n.phase==='finalQ'&&b.phase!=='finalQ'){UI.priv=null}
-  if(n.phase==='finalWager'&&b.phase!=='finalWager'){UI.priv=null}
+  keepAwake();
 }
+
+/* =====================================================================
+   ONLINE — rooms on Firebase Realtime Database
+   ===================================================================== */
+function onlineName(){return (store.get('oname','')||'').trim()}
+function genCode(){var s='';for(var i=0;i<4;i++)s+=CODE_CHARS[Math.floor(Math.random()*CODE_CHARS.length)];return s}
+function cleanAction(a){var o={type:a.type};['tile','amount','opt','pid','token'].forEach(function(k){if(typeof a[k]==='number'&&isFinite(a[k]))o[k]=a[k]});if(typeof S.rev==='number')o.rev=S.rev;return o}
+function netFail(msg,e){UI.busy=false;UI.netMsg=msg;if(e&&window.console)console.info('[deepcuts]',msg,e&&(e.code||e.message||e));render()}
+
+function pushState(){
+  var n=NET(); if(!n||!ROOM)return;
+  n.writeState(ROOM.code,JSON.stringify(S)).catch(function(e){console.info('[deepcuts] state write failed, will retry on next change',e&&(e.code||e.message))});
+}
+function sendRemote(a){
+  var n=NET(); if(!n||!ROOM)return;
+  if(a.type==='ANSWER'||a.type==='FINAL_ANSWER'){UI.pendingAns=a.opt;UI.pendingTok=S.clue?S.clue.token:'f';Sfx.play('lock');render()}
+  if(a.type==='FINAL_WAGER'||a.type==='WAGER'){UI.pendingAns='w';render()}
+  n.sendAction(ROOM.code,cleanAction(a)).catch(function(e){UI.pendingAns=null;netFail('That didn’t reach the host. Check your connection and try again.',e)});
+}
+var REMOTE_OK=['PICK','WAGER','ANSWER','CONTINUE','FINAL_WAGER','FINAL_ANSWER'];
+function onRemoteAction(x){
+  if(!x||!x.uid||!S.players||REMOTE_OK.indexOf(x.type)<0)return;
+  var pid=-1; S.players.forEach(function(p,i){if(p.uid===x.uid)pid=i});
+  if(pid<0)return;  // spectators can't act
+  var a={type:x.type,pid:pid,now:clock()};
+  ['tile','amount','opt','rev'].forEach(function(k){if(typeof x[k]==='number')a[k]=x[k]});
+  if(a.type==='ANSWER'||a.type==='FINAL_ANSWER')Sfx.play('lock');
+  var before=S, next=reduce(S,a);
+  if(next===before)return;
+  applyState(before,next,a); pushState();
+}
+function onRemoteState(str){
+  if(!str||!ROOM)return;
+  var n; try{n=JSON.parse(str)}catch(e){return}
+  if(isHost()){
+    // host only reads state once, when rejoining its own room after a reload
+    if(ROOM.loaded)return; ROOM.loaded=true;
+    S=n; render(); return;
+  }
+  ROOM.loaded=true;
+  var b=S; if(b.phase==='lobby')b={phase:'room'};
+  applyState(b,n,null);
+}
+function watchRoom(code,role){
+  var n=NET();
+  ROOM.unsub.push(n.watchMembers(code,function(m){ROOM.members=m||{};render()}));
+  ROOM.unsub.push(n.watchHost(code,function(h){
+    if(h==null&&ROOM&&ROOM.code===code&&ROOM.loaded){leaveRoom(false,'The host closed room '+code+'.');return}
+    if(ROOM)ROOM.hostUid=h;
+  }));
+  ROOM.unsub.push(n.watchState(code,onRemoteState));
+  if(role==='host')ROOM.unsub.push(n.watchActions(code,onRemoteAction));
+}
+function hostRoom(){
+  var n=NET(), name=onlineName(); if(!n)return;
+  if(!name){UI.netMsg='Type your name first.';render();return}
+  UI.busy=true;UI.netMsg='';render();
+  var tries=0;
+  (function attempt(){
+    var code=genCode();
+    n.roomInfo(code).then(function(info){
+      if(info.exists&&++tries<6)return attempt();
+      var st=UI.setup||defaultSetup();
+      var state={v:1,phase:'room',settings:{length:st.length,timer:!!st.timer,online:true},rev:1};
+      return n.create(code,JSON.stringify(state),name).then(function(){
+        ROOM={code:code,role:'host',members:{},hostUid:n.uid,unsub:[],loaded:true};
+        store.set('room',{code:code,role:'host'});
+        S=state; UI.busy=false; watchRoom(code,'host'); render();
+      });
+    }).catch(function(e){netFail(explainNet(e),e)});
+  })();
+}
+function joinRoom(code,silent){
+  var n=NET(), name=onlineName(); if(!n)return;
+  code=String(code||'').toUpperCase().replace(/[^A-Z]/g,'');
+  if(code.length!==4){UI.netMsg='Room codes are 4 letters.';render();return}
+  if(!name){UI.netMsg='Type your name first.';render();return}
+  UI.busy=true;UI.netMsg='';render();
+  n.roomInfo(code).then(function(info){
+    if(!info.exists){store.del('room');return netFail(silent?'':'No room '+code+'. Check the code with the host.')}
+    var role=info.host===n.uid?'host':'guest';
+    return n.join(code,name).then(function(){
+      ROOM={code:code,role:role,members:{},hostUid:info.host,unsub:[],loaded:false};
+      store.set('room',{code:code,role:role});
+      UI.busy=false;UI.joinOpen=false;
+      if(role==='guest')S={v:1,phase:'room',rev:0};
+      watchRoom(code,role); render();
+    });
+  }).catch(function(e){netFail(explainNet(e),e)});
+}
+function leaveRoom(closeRoom,msg){
+  var n=NET(), r=ROOM; ROOM=null;
+  if(r){r.unsub.forEach(function(f){try{f()}catch(e){}});
+    if(n){ if(closeRoom&&r.role==='host')n.destroy(r.code).catch(function(){}); else n.leave(r.code,S.phase==='room').catch(function(){}); }}
+  store.del('room'); S=newState(); UI.menu=false; UI.netMsg=msg||''; UI.busy=false; render();
+}
+function explainNet(e){
+  var c=String(e&&(e.code||e.message)||'');
+  if(/permission/i.test(c))return 'Firebase refused that. Check that the database rules were published.';
+  if(/network|unavailable|offline/i.test(c))return 'Couldn’t reach Firebase. Check your connection.';
+  return 'Online play hit a snag ('+c.slice(0,60)+'). Try again.';
+}
+function hostStart(){
+  var list=membersList().slice(0,4);
+  if(!list.length)return;
+  var st=S.settings||{length:'full',timer:true,online:true};
+  UI.wagerAmt=null;UI.priv=null;UI.menu=false;
+  dispatch({type:'NEW_GAME',id:uid(),players:list.map(function(m){return {name:m.name||'Player',uid:m.uid}}),
+    settings:{length:st.length,timer:!!st.timer,online:true},deal:makeDeal(st.length,store.get('seen',{})),control:Math.floor(Math.random()*list.length)});
+}
+function hostToRoom(){
+  S={v:1,phase:'room',settings:S.settings,rev:(S.rev||0)+1};
+  UI.menu=false; render(); pushState();
+}
+function membersList(){
+  var m=ROOM&&ROOM.members||{};
+  return Object.keys(m).map(function(k){return {uid:k,name:m[k].name,online:m[k].online!==false,joined:m[k].joined||0}})
+    .sort(function(a,b){return a.joined-b.joined});
+}
+window.addEventListener('net-change',function(){
+  if(window.__netState==='ready'){
+    var saved=store.get('room',null);
+    if(saved&&!ROOM&&S.phase==='lobby'&&onlineName())joinRoom(saved.code,true);
+  }
+  if(S.phase==='lobby')render();
+});
+window.addEventListener('net-conn',function(){if(ROOM)render()});
+
+/* keep phones awake during a game (best effort) */
+var wake=null;
+function keepAwake(){
+  try{
+    if(S.phase!=='lobby'&&!wake&&navigator.wakeLock&&document.visibilityState==='visible'){
+      navigator.wakeLock.request('screen').then(function(w){wake=w;w.addEventListener('release',function(){wake=null})}).catch(function(){});
+    }
+  }catch(e){}
+}
+document.addEventListener('visibilitychange',function(){
+  if(document.visibilityState==='visible'){keepAwake();var n=NET();if(n&&ROOM)n.wake()}
+});
 
 /* =====================================================================
    RENDER
@@ -663,10 +958,23 @@ var ICON={
 function render(){
   try{
     if(S.phase==='lobby'){app.innerHTML=lobbyHTML();return}
-    app.innerHTML=gameHTML()+overlayHTML()+(UI.menu?menuHTML():'');
+    if(S.phase==='room'){UI.ovKey=null;app.innerHTML=roomHTML();return}
+    // entrance animations only when an overlay first appears, never on
+    // the re-renders caused by other players' moves
+    var ok=overlayKey(), fresh=ok!==UI.ovKey; UI.ovKey=ok;
+    var ov=overlayHTML(); if(!fresh)ov=ov.replace(/class="ov fade/g,'class="ov').replace(/bigcard drop/g,'bigcard');
+    var mn=UI.menu?menuHTML():''; if(mn&&UI.menuShown)mn=mn.replace('class="ov fade menu-ov"','class="ov menu-ov"'); UI.menuShown=!!UI.menu;
+    app.innerHTML=gameHTML()+ov+mn;
     afterRender();
   }catch(e){showFatal(e)}
   finally{UI.lastEvent=null}
+}
+
+function overlayKey(){
+  var k=S.phase+':'+(S.id||'')+':'+S.round;
+  if(S.clue)k+=':'+S.clue.t;
+  if(S.phase==='finalReveal')k+=':'+S.final.step;
+  return k;
 }
 
 /* ---------- lobby ---------- */
@@ -674,9 +982,25 @@ function defaultSetup(){
   var saved=store.get('setup',null);
   return saved||{names:['Player 1','Player 2'],length:'full',timer:true};
 }
+function onlineHTML(){
+  var st=window.__netState||'off', saved=store.get('room',null);
+  var h='<div class="online"><h3>Play online</h3>';
+  if(st==='off'){return h+'<p class="onote">Online rooms turn on once Firebase is connected.</p></div>'}
+  if(st==='failed'){return h+'<p class="onote">'+esc(window.__netError||'Online play couldn’t start.')+' Local play still works.</p></div>'}
+  if(st==='loading'){return h+'<p class="onote">Connecting…</p></div>'}
+  h+='<p class="onote">Everyone plays on their own phone. No sign-up.</p>'+
+    '<label class="olabel">Your name<input data-oname value="'+esc(onlineName())+'" maxlength="16" autocomplete="off" placeholder="Name"></label>'+
+    '<div class="obtns"><button class="btn small" data-act="host"'+(UI.busy?' disabled':'')+'>Host a room</button>'+
+    '<button class="btn small ghost" data-act="showjoin"'+(UI.busy?' disabled':'')+'>Join with code</button></div>';
+  if(UI.joinOpen)h+='<div class="ojoin"><input data-code value="'+esc(UI.joinCode)+'" maxlength="4" autocomplete="off" autocapitalize="characters" placeholder="Code" aria-label="Room code"><button class="btn small" data-act="join"'+(UI.busy?' disabled':'')+'>Join</button></div>';
+  if(saved&&!UI.busy)h+='<button class="addp" data-act="rejoin">Rejoin room '+esc(saved.code)+'</button>';
+  if(UI.busy)h+='<p class="onote">Working…</p>';
+  if(UI.netMsg)h+='<p class="omsg" role="alert">'+esc(UI.netMsg)+'</p>';
+  return h+'</div>';
+}
 function lobbyHTML(){
   var st=UI.setup||(UI.setup=defaultSetup());
-  var saved=store.get('game',null), canResume=saved&&saved.phase&&saved.phase!=='lobby'&&saved.phase!=='over';
+  var saved=store.get('game',null), canResume=saved&&saved.phase&&saved.phase!=='lobby'&&saved.phase!=='over'&&saved.phase!=='room'&&!(saved.settings&&saved.settings.online);
   var rows=st.names.map(function(n,i){
     return '<div class="prow"><i class="swatch" style="background:'+PCOLORS[i]+'"></i>'+
       '<input data-name="'+i+'" value="'+esc(n)+'" maxlength="16" aria-label="Player '+(i+1)+' name" autocomplete="off">'+
@@ -689,29 +1013,66 @@ function lobbyHTML(){
     '<section class="hero"><div class="record" aria-hidden="true"></div>'+
       '<h1 class="logo"><span>Deep</span><span>Cuts</span></h1>'+
       '<p class="tagline">A trivia board for people who own the B-sides. Pick a clue, wager on the hidden Deep Cuts, then bet it all in the Encore.</p>'+
-      '<div class="bandlist">'+BANDS.map(function(b){return '<b style="color:'+b.color+'">'+b.name+'</b>'}).join('')+'</div>'+
     '</section>'+
     '<section class="setup paper" aria-label="Game setup">'+
-      '<h2>Who’s playing?</h2><p class="hint">1 to 4 players on this screen.</p>'+
+      '<h2>Who’s playing?</h2><p class="hint">1 to 4 players sharing this screen.</p>'+
       '<div class="plist">'+rows+'</div>'+
       (st.names.length<4?'<button class="addp" data-act="addp">Add a player</button>':'')+
-      '<div class="opts">'+
-        '<div class="seg" role="group" aria-label="Game length">'+
-          '<button data-act="len" data-v="full" aria-pressed="'+(st.length==='full')+'">Full show<small>Side A, Side B, Encore</small></button>'+
-          '<button data-act="len" data-v="quick" aria-pressed="'+(st.length==='quick')+'">Quick set<small>Side A, Encore</small></button>'+
-        '</div>'+
-        '<div class="optrow">Answer timer<button class="switch" role="switch" data-act="tmr" aria-checked="'+(!!st.timer)+'" aria-label="Answer timer"></button></div>'+
-      '</div>'+
+      setupOpts(st.length,st.timer)+
       '<div class="actions"><button class="btn" data-act="start">Start game</button>'+
         (canResume?'<button class="btn ghost" data-act="resume">Resume ('+esc(resumeTxt)+')</button>':'')+'</div>'+
       (st.names.length>1?'<p class="keys">Buzzers: tap your color, or press '+st.names.map(function(n,i){return '<kbd>'+PKEYS[i]+'</kbd>'}).join(' ')+'. Answer with <kbd>1</kbd>–<kbd>4</kbd>.</p>':'<p class="keys">Answer with <kbd>1</kbd>–<kbd>4</kbd>, continue with <kbd>Space</kbd>.</p>')+
-      '<div class="online"><button class="btn ghost" disabled>Host online</button><button class="btn ghost" disabled>Join with code</button><span>Online rooms turn on once Firebase is connected.</span></div>'+
+      onlineHTML()+
     '</section></div></main>';
+}
+function setupOpts(length,timer,actPrefix){
+  actPrefix=actPrefix||'';
+  return '<div class="opts">'+
+    '<div class="seg" role="group" aria-label="Game length">'+
+      '<button data-act="'+actPrefix+'len" data-v="full" aria-pressed="'+(length==='full')+'">Full show<small>Side A, Side B, Encore</small></button>'+
+      '<button data-act="'+actPrefix+'len" data-v="quick" aria-pressed="'+(length==='quick')+'">Quick set<small>Side A, Encore</small></button>'+
+    '</div>'+
+    '<div class="optrow">Answer timer<button class="switch" role="switch" data-act="'+actPrefix+'tmr" aria-checked="'+(!!timer)+'" aria-label="Answer timer"></button></div>'+
+  '</div>';
+}
+
+/* ---------- online room (waiting area) ---------- */
+function inviteLink(){return location.origin+location.pathname+'?room='+ROOM.code}
+function roomHTML(){
+  var list=membersList(), me=NET()&&NET().uid, host=isHost();
+  var hostName=(ROOM.members[ROOM.hostUid]||{}).name||'the host';
+  var roster=list.map(function(m,i){
+    var spect=i>=4;
+    return '<li style="--pc:'+(spect?'#8a817a':PCOLORS[i])+'"><span class="dot'+(m.online?' on':'')+'" title="'+(m.online?'Connected':'Offline')+'"></span>'+
+      '<span class="nm">'+esc(m.name||'Player')+'</span>'+
+      (m.uid===ROOM.hostUid?'<span class="rtag">Host</span>':'')+(m.uid===me?'<span class="rtag you">You</span>':'')+(spect?'<span class="rtag">Watching</span>':'')+'</li>';
+  }).join('');
+  var st=S.settings||{length:'full',timer:true};
+  return '<main class="lobby"><div class="room paper">'+
+    netBanner()+
+    '<p class="rlead">Room code</p><div class="code" aria-label="Room code '+ROOM.code.split('').join(' ')+'">'+ROOM.code+'</div>'+
+    '<p class="rhint">Friends open this page, tap <b>Join with code</b> and type it in.</p>'+
+    '<button class="btn small ghost" data-act="invite">'+(UI.copied?'Link copied':'Share invite link')+'</button>'+
+    '<ol class="roster">'+roster+'</ol>'+
+    (list.length>4?'<p class="rhint">The first four play. Everyone else watches.</p>':'')+
+    (host
+      ? setupOpts(st.length,st.timer,'r')+'<div class="actions"><button class="btn" data-act="rstart"'+(list.length?'':' disabled')+'>Start game</button><button class="btn ghost" data-act="rclose">Close room</button></div>'
+      : '<p class="rwait">Waiting for '+esc(hostName)+' to start the game…</p><div class="actions"><button class="btn ghost" data-act="leave">Leave room</button></div>')+
+    (UI.netMsg?'<p class="omsg" role="alert">'+esc(UI.netMsg)+'</p>':'')+
+  '</div></main>';
+}
+function netBanner(){
+  if(!ROOM)return '';
+  var n=NET();
+  if(n&&!n.connected)return '<div class="netpill warn" role="status">Reconnecting…</div>';
+  if(isGuest()&&ROOM.hostUid){var h=member(ROOM.hostUid);if(h&&h.online===false)return '<div class="netpill warn" role="status">Host is offline. Waiting for them…</div>'}
+  return '';
 }
 
 /* ---------- game chrome ---------- */
+function canPick(){return !ROOM||isHost()||myPid()===S.control}
 function gameHTML(){
-  var R=ROUNDS[S.round], tiles=S.rounds[S.round], locked=S.phase!=='board';
+  var R=ROUNDS[S.round], tiles=S.rounds[S.round], locked=S.phase!=='board'||!canPick();
   var heads=BANDS.map(function(b){return '<div class="head" style="--bc:'+b.color+'"><span>'+b.name+'</span></div>'}).join('');
   var cells=tiles.map(function(t,i){
     var b=BANDS[t.c];
@@ -722,10 +1083,13 @@ function gameHTML(){
   var finalish=S.phase.indexOf('final')===0||S.phase==='over';
   var status='';
   if(S.phase==='board'){
-    status=S.players.length>1?'<b>'+esc(S.players[S.control].name)+'</b> picks the next clue':'Pick a clue';
+    var cp=S.players[S.control], me=myPid();
+    if(ROOM)status=me===S.control?'<b>Your pick.</b> Choose a clue.':'<b>'+esc(cp.name)+'</b> is picking'+(isHost()?' (you can pick for them)':'')+'…';
+    else status=S.players.length>1?'<b>'+esc(cp.name)+'</b> picks the next clue':'Pick a clue';
   }
   return '<header class="top"><span class="mark">Deep Cuts</span><span class="round">'+(finalish?'The Encore':R.name)+'</span>'+
-    '<span class="spacer"></span><span class="left">'+(finalish?'':roundLeft(S)+' left')+'</span>'+
+    (ROOM?'<span class="rcode">Room '+ROOM.code+'</span>':'')+
+    '<span class="spacer"></span>'+netBanner()+'<span class="left">'+(finalish?'':roundLeft(S)+' left')+'</span>'+
     '<button class="iconbtn" data-act="mute" aria-label="'+(Sfx.on?'Mute sound':'Turn sound on')+'">'+(Sfx.on?ICON.on:ICON.off)+'</button>'+
     '<button class="iconbtn" data-act="menu" aria-label="Game menu">'+ICON.menu+'</button></header>'+
     '<div class="stage"><div class="board'+(locked?' locked':'')+(UI.lastEvent&&UI.lastEvent.dealt?' dealing':'')+'">'+heads+cells+'</div>'+
@@ -733,14 +1097,15 @@ function gameHTML(){
     playersHTML();
 }
 function playersHTML(){
-  var multi=S.players.length>1;
+  var multi=S.players.length>1, me=myPid();
   return '<footer class="players" style="--n:'+S.players.length+'">'+S.players.map(function(p,i){
-    var bump=UI.prevScores&&UI.prevScores[i]!==p.score;
-    return '<div class="pl'+(multi&&S.control===i&&S.phase==='board'?' ctrl':'')+(bump?' bump':'')+'" style="--pc:'+p.color+'">'+
-      (multi&&S.control===i&&S.phase==='board'?'<span class="tag">Picking</span>':'')+
-      '<div class="nm">'+esc(p.name)+'</div><div class="sc'+(p.score<0?' neg':'')+'" data-score="'+i+'">'+fmt(p.score)+'</div></div>';
+    var bump=UI.prevScores&&UI.prevScores[i]!==p.score, off=playerOffline(p), ctrl=multi&&S.control===i&&S.phase==='board';
+    return '<div class="pl'+(ctrl?' ctrl':'')+(bump?' bump':'')+(off?' off':'')+(me===i?' me':'')+'" style="--pc:'+p.color+'">'+
+      (off?'<span class="tag offt">Offline</span>':(ctrl?'<span class="tag">Picking</span>':''))+
+      '<div class="nm">'+esc(p.name)+(me===i?' <small>(you)</small>':'')+'</div><div class="sc'+(p.score<0?' neg':'')+'" data-score="'+i+'">'+fmt(p.score)+'</div></div>';
   }).join('')+'</footer>';
 }
+function chip(pid){var p=S.players[pid];return '<span class="chip" style="--pc:'+p.color+'" title="'+esc(p.name)+'">'+esc(p.name)+'</span>'}
 
 /* ---------- overlays ---------- */
 function overlayHTML(){
@@ -757,17 +1122,26 @@ function overlayHTML(){
   }
   return '';
 }
+function contBtn(label){return '<button class="btn hot" data-act="cont">'+label+'</button>'}
 function introHTML(){
   var R=ROUNDS[S.round], first=S.players[S.control];
   var sub=S.round===0
     ? 'Twenty-four clues. '+(R.deep===1?'One hidden Deep Cut':'Hidden Deep Cuts')+' lets you wager.'
     : 'Values double. Two Deep Cuts are hiding on this board.';
+  if(ROOM)sub+=' Everyone answers on their own phone, and the fastest right answer picks next.';
   return '<div class="ov fade"><div class="bigcard drop"><h2>'+R.name+'</h2><p>'+sub+'</p>'+
     (S.players.length>1?'<p><b>'+esc(first.name)+'</b> picks first.</p>':'')+
-    '<button class="btn hot" data-act="cont">Start '+R.name+'</button></div></div>';
+    contBtn('Start '+R.name)+'</div></div>';
 }
 function wagerHTML(){
   var t=tileOf(S), b=BANDS[t.c], p=S.players[S.control], max=deepMax(S,S.control);
+  var mine=!ROOM||myPid()===S.control;
+  if(!mine){
+    return '<div class="ov fade"><div class="bigcard drop" style="--bc:'+b.color+'"><div class="vinyl" aria-hidden="true"></div><h2>Deep Cut</h2>'+
+      '<p><b>'+esc(p.name)+'</b> found a Deep Cut in <b style="color:'+b.color+'">'+b.name+'</b> and is choosing a wager…</p>'+
+      (isHost()&&playerOffline(p)?'<button class="btn ghost" data-act="wager-min">They dropped. Wager the minimum for them</button>':'')+'</div></div>';
+  }
+  if(UI.pendingAns==='w')return '<div class="ov fade"><div class="bigcard"><h2>Locked</h2><p>Sending your wager…</p></div></div>';
   if(UI.wagerAmt==null||UI.wagerAmt>max)UI.wagerAmt=Math.min(max,Math.max(5,Math.round(max/2/100)*100||5));
   return '<div class="ov fade"><div class="bigcard drop" style="--bc:'+b.color+'"><div class="vinyl" aria-hidden="true"></div><h2>Deep Cut</h2>'+
     '<p>'+(S.players.length>1?'<b>'+esc(p.name)+'</b>, this one’s yours alone. ':'This one’s worth a wager. ')+'Category: <b style="color:'+b.color+'">'+b.name+'</b>. How much do you want to risk?</p>'+
@@ -780,43 +1154,75 @@ function wagerControls(min,max){
     '<div class="quick"><button data-act="wq" data-v="'+min+'">Minimum</button><button data-act="wq" data-v="'+Math.round(max/2)+'">Half</button><button data-act="wq" data-v="'+max+'">Everything</button></div>'+
     '<div class="range">'+fmt(min)+' to '+fmt(max)+'</div></div>';
 }
+function myClueAnswer(){
+  var me=myPid(), c=S.clue;
+  if(me==null||me<0||!c)return null;
+  if(c.answers&&c.answers[me]!=null)return c.answers[me];
+  if(UI.pendingAns!=null&&UI.pendingTok===c.token)return UI.pendingAns;
+  return null;
+}
 function clueHTML(){
   var c=S.clue, t=tileOf(S), q=BY_ID[t.q], b=BANDS[t.c], reveal=S.phase==='reveal';
-  var multi=c.mode==='buzz', answerer=multi?c.buzzed:(c.mode==='solo'?S.control:0);
-  var canAnswer=!reveal&&answerer!=null;
-  var ev=UI.lastEvent||{};
+  var mode=c.mode, me=myPid(), ev=UI.lastEvent||{};
+  var all=mode==='all', mine=all?myClueAnswer():null;
+  var answerer=mode==='buzz'?c.buzzed:(mode==='solo'?S.control:0);
+  var canAnswer;
+  if(reveal)canAnswer=false;
+  else if(all)canAnswer=me!=null&&me>=0&&mine==null;
+  else if(ROOM)canAnswer=mode==='solo'&&me===S.control;
+  else canAnswer=answerer!=null;
+
+  var pickers={};
+  if(all&&reveal)Object.keys(c.answers||{}).forEach(function(pid){var o=c.answers[pid];(pickers[o]=pickers[o]||[]).push(+pid)});
   var choices=t.o.map(function(o,i){
     var cls='choice';
     if(c.struck.indexOf(i)>=0)cls+=' struck';
     if(reveal&&i===t.k)cls+=' right';
-    if(reveal&&c.picked===i&&i!==t.k)cls+=' picked-wrong';
+    if(reveal&&!all&&c.picked===i&&i!==t.k)cls+=' picked-wrong';
+    if(all&&mine===i)cls+=reveal&&i!==t.k?' picked-wrong':' mine';
     if(ev.wrong&&ev.opt===i)cls+=' shake';
     var dis=!canAnswer||c.struck.indexOf(i)>=0;
-    return '<button class="'+cls+'" data-act="ans" data-o="'+i+'"'+(dis?' disabled':'')+'><span class="k">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>';
+    var chips=pickers[i]?'<span class="chips">'+pickers[i].map(chip).join('')+'</span>':'';
+    return '<button class="'+cls+'" data-act="ans" data-o="'+i+'"'+(dis?' disabled':'')+'><span class="k">'+'ABCD'[i]+'</span><span class="ct">'+esc(o)+'</span>'+chips+'</button>';
   }).join('');
+
   var who='';
   if(!reveal){
-    if(multi){
+    if(all){
+      var done=(c.order||[]).slice();
+      var waiting=S.players.map(function(p,i){return i}).filter(function(i){return done.indexOf(i)<0});
+      who=(mine!=null?'<span><b class="plain">You’re locked in.</b></span>':(me>=0?'<span>Everyone answers. Lock in before time runs out.</span>':'<span>You’re watching this one.</span>'))+
+        (done.length?'<span class="lockrow">Locked: '+done.map(chip).join('')+'</span>':'')+
+        (waiting.length&&done.length?'<span class="lockrow dim">Waiting on '+waiting.map(function(i){return esc(S.players[i].name)}).join(', ')+'</span>':'');
+    }else if(mode==='buzz'){
       if(c.buzzed!=null){var bp=S.players[c.buzzed];who='<b style="--pc:'+bp.color+'">'+esc(bp.name)+'</b> buzzed in. Pick an answer.'}
       else if(c.last){var lp=S.players[c.last.pid];who='<span>'+esc(lp.name)+' '+(c.last.opt==null?'ran out of time':'missed')+' ('+fmt(c.last.delta)+'). Anyone else?</span>'}
       else who='<span>Buzz in when you know it.</span>';
-    }else if(c.mode==='solo'&&S.players.length>1){var sp=S.players[S.control];who='<b style="--pc:'+sp.color+'">'+esc(sp.name)+'</b> wagered '+fmt(c.value)+'.'}
+    }else if(mode==='solo'&&S.players.length>1){var sp=S.players[S.control];
+      who=ROOM&&me!==S.control?'<b style="--pc:'+sp.color+'">'+esc(sp.name)+'</b><span>is answering for '+fmt(c.value)+'…</span>':'<b style="--pc:'+sp.color+'">'+esc(sp.name)+'</b><span>wagered '+fmt(c.value)+'.</span>'}
     else if(c.dd)who='<span>You wagered '+fmt(c.value)+'.</span>';
   }else{
     var r=c.result;
-    if(r.pid==null)who='<span>'+(r.timeout?'Time’s up. ':'')+'Nobody got it.</span>';
-    else{var rp=S.players[r.pid];who='<b style="--pc:'+rp.color+'">'+esc(rp.name)+'</b><span>'+(r.correct?'got it':(r.timeout?'ran out of time':'missed'))+', '+(r.delta>=0?'+':'')+fmt(r.delta)+'</span>'}
+    if(r.all){
+      who=r.first!=null?'<b style="--pc:'+S.players[r.first].color+'">'+esc(S.players[r.first].name)+'</b><span>was fastest and picks next.</span>':'<span>Nobody got it.</span>';
+      who+='<span class="deltas">'+S.players.map(function(p,i){var d=r.deltas[i];return '<span class="dl'+(d>0?' up':d<0?' down':'')+'" style="--pc:'+p.color+'">'+esc(p.name)+' '+(d===0?'±0':signed(d))+'</span>'}).join('')+'</span>';
+    }
+    else if(r.pid==null)who='<span>'+(r.timeout?'Time’s up. ':'')+'Nobody got it.</span>';
+    else{var rp=S.players[r.pid];who='<b style="--pc:'+rp.color+'">'+esc(rp.name)+'</b><span>'+(r.correct?'got it':(r.timeout?'ran out of time':'missed'))+', '+signed(r.delta)+'</span>'}
   }
   var stamp='';
-  if(reveal&&c.result.pid!=null){
-    var ok=c.result.correct;
-    stamp='<div class="stamp '+(ok?'ok':'no')+(ev.stamp?' slam':'')+'">'+(ok?'Correct':'Wrong')+'<small>'+(c.result.delta>=0?'+':'')+fmt(c.result.delta)+'</small></div>';
+  if(reveal){
+    var sd=null;
+    if(c.result.all){if(me!=null&&me>=0&&c.answers[me]!=null)sd=c.result.deltas[me]}
+    else if(c.result.pid!=null)sd=c.result.delta;
+    if(sd!=null){var ok=sd>0;stamp='<div class="stamp '+(ok?'ok':'no')+(ev.stamp?' slam':'')+'">'+(ok?'Correct':'Wrong')+'<small>'+signed(sd)+'</small></div>'}
   }
   var foot='';
   if(reveal)foot='<button class="btn" data-act="cont">Continue</button>';
-  else if(multi&&c.buzzed==null)foot='<button class="btn ghost small" data-act="giveup">Nobody knows</button>';
+  else if(mode==='buzz'&&c.buzzed==null)foot='<button class="btn ghost small" data-act="giveup">Nobody knows</button>';
+  else if(ROOM&&isHost()&&(all||mode==='solo'))foot='<button class="btn ghost small" data-act="revealnow">'+(all?'Reveal now':'Time’s up for them')+'</button>';
   var pads='';
-  if(multi&&!reveal){
+  if(mode==='buzz'&&!reveal){
     pads='<div class="pads" style="--n:'+S.players.length+'">'+S.players.map(function(p,i){
       var dis=c.buzzed!=null||c.locked.indexOf(i)>=0;
       return '<button class="pad'+(c.buzzed===i?' live':'')+'" style="--pc:'+p.color+'" data-act="buzz" data-p="'+i+'"'+(dis?' disabled':'')+'>'+esc(p.name)+'<small>Buzz with '+PKEYS[i]+'</small></button>';
@@ -826,7 +1232,7 @@ function clueHTML(){
   return '<div class="ov'+(UI.flipFrom?'':' fade')+'" id="clueov"><article class="card paper" id="cluecard" style="--bc:'+b.color+'">'+timer+stamp+
     '<div class="meta"><span class="band">'+b.name+'</span><span class="worth">'+fmt(c.value)+(c.dd?'<small>Deep Cut</small>':'')+'</span></div>'+
     '<h2 class="qtext">'+esc(q.q)+'</h2>'+
-    '<div class="choices'+(canAnswer||reveal?'':' wait')+'">'+choices+'</div>'+
+    '<div class="choices'+(canAnswer||reveal||(all&&mine!=null)?'':' wait')+'">'+choices+'</div>'+
     '<div class="who" aria-live="polite">'+who+'</div>'+
     (foot?'<div class="foot">'+foot+'</div>':'')+
     '</article>'+pads+'</div>';
@@ -838,25 +1244,37 @@ function standingsHTML(){
 }
 function roundEndHTML(){
   return '<div class="ov fade"><div class="bigcard drop"><h2>Flip it</h2><p>Side A is done. Side B doubles every value'+(S.players.length>1?', and whoever is trailing picks first':'')+'.</p>'+
-    standingsHTML()+'<button class="btn hot" data-act="cont">Play Side B</button></div></div>';
+    standingsHTML()+contBtn('Play Side B')+'</div></div>';
 }
 function finalIntroHTML(){
   var b=BANDS[S.final.b];
   return '<div class="ov fade"><div class="bigcard drop" style="--bc:'+b.color+'"><div class="vinyl" aria-hidden="true"></div><h2>The Encore</h2>'+
     '<p>One last question, and it’s about <b style="color:'+b.color+'">'+b.name+'</b>. '+(S.players.length>1?'Everyone wagers in secret, then answers in secret.':'Wager what you dare.')+'</p>'+
-    standingsHTML()+'<button class="btn hot" data-act="cont">Place wagers</button></div></div>';
+    standingsHTML()+contBtn('Place wagers')+'</div></div>';
 }
 function nextPending(map){for(var i=0;i<S.players.length;i++)if(map[i]==null)return i;return -1}
+function waitingFor(map){return S.players.map(function(p,i){return i}).filter(function(i){return map[i]==null})}
 function privacyGate(pid,what){
   var p=S.players[pid];
   return '<div class="ov fade"><div class="bigcard privacy"><h2 style="font-size:clamp(48px,10vw,88px)">Pass it</h2>'+
     '<p>Hand the screen to <b style="color:'+p.color+'">'+esc(p.name)+'</b>. Everyone else, look away.</p>'+
     '<button class="btn hot" data-act="privok" data-p="'+pid+'">I’m '+esc(p.name)+', show my '+what+'</button></div></div>';
 }
+function finalWaitHTML(map,what){
+  var w=waitingFor(map);
+  return '<div class="ov fade"><div class="bigcard"><h2 style="font-size:clamp(48px,10vw,88px)">The Encore</h2>'+
+    '<p>'+(what==='wager'?'Your wager is locked.':'Your answer is locked.')+' Waiting for '+w.map(function(i){return '<b style="color:'+S.players[i].color+'">'+esc(S.players[i].name)+'</b>'}).join(', ')+'…</p>'+
+    (isHost()?'<button class="btn ghost" data-act="fforce">Stop waiting</button>':'')+'</div></div>';
+}
 function finalWagerHTML(){
-  var pid=nextPending(S.final.wagers); if(pid<0)return '';
-  var multi=S.players.length>1;
-  if(multi&&UI.priv!==pid)return privacyGate(pid,'wager');
+  var pid;
+  if(ROOM){
+    pid=myPid();
+    if(pid==null||pid<0||S.final.wagers[pid]!=null||UI.pendingAns==='w')return finalWaitHTML(S.final.wagers,'wager');
+  }else{
+    pid=nextPending(S.final.wagers); if(pid<0)return '';
+    if(S.players.length>1&&UI.priv!==pid)return privacyGate(pid,'wager');
+  }
   var p=S.players[pid], b=BANDS[S.final.b], max=finalMax(S,pid);
   if(max<=0){
     return '<div class="ov fade"><div class="bigcard"><h2 style="font-size:clamp(48px,10vw,88px)">'+esc(p.name)+'</h2>'+
@@ -869,15 +1287,20 @@ function finalWagerHTML(){
     '<button class="btn hot" data-act="fwager" data-p="'+pid+'">Lock in wager</button></div></div>';
 }
 function finalQHTML(){
-  var pid=nextPending(S.final.answers); if(pid<0)return '';
-  var multi=S.players.length>1;
-  if(multi&&UI.priv!==pid)return privacyGate(pid,'question');
+  var pid;
+  if(ROOM){
+    pid=myPid();
+    if(pid==null||pid<0||S.final.answers[pid]!=null||(UI.pendingAns!=null&&UI.pendingTok==='f'))return finalWaitHTML(S.final.answers,'answer');
+  }else{
+    pid=nextPending(S.final.answers); if(pid<0)return '';
+    if(S.players.length>1&&UI.priv!==pid)return privacyGate(pid,'question');
+  }
   var q=BY_ID[S.final.q], b=BANDS[S.final.b], p=S.players[pid];
-  var choices=S.final.o.map(function(o,i){return '<button class="choice" data-act="fans" data-p="'+pid+'" data-o="'+i+'"><span class="k">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>'}).join('');
+  var choices=S.final.o.map(function(o,i){return '<button class="choice" data-act="fans" data-p="'+pid+'" data-o="'+i+'"><span class="k">'+'ABCD'[i]+'</span><span class="ct">'+esc(o)+'</span></button>'}).join('');
   return '<div class="ov fade"><article class="card paper" style="--bc:'+b.color+'">'+
     '<div class="meta"><span class="band">'+b.name+'</span><span class="worth">Encore<small>'+esc(p.name)+' wagered '+fmt(S.final.wagers[pid]||0)+'</small></span></div>'+
     '<h2 class="qtext">'+esc(q.q)+'</h2><div class="choices">'+choices+'</div>'+
-    '<div class="who">'+(multi?'<span>Your answer stays hidden until the reveal.</span>':'')+'</div></article></div>';
+    '<div class="who">'+(S.players.length>1?'<span>Your answer stays hidden until the reveal.</span>':'')+'</div></article></div>';
 }
 function finalRevealHTML(){
   var pid=S.final.order[S.final.step], p=S.players[pid], q=BY_ID[S.final.q], b=BANDS[S.final.b];
@@ -885,35 +1308,43 @@ function finalRevealHTML(){
   return '<div class="ov fade"><div class="bigcard" style="--bc:'+b.color+'"><h2 style="font-size:clamp(44px,9vw,80px)">The Encore</h2>'+
     '<p>'+esc(q.q)+'</p><p>Answer: <b>'+esc(S.final.o[S.final.k])+'</b></p>'+
     '<div class="reveal-row" style="--pc:'+p.color+'"><div class="nm">'+esc(p.name)+'</div>'+
-      '<div class="ln">Answered <b>'+esc(S.final.o[pick])+'</b>, wagered <b>'+fmt(w)+'</b></div>'+
-      '<div class="res '+(ok?'ok':'no')+'">'+(ok?'Right, ':'Wrong, ')+(ok?'+':'−')+fmt(w).replace('−','')+' → '+fmt(p.score)+'</div></div>'+
-    '<button class="btn hot" data-act="cont">'+(last?'Final scores':'Next reveal')+'</button></div></div>';
+      '<div class="ln">'+(pick>=0?'Answered <b>'+esc(S.final.o[pick])+'</b>':'No answer')+', wagered <b>'+fmt(w)+'</b></div>'+
+      '<div class="res '+(ok?'ok':'no')+'">'+(ok?'Right, +':'Wrong, −')+fmt(w)+' → '+fmt(p.score)+'</div></div>'+
+    contBtn(last?'Final scores':'Next reveal')+'</div></div>';
 }
 function overHTML(){
   var order=S.players.map(function(p,i){return i}).sort(function(a,b){return S.players[b].score-S.players[a].score});
   var top=S.players[order[0]], tie=order.length>1&&S.players[order[1]].score===top.score;
   var title=S.players.length===1?fmt(top.score):(tie?'A tie':esc(top.name)+' wins');
   var sub=S.players.length===1?(top.score>0?'That’s your final score.':'Rough night. Run it back?'):(tie?'Settle it with a rematch.':'Final standings:');
+  var btns;
+  if(isGuest())btns='<p>Waiting for the host to start a rematch…</p><div class="rowbtns"><button class="btn ghost" data-act="leave">Leave room</button></div>';
+  else if(isHost())btns='<div class="rowbtns"><button class="btn hot" data-act="again">Play again</button><button class="btn ghost" data-act="toroom">Back to room</button></div>';
+  else btns='<div class="rowbtns"><button class="btn hot" data-act="again">Play again</button><button class="btn ghost" data-act="tolobby">Change players</button></div>';
   return '<div class="ov fade"><div class="bigcard drop"><h2 style="font-size:clamp(56px,11vw,110px)">'+title+'</h2><p>'+sub+'</p>'+
-    (S.players.length>1?standingsHTML():'')+
-    '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn hot" data-act="again">Play again</button><button class="btn ghost" data-act="tolobby">Change players</button></div></div></div>';
+    (S.players.length>1?standingsHTML():'')+btns+'</div></div>';
 }
 function menuHTML(){
-  var rows=S.players.map(function(p,i){return '<div class="row"><span class="nm" style="border-left:5px solid '+p.color+';padding-left:8px">'+esc(p.name)+' <small style="font-family:var(--f-body)">'+fmt(p.score)+'</small></span>'+
-    '<span class="adj"><button data-act="adj" data-p="'+i+'" data-d="-100">−100</button><button data-act="adj" data-p="'+i+'" data-d="100">+100</button></span></div>'}).join('');
-  return '<div class="ov fade menu-ov" data-act="closemenu-bg"><div class="sheet paper" role="dialog" aria-label="Game menu">'+
-    '<h3>Game menu</h3>'+
-    '<div class="row">Answer timer<button class="switch" role="switch" data-act="mtimer" aria-checked="'+(!!S.settings.timer)+'" aria-label="Answer timer"></button></div>'+
-    '<div class="row">Sound<button class="switch" role="switch" data-act="mute" aria-checked="'+Sfx.on+'" aria-label="Sound"></button></div>'+
-    '<p style="margin:14px 0 2px;font-weight:600">Fix a score</p>'+rows+
-    '<div class="btns"><button class="btn danger" data-act="endgame">'+(UI.confirmEnd?'Tap again to end':'End game')+'</button><button class="btn" data-act="closemenu">Back to game</button></div>'+
-    '</div></div>';
+  var body='';
+  if(isGuest()){
+    body='<div class="row">Sound<button class="switch" role="switch" data-act="mute" aria-checked="'+Sfx.on+'" aria-label="Sound"></button></div>'+
+      '<p class="mnote">You’re in room '+ROOM.code+'. If you leave, you can rejoin with the same code.</p>'+
+      '<div class="btns"><button class="btn danger" data-act="leave">Leave room</button><button class="btn" data-act="closemenu">Back to game</button></div>';
+  }else{
+    var rows=S.players?S.players.map(function(p,i){return '<div class="row"><span class="nm" style="border-left:5px solid '+p.color+';padding-left:8px">'+esc(p.name)+' <small style="font-family:var(--f-body)">'+fmt(p.score)+'</small></span>'+
+      '<span class="adj"><button data-act="adj" data-p="'+i+'" data-d="-100">−100</button><button data-act="adj" data-p="'+i+'" data-d="100">+100</button></span></div>'}).join(''):'';
+    body=(S.settings?'<div class="row">Answer timer<button class="switch" role="switch" data-act="mtimer" aria-checked="'+(!!S.settings.timer)+'" aria-label="Answer timer"></button></div>':'')+
+      '<div class="row">Sound<button class="switch" role="switch" data-act="mute" aria-checked="'+Sfx.on+'" aria-label="Sound"></button></div>'+
+      (rows?'<p style="margin:14px 0 2px;font-weight:600">Fix a score</p>'+rows:'')+
+      '<div class="btns"><button class="btn danger" data-act="endgame">'+(UI.confirmEnd?'Tap again to end':(isHost()?'End game, back to room':'End game'))+'</button><button class="btn" data-act="closemenu">Back to game</button></div>';
+  }
+  return '<div class="ov fade menu-ov" data-act="closemenu-bg"><div class="sheet paper" role="dialog" aria-label="Game menu"><h3>Game menu</h3>'+body+'</div></div>';
 }
 
 /* ---------- post-render: flip animation, score tween, focus ---------- */
 function afterRender(){
   var card=document.getElementById('cluecard');
-  if(card&&UI.flipFrom&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  if(card&&UI.flipFrom){
     var f=UI.flipFrom, r=card.getBoundingClientRect();
     var sx=f.width/r.width, sy=f.height/r.height, dx=(f.left+f.width/2)-(r.left+r.width/2), dy=(f.top+f.height/2)-(r.top+r.height/2);
     card.style.transition='none';card.style.transform='translate('+dx+'px,'+dy+'px) scale('+sx+','+sy+')';card.style.opacity='.6';
@@ -922,48 +1353,65 @@ function afterRender(){
     var ov=document.getElementById('clueov');if(ov){ov.style.background='rgba(12,4,7,0)';ov.getBoundingClientRect();ov.style.transition='background .3s';ov.style.background=''}
   }
   UI.flipFrom=null;
-  // tween changed scores
   if(UI.prevScores){var prev=UI.prevScores;S.players.forEach(function(p,i){
     if(prev[i]===p.score)return;var el=app.querySelector('[data-score="'+i+'"]');if(!el)return;tween(el,prev[i],p.score)});UI.prevScores=null}
   var hot=app.querySelector('.ov .btn.hot, .ov .card .foot .btn:not(.ghost)');
   if(hot&&!UI.menu)try{hot.focus({preventScroll:true})}catch(e){}
   var rng=document.getElementById('wrange');
   if(rng)rng.addEventListener('input',function(){UI.wagerAmt=+rng.value;var a=document.getElementById('wamt');if(a)a.textContent=fmt(UI.wagerAmt)});
+  updateTimer();
 }
 function tween(el,from,to){
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=fmt(to);return}
+  if(reduced()){el.textContent=fmt(to);return}
   var t0=performance.now(),d=550;
   (function step(t){var k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3),v=Math.round(from+(to-from)*e);el.textContent=fmt(v);el.classList.toggle('neg',v<0);if(k<1)requestAnimationFrame(step)})(t0);
 }
 
-/* ---------- timer loop (UI only; rules see TIMEOUT action) ---------- */
-setInterval(function(){
-  if(S.phase!=='clue'||!S.clue||!S.clue.deadline||UI.menu)return;
-  var left=S.clue.deadline-Date.now();
-  var c=S.clue, span=c.mode==='buzz'?(c.buzzed!=null?TIME.answer:TIME.open):(c.mode==='solo'?TIME.deep:TIME.direct);
+/* ---------- timer loop (UI; only the host/local device fires TIMEOUT) ---------- */
+function spanFor(c){return c.mode==='buzz'?(c.buzzed!=null?TIME.answer:TIME.open):TIME[c.mode==='solo'?'deep':c.mode]}
+function updateTimer(){
+  if(S.phase!=='clue'||!S.clue||!S.clue.deadline)return null;
+  var left=S.clue.deadline-clock();
   var bar=document.getElementById('tbar');
-  if(bar){bar.style.setProperty('--t',Math.max(0,left/span).toFixed(3));bar.parentNode.classList.toggle('low',left<4000)}
+  if(bar){bar.style.setProperty('--t',Math.max(0,Math.min(1,left/spanFor(S.clue))).toFixed(3));bar.parentNode.classList.toggle('low',left<4000)}
+  return left;
+}
+setInterval(function(){
+  if(UI.menu&&!ROOM)return;
+  var left=updateTimer(); if(left==null)return;
   var sec=Math.ceil(left/1000);
   if(left<4000&&left>0&&sec!==UI.lastTick){UI.lastTick=sec;Sfx.play('tick')}
-  if(left<=0)dispatch({type:'TIMEOUT',token:c.token});
+  if(left<=0&&!isGuest())dispatch({type:'TIMEOUT',token:S.clue.token});
 },100);
-// pause timers while the menu is open by pushing the deadline forward
+// local games pause the clock while the menu is open
 var lastMenuTick=Date.now();
-setInterval(function(){var n=Date.now();if(UI.menu&&S.clue&&S.clue.deadline){S.clue.deadline+=n-lastMenuTick}lastMenuTick=n},250);
+setInterval(function(){var n=Date.now();if(UI.menu&&!ROOM&&S.clue&&S.clue.deadline){S.clue.deadline+=n-lastMenuTick}lastMenuTick=n},250);
 
 /* =====================================================================
    INPUT
    ===================================================================== */
 function startGame(names,settings){
-  var seen=store.get('seen',{});
-  var deal=makeDeal(settings.length,seen);
+  var deal=makeDeal(settings.length,store.get('seen',{}));
   UI.wagerAmt=null;UI.priv=null;UI.menu=false;
   dispatch({type:'NEW_GAME',id:uid(),players:names.map(function(n,i){return {name:(n||'').trim()||('Player '+(i+1))}}),settings:settings,deal:deal,control:Math.floor(Math.random()*names.length)});
 }
+function shareInvite(){
+  var url=inviteLink(), done=function(){UI.copied=true;render();setTimeout(function(){UI.copied=false;if(S.phase==='room')render()},2200)};
+  try{
+    if(navigator.share){navigator.share({title:'Deep Cuts',text:'Join my Deep Cuts room: '+ROOM.code,url:url}).catch(function(){});return}
+    navigator.clipboard.writeText(url).then(done,function(){prompt('Copy this link',url)});
+  }catch(e){prompt('Copy this link',url)}
+}
 document.addEventListener('input',function(e){
-  var i=e.target.getAttribute&&e.target.getAttribute('data-name');
-  if(i!=null&&UI.setup){UI.setup.names[+i]=e.target.value;store.set('setup',UI.setup)}
+  var t=e.target; if(!t.getAttribute)return;
+  var i=t.getAttribute('data-name');
+  if(i!=null&&UI.setup){UI.setup.names[+i]=t.value;store.set('setup',UI.setup)}
+  if(t.hasAttribute('data-oname'))store.set('oname',t.value);
+  if(t.hasAttribute('data-code')){t.value=t.value.toUpperCase().replace(/[^A-Z]/g,'');UI.joinCode=t.value}
 });
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&e.target&&e.target.hasAttribute&&e.target.hasAttribute('data-code')){joinRoom(UI.joinCode);e.preventDefault()}
+},true);
 document.addEventListener('click',function(e){
   Sfx.init();
   var el=e.target.closest('[data-act]'); if(!el||el.disabled)return;
@@ -977,20 +1425,35 @@ document.addEventListener('click',function(e){
     case 'tmr': st.timer=!st.timer;store.set('setup',st);render();break;
     case 'start': startGame(st.names.slice(),{length:st.length,timer:!!st.timer});break;
     case 'resume': var g=store.get('game',null);if(g){S=g;UI.menu=false;dispatch({type:'RESUME'});render()}break;
-    case 'pick':
-      var r=el.getBoundingClientRect();UI.flipFrom={left:r.left,top:r.top,width:r.width,height:r.height};
-      UI.wagerAmt=null;dispatch({type:'PICK',tile:+el.getAttribute('data-t')});
-      if(S.phase!=='clue')UI.flipFrom=null;break;
+    /* online lobby */
+    case 'host': hostRoom();break;
+    case 'showjoin': UI.joinOpen=!UI.joinOpen;UI.netMsg='';render();var ci=app.querySelector('[data-code]');if(ci)ci.focus();break;
+    case 'join': joinRoom(UI.joinCode);break;
+    case 'rejoin': var sv=store.get('room',null);if(sv)joinRoom(sv.code);break;
+    case 'invite': shareInvite();break;
+    case 'rlen': S.settings.length=el.getAttribute('data-v');pushState();render();break;
+    case 'rtmr': S.settings.timer=!S.settings.timer;pushState();render();break;
+    case 'rstart': hostStart();break;
+    case 'rclose': leaveRoom(true);break;
+    case 'leave': leaveRoom(false);break;
+    case 'toroom': hostToRoom();break;
+    /* game */
+    case 'pick': if(!canPick())break;UI.wagerAmt=null;dispatch({type:'PICK',tile:+el.getAttribute('data-t')});break;
     case 'wager': dispatch({type:'WAGER',amount:UI.wagerAmt});break;
+    case 'wager-min': dispatch({type:'WAGER',amount:5});break;
     case 'wq': UI.wagerAmt=+el.getAttribute('data-v');var rg=document.getElementById('wrange');if(rg){rg.value=UI.wagerAmt;document.getElementById('wamt').textContent=fmt(UI.wagerAmt)}break;
     case 'buzz': dispatch({type:'BUZZ',pid:+el.getAttribute('data-p')});break;
     case 'ans': dispatch({type:'ANSWER',opt:+el.getAttribute('data-o')});break;
     case 'giveup': dispatch({type:'GIVE_UP'});break;
-    case 'cont': UI.wagerAmt=null;dispatch({type:'CONTINUE'});break;
+    case 'revealnow': dispatch({type:'REVEAL_NOW'});break;
+    case 'cont': UI.wagerAmt=null;dispatch({type:'CONTINUE',rev:ROOM?S.rev:undefined});break;
     case 'privok': UI.priv=+el.getAttribute('data-p');UI.wagerAmt=null;render();break;
-    case 'fwager': var pid=+el.getAttribute('data-p');dispatch({type:'FINAL_WAGER',pid:pid,amount:el.getAttribute('data-zero')?0:UI.wagerAmt});UI.wagerAmt=null;UI.priv=null;render();break;
+    case 'fwager': var pid=+el.getAttribute('data-p');var amt=el.getAttribute('data-zero')?0:UI.wagerAmt;UI.wagerAmt=null;UI.priv=null;dispatch({type:'FINAL_WAGER',pid:pid,amount:amt});render();break;
     case 'fans': UI.priv=null;dispatch({type:'FINAL_ANSWER',pid:+el.getAttribute('data-p'),opt:+el.getAttribute('data-o')});render();break;
-    case 'again': var names=S.players.map(function(p){return p.name});startGame(names,S.settings);break;
+    case 'fforce': dispatch({type:'FINAL_FORCE'});break;
+    case 'again':
+      if(isHost()){hostStart();break}
+      startGame(S.players.map(function(p){return p.name}),S.settings);break;
     case 'tolobby': S=newState();store.del('game');UI.menu=false;render();break;
     case 'mute': Sfx.on=!Sfx.on;store.set('sound',Sfx.on);render();break;
     case 'menu': UI.menu=true;UI.confirmEnd=false;render();break;
@@ -998,7 +1461,9 @@ document.addEventListener('click',function(e){
     case 'mtimer': dispatch({type:'SET_TIMER',on:!S.settings.timer});break;
     case 'adj': dispatch({type:'ADJUST',pid:+el.getAttribute('data-p'),delta:+el.getAttribute('data-d')});break;
     case 'endgame': if(!UI.confirmEnd){UI.confirmEnd=true;render();break}
-      UI.menu=false;UI.confirmEnd=false;S=newState();store.del('game');render();break;
+      UI.menu=false;UI.confirmEnd=false;
+      if(isHost()){hostToRoom();break}
+      S=newState();store.del('game');render();break;
   }
 });
 document.addEventListener('keydown',function(e){
@@ -1010,11 +1475,15 @@ document.addEventListener('keydown',function(e){
     var pi=PKEYS.indexOf(k);
     if(pi>=0&&pi<S.players.length&&S.clue.mode==='buzz'){dispatch({type:'BUZZ',pid:pi});e.preventDefault();return}
     var oi='1234'.indexOf(e.key); if(oi<0)oi='ABCD'.indexOf(k);
-    if(oi>=0&&!(S.clue.mode==='buzz'&&S.clue.buzzed==null)){dispatch({type:'ANSWER',opt:oi});e.preventDefault();return}
+    if(oi>=0&&!(S.clue.mode==='buzz'&&S.clue.buzzed==null)){
+      var btn=app.querySelectorAll('.choice')[oi];
+      if(btn&&!btn.disabled)dispatch({type:'ANSWER',opt:oi});
+      e.preventDefault();return;
+    }
   }
-  if(S.phase==='finalQ'&&(S.players.length===1||UI.priv!=null)){
-    var fo='1234'.indexOf(e.key); var fp=nextPending(S.final.answers);
-    if(fo>=0&&fp>=0){UI.priv=null;dispatch({type:'FINAL_ANSWER',pid:fp,opt:fo});render();return}
+  if(S.phase==='finalQ'){
+    var fo='1234'.indexOf(e.key), fb=fo>=0&&app.querySelectorAll('[data-act=fans]')[fo];
+    if(fb){fb.click();return}
   }
   if(e.key==='Escape'&&S.phase!=='lobby'){UI.menu=true;render()}
 });
@@ -1024,21 +1493,144 @@ document.addEventListener('keydown',function(e){
    ===================================================================== */
 function showFatal(e){
   app.innerHTML='<div class="fatal"><h2 style="font-family:var(--f-display)">Something broke while loading.</h2><p>Reload the page. If it keeps happening, starting a new game usually fixes it.</p><pre>'+esc(e&&e.stack||e)+'</pre><button class="btn" id="fatalreset">Clear saved game and reload</button></div>';
-  var b=document.getElementById('fatalreset');if(b)b.onclick=function(){store.del('game');location.reload()};
+  var b=document.getElementById('fatalreset');if(b)b.onclick=function(){store.del('game');store.del('room');location.reload()};
   if(window.console)console.error('[deepcuts]',e);
 }
 function boot(){
   BANK=JSON.parse(document.getElementById('bank').textContent);
   BANK.forEach(function(q){BY_ID[q.id]=q});
   Sfx.on=store.get('sound',true)!==false;
-  // a saved game from an older build (question removed) shouldn't crash the lobby
   var g=store.get('game',null);
   if(g&&g.rounds){var ok=g.rounds.every(function(r){return r.every(function(t){return BY_ID[t.q]})})&&BY_ID[g.final.q];if(!ok)store.del('game')}
+  // invite links look like ...?room=ABCD
+  try{var m=/[?&]room=([A-Za-z]{4})/.exec(location.search);if(m){UI.joinOpen=true;UI.joinCode=m[1].toUpperCase();history.replaceState(null,'',location.pathname)}}catch(e){}
   render();
+  if(window.__netState==='ready')window.dispatchEvent(new Event('net-change'));
 }
-window.__deepcuts={reduce:reduce,makeDeal:makeDeal,getState:function(){return S},dispatch:dispatch,BANK:function(){return BANK}};
+window.__deepcuts={reduce:reduce,makeDeal:makeDeal,getState:function(){return S},getRoom:function(){return ROOM},dispatch:dispatch,BANK:function(){return BANK}};
 try{boot()}catch(e){showFatal(e)}
 })();
 </script>
+
+<script type="module">
+/* =====================================================================
+   FIREBASE — optional online layer.
+   The game above never waits for this. If the config below still has
+   placeholders, or Firebase can't load, the game just stays local.
+   Players sign in anonymously (no accounts, no Google login).
+   ===================================================================== */
+const firebaseConfig = {
+  apiKey: "AIzaSyCDMZ0wMuqhsW6Yp7nccrBtPmQZ7zdVBEM",
+  authDomain: "deep-cuts-3e6fa.firebaseapp.com",
+  databaseURL: "https://deep-cuts-3e6fa-default-rtdb.firebaseio.com",
+  projectId: "deep-cuts-3e6fa",
+  storageBucket: "deep-cuts-3e6fa.firebasestorage.app",
+  messagingSenderId: "295969292404",
+  appId: "1:295969292404:web:1670d7397441ebea861121"
+};
+const FB_VERSION = '12.12.0';
+
+function setNet(state, err){
+  window.__netState = state;
+  if (err) window.__netError = err;
+  window.dispatchEvent(new Event('net-change'));
+}
+function explain(e){
+  const c = String((e && (e.code || e.message)) || e || '');
+  if (/admin-restricted|operation-not-allowed/.test(c)) return 'Anonymous sign-in is off in Firebase (Authentication → Sign-in method).';
+  if (/network|timeout|Failed to fetch|import/i.test(c)) return 'Couldn’t reach Firebase.';
+  return 'Online play couldn’t start (' + c.slice(0, 60) + ').';
+}
+(async function(){
+  const placeholder = !firebaseConfig.apiKey || !firebaseConfig.databaseURL || /YOUR_|PASTE_/.test(JSON.stringify(firebaseConfig));
+  if (placeholder){ console.info('[deepcuts] Firebase not configured. Local play only.'); setNet('off'); return; }
+  setNet('loading');
+  try{
+    const base = 'https://www.gstatic.com/firebasejs/' + FB_VERSION + '/';
+    const [A, U, D] = await Promise.all([
+      import(base + 'firebase-app.js'),
+      import(base + 'firebase-auth.js'),
+      import(base + 'firebase-database.js')
+    ]);
+    const app = A.initializeApp(firebaseConfig);
+    const auth = U.getAuth(app);
+    const db = D.getDatabase(app);
+
+    // Anonymous sign-in. The same browser keeps the same id across reloads,
+    // which is how a dropped player slots back into their seat.
+    const user = await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error('network timeout')), 15000);
+      const stop = U.onAuthStateChanged(auth, u => { if (u){ clearTimeout(timer); stop(); resolve(u); } });
+      U.signInAnonymously(auth).catch(e => { clearTimeout(timer); reject(e); });
+    });
+
+    const R = p => D.ref(db, p);
+    let connected = false, offset = 0, presence = null;
+    function armPresence(){
+      if (!presence) return;
+      const r = R('rooms/' + presence + '/members/' + user.uid + '/online');
+      D.onDisconnect(r).set(false).catch(() => {});
+      D.set(r, true).catch(() => {});
+    }
+    D.onValue(R('.info/connected'), s => {
+      connected = !!s.val();
+      if (connected) armPresence();          // re-mark online after every reconnect
+      window.dispatchEvent(new Event('net-conn'));
+    });
+    D.onValue(R('.info/serverTimeOffset'), s => { offset = s.val() || 0; });
+
+    window.__net = {
+      uid: user.uid,
+      get connected(){ return connected; },
+      now: () => Date.now() + offset,                 // shared clock for timers
+      wake(){ try { D.goOnline(db); } catch (e) {} },
+      async roomInfo(code){
+        const s = await D.get(R('rooms/' + code + '/host'));
+        return { exists: s.exists(), host: s.val() };
+      },
+      async create(code, stateStr, name){
+        const p = 'rooms/' + code + '/';
+        await D.update(D.ref(db), {
+          [p + 'host']: user.uid,
+          [p + 'state']: stateStr,
+          [p + 'members/' + user.uid]: { name, online: true, joined: D.serverTimestamp() }
+        });
+        presence = code; armPresence();
+      },
+      async join(code, name){
+        const m = R('rooms/' + code + '/members/' + user.uid);
+        const s = await D.get(m);
+        if (s.exists()) await D.update(m, { name, online: true });
+        else await D.set(m, { name, online: true, joined: D.serverTimestamp() });
+        presence = code; armPresence();
+      },
+      async leave(code, removeMe){
+        presence = null;
+        const r = R('rooms/' + code + '/members/' + user.uid);
+        try { await D.onDisconnect(R('rooms/' + code + '/members/' + user.uid + '/online')).cancel(); } catch (e) {}
+        if (removeMe) await D.remove(r); else await D.set(R('rooms/' + code + '/members/' + user.uid + '/online'), false);
+      },
+      async destroy(code){ presence = null; await D.remove(R('rooms/' + code)); },
+      watchMembers(code, cb){ return D.onValue(R('rooms/' + code + '/members'), s => cb(s.val() || {})); },
+      watchHost(code, cb){ return D.onValue(R('rooms/' + code + '/host'), s => cb(s.val())); },
+      watchState(code, cb){ return D.onValue(R('rooms/' + code + '/state'), s => cb(s.val())); },
+      watchActions(code, cb){
+        return D.onChildAdded(R('rooms/' + code + '/actions'), s => {
+          const v = s.val();
+          D.remove(s.ref).catch(() => {});
+          cb(v);
+        });
+      },
+      writeState(code, str){ return D.set(R('rooms/' + code + '/state'), str); },
+      sendAction(code, a){ return D.push(R('rooms/' + code + '/actions'), Object.assign({}, a, { uid: user.uid })); }
+    };
+    setNet('ready');
+  }catch(e){
+    console.info('[deepcuts] Online play unavailable:', e && (e.code || e.message));
+    setNet('failed', explain(e));
+  }
+})();
+</script>
+
 </body>
 </html>
