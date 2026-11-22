@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1d0910">
+<title>Deep Cuts — alt-rock trivia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Barlow:wght@400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+/* =====================================================================
+   DEEP CUTS — tokens
+   Concept: a club wall at night. Clues are xeroxed gig flyers stapled
+   up in a grid; band headers are gaffer tape with marker, like a setlist.
+   ===================================================================== */
+:root{
+  --curtain:#2b0e18;      /* oxblood venue wall */
+  --curtain-deep:#14060b;
+  --paper:#e9e2d0;        /* photocopy paper */
+  --paper-shade:#d6ccb3;
+  --ink:#1b1714;          /* toner */
+  --tape:#2c2b2e;         /* gaffer tape */
+  --marker:#f7f5f0;       /* paint marker */
+  --stamp-red:#c3202c;
+  --stamp-green:#1d7448;
+  --sg:#e07b24;  /* Soundgarden — sun orange */
+  --nv:#2e9cc8;  /* Nirvana — pool blue */
+  --tl:#9a74e0;  /* Tool — violet */
+  --ni:#d8243a;  /* Nine Inch Nails — red */
+  --f-display:"Big Shoulders Display", Impact, "Arial Narrow Bold", sans-serif;
+  --f-body:"Barlow", "Helvetica Neue", Arial, sans-serif;
+  --f-hand:"Permanent Marker", "Marker Felt", "Comic Sans MS", cursive;
+  --ease-out:cubic-bezier(.2,.8,.2,1);
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:var(--f-body);color:var(--marker);
+  background:
+    radial-gradient(120% 70% at 50% -10%, rgba(255,170,120,.16), transparent 60%),
+    radial-gradient(80% 60% at 10% 110%, rgba(120,20,40,.55), transparent 70%),
+    linear-gradient(180deg, var(--curtain) 0%, var(--curtain-deep) 100%);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+/* film grain over everything */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:disabled{cursor:default}
+:focus-visible{outline:3px solid #ffd36b;outline-offset:3px;border-radius:4px}
+input{font:inherit}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+#app{height:100dvh;height:100vh;display:flex;flex-direction:column}
+@supports(height:100dvh){#app{height:100dvh}}
+
+/* ---------- shared paper texture ---------- */
+.paper{
+  background-color:var(--paper);color:var(--ink);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='2'/><feColorMatrix values='0 0 0 0 .1  0 0 0 0 .09  0 0 0 0 .08  0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>"),
+    radial-gradient(140% 120% at 30% 20%, transparent 55%, rgba(80,60,30,.18) 100%);
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:.02em;
+  padding:14px 26px;border-radius:3px;background:var(--marker);color:var(--ink);
+  box-shadow:0 2px 0 rgba(0,0,0,.35), 0 10px 24px -10px rgba(0,0,0,.7);
+  transition:transform .12s var(--ease-out), box-shadow .12s;
+}
+.btn:hover:not(:disabled){transform:translateY(-2px)}
+.btn:active:not(:disabled){transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.35)}
+.btn:disabled{opacity:.4}
+.btn.ghost{background:transparent;color:var(--marker);box-shadow:inset 0 0 0 2px rgba(247,245,240,.55)}
+.btn.small{font-size:17px;padding:9px 16px}
+.btn.hot{background:#ffd36b}
+.iconbtn{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;color:var(--marker);opacity:.85}
+.iconbtn:hover{opacity:1;background:rgba(255,255,255,.08)}
+.iconbtn svg{width:22px;height:22px}
+
+/* =====================================================================
+   LOBBY
+   ===================================================================== */
+.lobby{flex:1;overflow-x:hidden;overflow-y:auto;display:grid;place-items:center;padding:28px 18px calc(28px + var(--safe-b))}
+.lobby-inner{width:min(980px,100%);display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+.hero{position:relative;min-height:380px;display:flex;flex-direction:column;justify-content:center}
+.record{
+  position:absolute;width:min(420px,88vw);aspect-ratio:1;left:-40px;top:50%;translate:0 -50%;border-radius:50%;z-index:0;
+  background:
+    radial-gradient(circle at 50% 50%, #e9e2d0 0 9%, var(--ni) 9.2% 18%, transparent 18.3%),
+    repeating-radial-gradient(circle at 50% 50%, #0d0b0c 0 2px, #1a1718 2.5px 3.5px),
+    #111;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.9), inset 0 0 0 6px #0a0909;
+  opacity:.9;animation:spin 7s linear infinite;
+}
+.record::after{content:"";position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 20deg, transparent 0 40deg, rgba(255,255,255,.12) 55deg, transparent 75deg 220deg, rgba(255,255,255,.08) 235deg, transparent 255deg)}
+@keyframes spin{to{rotate:360deg}}
+.logo{position:relative;z-index:1;margin:0;font-family:var(--f-display);font-weight:900;line-height:.78;
+  font-size:clamp(84px,13vw,168px);letter-spacing:-.01em;color:var(--paper);
+  text-shadow:0 4px 0 rgba(0,0,0,.35);
+}
+.logo span{display:block}
+.logo span:last-child{padding-left:.42em}
+.tagline{position:relative;z-index:1;margin:22px 0 0;max-width:30ch;font-size:18px;line-height:1.45;color:rgba(247,245,240,.82)}
+.bandlist{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:18px;font-family:var(--f-hand);font-size:19px}
+.bandlist b{font-weight:400}
+
+.setup{padding:26px 26px 22px;border-radius:2px;rotate:.6deg;box-shadow:0 30px 60px -25px rgba(0,0,0,.9)}
+.setup h2{margin:0 0 4px;font-family:var(--f-display);font-weight:900;font-size:34px;line-height:1}
+.setup .hint{margin:0 0 16px;font-size:15px;color:#5a5146}
+.plist{display:grid;gap:10px}
+.prow{display:flex;align-items:center;gap:10px}
+.swatch{width:14px;height:40px;border-radius:2px;flex:none}
+.prow input{flex:1;min-width:0;height:44px;padding:0 12px;border:2px solid var(--ink);border-radius:2px;background:rgba(255,255,255,.55);
+  font-family:var(--f-hand);font-size:20px;color:var(--ink)}
+.prow input:focus{outline:none;background:#fff}
+.prow .x{width:38px;height:38px;border-radius:50%;color:var(--ink);font-size:22px;line-height:1}
+.prow .x:hover{background:rgba(0,0,0,.08)}
+.addp{margin-top:10px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:3px;padding:4px 0}
+.opts{display:grid;gap:12px;margin:20px 0 18px}
+.seg{display:flex;border:2px solid var(--ink);border-radius:2px;overflow:hidden}
+.seg button{flex:1;padding:10px 8px;color:var(--ink);font-weight:600;font-size:15px;line-height:1.2}
+.seg button small{display:block;font-weight:500;font-size:12.5px;opacity:.7}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.optrow{display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600;font-size:15px}
+.switch{width:54px;height:30px;border-radius:15px;background:#b9ae95;position:relative;flex:none;transition:background .15s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:translate .15s var(--ease-out);box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.switch[aria-checked="true"]{background:var(--ink)}
+.switch[aria-checked="true"]::after{translate:24px 0}
+.setup .actions{display:flex;flex-wrap:wrap;gap:10px}
+.setup .btn{background:var(--ink);color:var(--paper)}
+.setup .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.online{margin-top:18px;padding-top:14px;border-top:2px dashed rgba(27,23,20,.35);display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px;color:#5a5146}
+.online .btn{font-size:16px;padding:8px 14px}
+.keys{font-size:13px;color:#5a5146;margin-top:10px}
+.keys kbd{font-family:var(--f-body);font-weight:700;border:1.5px solid #5a5146;border-radius:3px;padding:0 5px;font-size:12px}
+
+/* =====================================================================
+   GAME CHROME
+   ===================================================================== */
+.top{position:relative;z-index:30;display:flex;align-items:center;gap:12px;padding:10px 14px 4px;flex:none}
+.top .mark{font-family:var(--f-display);font-weight:900;font-size:26px;line-height:1;color:var(--paper)}
+.top .round{font-family:var(--f-hand);font-size:18px;color:rgba(247,245,240,.75);margin-left:4px}
+.top .spacer{flex:1}
+.top .left{font-size:14px;color:rgba(247,245,240,.6)}
+
+.stage{flex:1;min-height:0;display:flex;flex-direction:column;padding:6px 14px 0;max-width:1180px;width:100%;margin:0 auto}
+.board{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto repeat(6,minmax(0,1fr));gap:clamp(6px,1.2vw,14px)}
+
+/* gaffer-tape band headers */
+.head{
+  position:relative;display:grid;place-items:center;text-align:center;min-height:54px;padding:8px 6px 12px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.07), transparent 40%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 2px, transparent 2px 5px),
+    var(--tape);
+  clip-path:polygon(0 6%,3% 0,9% 5%,15% 1%,22% 4%,30% 0,38% 5%,47% 1%,55% 4%,63% 0,71% 5%,80% 1%,88% 4%,95% 0,100% 6%,99% 50%,100% 94%,96% 100%,90% 96%,82% 100%,74% 95%,66% 100%,57% 96%,48% 100%,40% 95%,31% 100%,23% 96%,14% 100%,6% 95%,0 99%,1% 50%);
+  box-shadow:0 6px 14px rgba(0,0,0,.4);
+}
+.head span{font-family:var(--f-hand);font-size:clamp(11px,3.1vw,24px);overflow-wrap:anywhere;line-height:1.05;color:var(--marker);transform:rotate(-1.5deg)}
+.head::after{content:"";position:absolute;left:16%;right:16%;bottom:7px;height:4px;border-radius:3px;background:var(--bc);opacity:.95;transform:rotate(-1deg)}
+
+/* xerox flyer tiles */
+.tile{
+  position:relative;display:grid;place-items:center;min-height:0;border-radius:1px;
+  rotate:var(--rot,0deg);
+  box-shadow:0 1px 0 rgba(0,0,0,.25), 0 12px 18px -12px rgba(0,0,0,.85);
+  transition:transform .16s var(--ease-out), box-shadow .16s;
+}
+.tile .val{font-family:var(--f-display);font-weight:900;font-size:clamp(20px,min(5.2vh,7.4vw),58px);line-height:1;letter-spacing:-.01em;
+  color:var(--ink);text-shadow:1px 0 0 rgba(27,23,20,.35);
+}
+/* staple */
+.tile::before{content:"";position:absolute;top:6px;left:50%;width:18px;height:4px;translate:-50% 0;border-radius:1px;
+  background:linear-gradient(180deg,#d8dadf,#8b8f97);box-shadow:0 1px 1px rgba(0,0,0,.4);opacity:.85}
+/* a faint band-color slash of highlighter */
+.tile::after{content:"";position:absolute;left:12%;right:12%;bottom:16%;height:22%;background:var(--bc);opacity:.18;mix-blend-mode:multiply;transform:skewX(-14deg);border-radius:2px}
+.tile:not(.used):hover{transform:translateY(-3px) scale(1.02);box-shadow:0 1px 0 rgba(0,0,0,.25),0 18px 26px -12px rgba(0,0,0,.9)}
+.tile:not(.used):active{transform:scale(.98)}
+.tile.used{background:transparent;box-shadow:none;outline:2px dashed rgba(247,245,240,.13);outline-offset:-2px;cursor:default}
+.tile.used::after,.tile.used .val{display:none}
+.tile.used::before{opacity:.35}
+.board.locked .tile:not(.used){cursor:default}
+.dealing .tile{animation:deal .5s var(--ease-out) backwards;animation-delay:calc(var(--i) * 28ms)}
+@keyframes deal{from{opacity:0;transform:translateY(-18px) rotate(-6deg) scale(.9)}}
+
+/* players */
+.players{position:relative;z-index:30;flex:none;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:10px;padding:12px 14px calc(12px + var(--safe-b));max-width:1180px;width:100%;margin:0 auto}
+.pl{position:relative;padding:8px 12px 8px 16px;border-radius:3px;background:rgba(0,0,0,.32);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);overflow:hidden}
+.pl::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--pc)}
+.pl .nm{font-family:var(--f-hand);font-size:17px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl .sc{font-family:var(--f-display);font-weight:800;font-size:clamp(24px,3.6vw,34px);line-height:1;margin-top:2px}
+.pl .sc.neg{color:#ff7b86}
+.pl.ctrl{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 2px var(--pc)}
+.pl .tag{position:absolute;right:8px;top:8px;font-size:12px;font-weight:700;padding:2px 7px;border-radius:10px;background:var(--pc);color:var(--ink)}
+.pl.bump .sc{animation:bump .5s var(--ease-out)}
+@keyframes bump{30%{transform:scale(1.18)}}
+.status{flex:none;text-align:center;font-size:15px;color:rgba(247,245,240,.72);padding:8px 0 0;min-height:30px}
+.status b{font-family:var(--f-hand);font-weight:400;font-size:18px;color:var(--marker)}
+
+/* =====================================================================
+   OVERLAYS (clue, wager, cards)
+   ===================================================================== */
+.ov{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:60px 14px calc(96px + var(--safe-b));
+  background:rgba(12,4,7,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);overflow:auto}
+.ov::before,.ov::after{content:"";flex:1 1 0;min-height:0}
+.ov.fade{animation:fadein .25s ease}
+@keyframes fadein{from{opacity:0}}
+
+.card{position:relative;width:min(880px,100%);padding:clamp(18px,3.2vw,36px);border-radius:2px;rotate:-.4deg;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.95), 0 2px 0 rgba(0,0,0,.3);transform-origin:center}
+.card .meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:clamp(10px,2vh,20px)}
+.card .band{font-family:var(--f-hand);font-size:clamp(20px,3vw,30px);line-height:1;position:relative}
+.card .band::after{content:"";position:absolute;left:-4px;right:-6px;bottom:-4px;height:7px;background:var(--bc);opacity:.85;border-radius:4px;transform:rotate(-1.2deg);z-index:-1}
+.card .band{z-index:0;isolation:isolate}
+.card .worth{font-family:var(--f-display);font-weight:900;font-size:clamp(30px,4.6vw,48px);line-height:.9}
+.card .worth small{font-family:var(--f-body);font-weight:600;font-size:13px;display:block;text-align:right;opacity:.6;margin-top:2px}
+.qtext{margin:0;font-weight:600;font-size:clamp(22px,3.3vw,38px);line-height:1.22;letter-spacing:-.005em;max-width:32ch;text-wrap:balance}
+.timer{position:absolute;left:0;right:0;top:0;height:6px;background:rgba(27,23,20,.12);overflow:hidden}
+.timer i{display:block;height:100%;width:100%;background:var(--ink);transform-origin:left;transform:scaleX(var(--t,1))}
+.timer.low i{background:var(--stamp-red)}
+
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:clamp(16px,3vh,30px)}
+.choice{position:relative;display:flex;align-items:center;gap:12px;text-align:left;padding:14px 16px;min-height:62px;border-radius:2px;
+  background:rgba(255,255,255,.5);color:var(--ink);font-weight:600;font-size:clamp(16px,2vw,20px);line-height:1.2;
+  box-shadow:inset 0 0 0 2px var(--ink);transition:transform .1s, background .12s}
+.choice .k{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--paper);font-family:var(--f-display);font-weight:800;font-size:18px}
+.choice:hover:not(:disabled){background:#fff;transform:translateY(-1px)}
+.choice:disabled{cursor:default}
+.choices.wait .choice{opacity:.55}
+.choice.struck{opacity:.4;background:transparent}
+.choice.struck span:last-child{text-decoration:line-through 2px}
+.choice.right{background:var(--stamp-green);color:#fff;box-shadow:none;opacity:1}
+.choice.right .k{background:#fff;color:var(--stamp-green)}
+.choice.picked-wrong{background:rgba(195,32,44,.14);box-shadow:inset 0 0 0 2px var(--stamp-red);opacity:1}
+.choice.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+
+.who{margin-top:16px;min-height:28px;font-size:16px;color:#4d453b;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.who b{font-family:var(--f-hand);font-weight:400;font-size:20px;color:var(--ink);padding:0 8px;border-radius:3px;background:var(--pc)}
+.card .foot{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;flex-wrap:wrap}
+.card .btn{background:var(--ink);color:var(--paper)}
+.card .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.answer-line{margin-top:14px;font-size:17px;color:#3c352c}
+.answer-line b{color:var(--ink)}
+
+/* rubber stamp */
+.stamp{position:absolute;right:clamp(12px,4vw,44px);top:clamp(84px,13vh,120px);z-index:3;pointer-events:none;
+  padding:8px 18px 6px;border:5px double currentColor;border-radius:6px;font-family:var(--f-display);font-weight:900;
+  font-size:clamp(34px,6vw,64px);line-height:.95;text-align:center;rotate:-9deg;mix-blend-mode:multiply;opacity:.88}
+.stamp small{display:block;font-size:.45em;font-weight:800}
+.stamp.ok{color:var(--stamp-green)}
+.stamp.no{color:var(--stamp-red)}
+.stamp.slam{animation:slam .38s cubic-bezier(.3,1.6,.5,1) backwards}
+@keyframes slam{from{opacity:0;transform:scale(2.2);rotate:-18deg}}
+
+/* buzzer pads (local multiplayer) */
+.pads{width:min(880px,100%);display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:10px;margin-top:14px}
+.pad{position:relative;height:clamp(64px,11vh,96px);border-radius:6px;background:var(--pc);color:var(--ink);
+  font-family:var(--f-display);font-weight:900;font-size:clamp(20px,3vw,30px);line-height:1;
+  box-shadow:0 6px 0 rgba(0,0,0,.45), inset 0 -6px 0 rgba(0,0,0,.18);transition:transform .06s, box-shadow .06s, opacity .15s}
+.pad small{display:block;font-family:var(--f-body);font-weight:600;font-size:13px;margin-top:4px;opacity:.75}
+.pad:active:not(:disabled){transform:translateY(5px);box-shadow:0 1px 0 rgba(0,0,0,.45), inset 0 -3px 0 rgba(0,0,0,.18)}
+.pad:disabled{opacity:.25}
+.pad.live{outline:4px solid var(--marker);outline-offset:3px}
+
+/* wager / round cards */
+.bigcard{width:min(620px,100%);text-align:center;padding:12px 18px}
+.bigcard h2{margin:0;font-family:var(--f-display);font-weight:900;font-size:clamp(56px,min(12vw,14vh),120px);line-height:.85;color:var(--paper)}
+.bigcard p{font-size:18px;line-height:1.45;color:rgba(247,245,240,.82);margin:16px auto 0;max-width:36ch}
+.bigcard p b{font-family:var(--f-hand);font-weight:400;font-size:22px;color:var(--marker)}
+.bigcard .btn{margin-top:20px}
+.bigcard .vinyl{width:clamp(90px,15vh,150px);height:clamp(90px,15vh,150px);margin:0 auto 14px;border-radius:50%;
+  background:radial-gradient(circle,var(--paper) 0 10%,var(--bc,var(--ni)) 10.5% 22%,transparent 22.5%),repeating-radial-gradient(circle,#0d0b0c 0 2px,#1d1a1b 2.5px 3.5px);
+  box-shadow:0 20px 50px -10px rgba(0,0,0,.9);animation:spin 2.2s linear infinite}
+.bigcard.drop h2{animation:drop .6s cubic-bezier(.3,1.5,.5,1) backwards}
+@keyframes drop{from{opacity:0;transform:translateY(-40px) scale(1.2)}}
+.wager{display:grid;gap:12px;margin:16px auto 0;max-width:420px}
+.wager .amt{font-family:var(--f-display);font-weight:900;font-size:clamp(44px,8vh,64px);line-height:1;color:var(--marker)}
+.wager input[type=range]{width:100%;accent-color:#ffd36b}
+.wager .quick{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.wager .quick button{padding:7px 14px;border-radius:16px;box-shadow:inset 0 0 0 1.5px rgba(247,245,240,.5);font-weight:600;font-size:14px}
+.wager .quick button:hover{background:rgba(255,255,255,.1)}
+.wager .range{font-size:14px;color:rgba(247,245,240,.6)}
+
+/* standings */
+.standings{list-style:none;margin:22px auto 0;padding:0;max-width:440px;text-align:left;display:grid;gap:8px}
+.standings li{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:3px;background:rgba(0,0,0,.35);border-left:6px solid var(--pc)}
+.standings .pos{font-family:var(--f-display);font-weight:900;font-size:24px;width:24px;opacity:.6}
+.standings .nm{flex:1;font-family:var(--f-hand);font-size:20px}
+.standings .sc{font-family:var(--f-display);font-weight:800;font-size:28px}
+.standings li.first{background:rgba(255,211,107,.16)}
+.reveal-row{margin:22px auto 0;max-width:520px;padding:18px;border-radius:3px;background:rgba(0,0,0,.35);text-align:left;border-left:6px solid var(--pc)}
+.reveal-row .nm{font-family:var(--f-hand);font-size:26px}
+.reveal-row .ln{margin-top:8px;font-size:17px;color:rgba(247,245,240,.85)}
+.reveal-row .ln b{color:var(--marker)}
+.reveal-row .res{margin-top:10px;font-family:var(--f-display);font-weight:900;font-size:34px}
+.reveal-row .res.ok{color:#5fd39a}.reveal-row .res.no{color:#ff7b86}
+
+/* menu sheet */
+.sheet{width:min(460px,100%);padding:22px;border-radius:3px;rotate:.3deg}
+.sheet h3{margin:0 0 12px;font-family:var(--f-display);font-weight:900;font-size:30px}
+.sheet .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1.5px dashed rgba(27,23,20,.25);font-weight:600}
+.sheet .adj{display:flex;gap:6px}
+.sheet .adj button{width:52px;height:34px;border-radius:2px;box-shadow:inset 0 0 0 2px var(--ink);color:var(--ink);font-weight:700;font-size:14px}
+.sheet .adj button:hover{background:rgba(0,0,0,.07)}
+.sheet .nm{font-family:var(--f-hand);font-weight:400;font-size:18px}
+.sheet .btns{display:flex;gap:10px;justify-content:space-between;margin-top:18px;flex-wrap:wrap}
+.sheet .btn{background:var(--ink);color:var(--paper)}
+.sheet .btn.danger{background:var(--stamp-red);color:#fff}
+.menu-ov{z-index:40;padding:16px}
+.privacy{display:grid;gap:12px;justify-items:center}
+
+.fatal{margin:auto;max-width:560px;padding:28px;font-size:17px;line-height:1.5}
+.fatal pre{white-space:pre-wrap;font-size:13px;background:rgba(0,0,0,.35);padding:12px;border-radius:3px}
+
+/* ---------- responsive ---------- */
+@media (max-width:820px){
+  .lobby-inner{grid-template-columns:minmax(0,1fr);gap:20px}
+  .setup{rotate:0deg;padding:22px 18px}
+  .hero{min-height:260px}
+  .record{width:300px;left:auto;right:-90px}
+  .tagline{font-size:16px}
+}
+@media (max-width:560px){
+  .stage{padding:4px 8px 0}
+  .players{gap:6px;padding:8px 8px calc(8px + var(--safe-b))}
+  .pl{padding:6px 8px 6px 12px}
+  .pl .nm{font-size:14px}
+  .pl .tag{display:none}
+  .choices{grid-template-columns:1fr}
+  .choice{min-height:52px;padding:10px 12px}
+  .top .round{display:none}
+  .head{min-height:46px}
+  .tile::before{width:12px;top:4px}
+  .stamp{top:auto;right:auto;left:16px;bottom:20px;font-size:34px;rotate:-6deg}
+}
+@media (max-height:520px) and (orientation:landscape){
+  .players{padding-top:4px;padding-bottom:4px}
+  .pl .sc{font-size:22px}
+  .head{min-height:38px;padding:4px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+}
+</style>
+</head>
+<body>
+<div id="app"><p style="margin:auto;font-family:sans-serif;opacity:.7">Loading Deep Cuts…</p></div>
+
+<script type="application/json" id="bank">[{"id":0,"b":0,"t":1,"q":"In what year was Soundgarden formed?","a":"1984","w":["1986","1982","1988"]},{"id":1,"b":0,"t":1,"q":"Which city did Soundgarden form in?","a":"Seattle, Washington","w":["Portland, Oregon","Tacoma, Washington","Olympia, Washington"]},{"id":2,"b":0,"t":2,"q":"What public artwork inspired the name Soundgarden?","a":"A wind-powered sculpture in Seattle","w":["A Seattle botanical garden","A recording studio courtyard","An outdoor amphitheater in Tacoma"]},{"id":3,"b":0,"t":3,"q":"Which three musicians founded Soundgarden?","a":"Cornell, Thayil & Yamamoto","w":["Cornell, Thayil & Cameron","Cornell, Yamamoto & Sundquist","Cornell, Shepherd & Thayil"]},{"id":4,"b":0,"t":2,"q":"What instrument did Chris Cornell initially play while singing in Soundgarden?","a":"Drums","w":["Bass","Rhythm guitar","Keyboards"]},{"id":5,"b":0,"t":2,"q":"Who replaced Scott Sundquist as Soundgarden’s drummer?","a":"Matt Cameron","w":["Dan Peters","Greg Gilmore","Dave Krusen"]},{"id":6,"b":0,"t":2,"q":"Who was Soundgarden's original bassist?","a":"Hiro Yamamoto","w":["Ben Shepherd","Jason Everman","Jeff Ament"]},{"id":7,"b":0,"t":3,"q":"Which musician briefly played bass for Soundgarden after Hiro Yamamoto?","a":"Jason Everman","w":["Jeff Ament","Krist Novoselic","Mike Starr"]},{"id":8,"b":0,"t":2,"q":"Which bassist joined Soundgarden in 1990?","a":"Ben Shepherd","w":["Jason Everman","Hiro Yamamoto","Jeff Ament"]},{"id":9,"b":0,"t":1,"q":"Which record label released Soundgarden’s first EP?","a":"Sub Pop","w":["SST Records","C/Z Records","A&M Records"]},{"id":10,"b":0,"t":2,"q":"What was Soundgarden’s first major-label studio album?","a":"Louder Than Love","w":["Ultramega OK","Badmotorfinger","Superunknown"]},{"id":11,"b":0,"t":2,"q":"In what year did Soundgarden first break up?","a":"1997","w":["1996","1998","1999"]},{"id":12,"b":0,"t":2,"q":"In what year did Soundgarden reunite?","a":"2010","w":["2008","2012","2014"]},{"id":13,"b":0,"t":1,"q":"What was Soundgarden’s first studio album after reuniting?","a":"King Animal","w":["Telephantasm","Higher Truth","Revelations"]},{"id":14,"b":0,"t":2,"q":"What year was King Animal released?","a":"2012","w":["2010","2011","2014"]},{"id":15,"b":0,"t":2,"q":"Which Seattle film featured Soundgarden performing Birth Ritual?","a":"Singles (1992)","w":["Reality Bites (1994)","Hype! (1996)","Say Anything (1989)"]},{"id":16,"b":0,"t":1,"q":"Which rock band took Soundgarden on its Use Your Illusion tour?","a":"Guns N' Roses","w":["Metallica","Mötley Crüe","Skid Row"]},{"id":17,"b":0,"t":3,"q":"Which two Soundgarden songs won Grammy Awards in 1995?","a":"Black Hole Sun & Spoonman","w":["Black Hole Sun & Fell on Black Days","Spoonman & Rusty Cage","Outshined & Black Hole Sun"]},{"id":18,"b":0,"t":1,"q":"What was Soundgarden’s debut EP called?","a":"Screaming Life","w":["Fopp","Hunted Down","Loudest Love"]},{"id":19,"b":0,"t":2,"q":"In what year was Screaming Life first released?","a":"1987","w":["1985","1986","1989"]},{"id":21,"b":0,"t":3,"q":"Who produced Screaming Life?","a":"Jack Endino","w":["Steve Albini","Terry Date","Butch Vig"]},{"id":22,"b":0,"t":3,"q":"Which Screaming Life song had already appeared on the 1986 Deep Six compilation?","a":"Tears to Forget","w":["Nothing to Say","Hunted Down","Little Joe"]},{"id":23,"b":0,"t":2,"q":"What is the opening track on Screaming Life?","a":"Hunted Down","w":["Entering","Little Joe","Hand of God"]},{"id":24,"b":0,"t":3,"q":"Which two early Soundgarden EPs were combined into a single 1990 release?","a":"Screaming Life & Fopp","w":["Fopp & Loudest Love","Screaming Life & Deep Six","Hunted Down & Fopp"]},{"id":25,"b":0,"t":2,"q":"What year was Soundgarden’s Fopp EP released?","a":"1988","w":["1987","1989","1990"]},{"id":26,"b":0,"t":2,"q":"Which Ohio funk group originally recorded the song Fopp?","a":"Ohio Players","w":["Parliament","Sly and the Family Stone","Kool & the Gang"]},{"id":28,"b":0,"t":3,"q":"The Fopp EP includes two different versions of which cover song?","a":"Fopp","w":["Swallow My Pride","Kingdom of Come","Smokestack Lightning"]},{"id":29,"b":0,"t":1,"q":"What was Soundgarden’s first full-length studio album?","a":"Ultramega OK","w":["Louder Than Love","Screaming Life","Badmotorfinger"]},{"id":31,"b":0,"t":2,"q":"Which independent label originally released Ultramega OK?","a":"SST Records","w":["Sub Pop","Touch and Go","Epitaph"]},{"id":32,"b":0,"t":3,"q":"Who produced the original Ultramega OK album?","a":"Drew Canulette","w":["Jack Endino","Terry Date","Michael Beinhorn"]},{"id":33,"b":0,"t":2,"q":"Which Howlin’ Wolf song did Soundgarden cover on Ultramega OK?","a":"Smokestack Lightning","w":["Spoonful","Killing Floor","Little Red Rooster"]},{"id":34,"b":0,"t":3,"q":"Which song was released as the lead single from Ultramega OK?","a":"Flower","w":["All Your Lies","Beyond the Wheel","Mood for Trouble"]},{"id":35,"b":0,"t":3,"q":"Ultramega OK earned a Grammy nomination in which category?","a":"Best Metal Performance","w":["Best Hard Rock Performance","Best Alternative Music Album","Best Rock Album"]},{"id":36,"b":0,"t":1,"q":"Which album followed Ultramega OK in Soundgarden’s studio discography?","a":"Louder Than Love","w":["Badmotorfinger","Superunknown","Screaming Life"]},{"id":37,"b":0,"t":2,"q":"What year was Louder Than Love released?","a":"1989","w":["1988","1990","1991"]},{"id":38,"b":0,"t":1,"q":"Which major label released Louder Than Love?","a":"A&M Records","w":["Geffen Records","Epic Records","Warner Bros."]},{"id":39,"b":0,"t":3,"q":"Who produced Louder Than Love?","a":"Terry Date","w":["Butch Vig","Rick Rubin","Michael Beinhorn"]},{"id":40,"b":0,"t":3,"q":"Which Louder Than Love single is an environmental protest song?","a":"Hands All Over","w":["Loud Love","Get on the Snake","Ugly Truth"]},{"id":41,"b":0,"t":3,"q":"Which Soundgarden bassist performed on Louder Than Love?","a":"Hiro Yamamoto","w":["Ben Shepherd","Jason Everman","Jeff Ament"]},{"id":43,"b":0,"t":1,"q":"Which album followed Louder Than Love?","a":"Badmotorfinger","w":["Superunknown","Ultramega OK","Down on the Upside"]},{"id":44,"b":0,"t":2,"q":"What year was Badmotorfinger released?","a":"1991","w":["1990","1992","1989"]},{"id":45,"b":0,"t":3,"q":"Who produced Badmotorfinger?","a":"Terry Date","w":["Butch Vig","Michael Beinhorn","Adam Kasper"]},{"id":46,"b":0,"t":2,"q":"Which Soundgarden album first featured Ben Shepherd on bass?","a":"Badmotorfinger","w":["Louder Than Love","Superunknown","Ultramega OK"]},{"id":47,"b":0,"t":2,"q":"Which song opens Badmotorfinger?","a":"Rusty Cage","w":["Outshined","Jesus Christ Pose","Slaves & Bulldozers"]},{"id":48,"b":0,"t":1,"q":"Which Soundgarden song did Johnny Cash cover on his 1996 album Unchained?","a":"Rusty Cage","w":["Black Hole Sun","Outshined","Fell on Black Days"]},{"id":49,"b":0,"t":2,"q":"Which Badmotorfinger music video was controversial for its religious imagery?","a":"Jesus Christ Pose","w":["Outshined","Rusty Cage","Searching with My Good Eye Closed"]},{"id":50,"b":0,"t":1,"q":"Which album immediately followed Badmotorfinger?","a":"Superunknown","w":["Down on the Upside","King Animal","Louder Than Love"]},{"id":51,"b":0,"t":1,"q":"In what year was Superunknown released?","a":"1994","w":["1993","1995","1992"]},{"id":52,"b":0,"t":2,"q":"Which Soundgarden album debuted at number one on the Billboard 200?","a":"Superunknown","w":["Badmotorfinger","Down on the Upside","King Animal"]},{"id":53,"b":0,"t":3,"q":"Who produced Superunknown with Soundgarden?","a":"Michael Beinhorn","w":["Terry Date","Butch Vig","Brendan O'Brien"]},{"id":54,"b":0,"t":1,"q":"Which Superunknown song features a spoon-playing street performer in its music video?","a":"Spoonman","w":["Black Hole Sun","My Wave","The Day I Tried to Live"]},{"id":55,"b":0,"t":2,"q":"Which Seattle street musician inspired Spoonman?","a":"Artis the Spoonman","w":["Jimmy the Spoon","Spoony Gary","Seattle Slim"]},{"id":56,"b":0,"t":2,"q":"Which Superunknown song won the Grammy for Best Hard Rock Performance?","a":"Black Hole Sun","w":["Spoonman","Fell on Black Days","My Wave"]},{"id":57,"b":0,"t":3,"q":"Which Superunknown song won the Grammy for Best Metal Performance?","a":"Spoonman","w":["Black Hole Sun","The Day I Tried to Live","Fell on Black Days"]},{"id":58,"b":0,"t":1,"q":"Complete the Superunknown single title: \"Fell on ___ Days\"","a":"Black","w":["Dark","Grey","Better"]},{"id":59,"b":0,"t":3,"q":"Which is the shortest track on Superunknown, at about a minute and a half?","a":"Kickstand","w":["Half","Head Down","Mailman"]},{"id":60,"b":0,"t":1,"q":"Which album followed Superunknown?","a":"Down on the Upside","w":["King Animal","Badmotorfinger","A-Sides"]},{"id":61,"b":0,"t":2,"q":"In what year was Down on the Upside released?","a":"1996","w":["1995","1997","1998"]},{"id":63,"b":0,"t":3,"q":"Which song was the second single from Down on the Upside?","a":"Burden in My Hand","w":["Pretty Noose","Blow Up the Outside World","Ty Cobb"]},{"id":64,"b":0,"t":2,"q":"Which song was the lead single from Down on the Upside?","a":"Pretty Noose","w":["Burden in My Hand","Blow Up the Outside World","Ty Cobb"]},{"id":65,"b":0,"t":1,"q":"What is the title of Soundgarden’s 1997 greatest-hits compilation?","a":"A-Sides","w":["Telephantasm","Echo of Miles","Ultramega OK"]},{"id":66,"b":0,"t":3,"q":"Which previously unreleased Soundgarden song appeared on A-Sides?","a":"Bleed Together","w":["Black Rain","Live to Rise","Birth Ritual"]},{"id":68,"b":0,"t":1,"q":"Was A-Sides released before or after Soundgarden’s 1997 breakup?","a":"After the breakup","w":["Two years before the breakup","A month before the breakup","It was shelved until 2010"]},{"id":69,"b":0,"t":2,"q":"What year was Telephantasm released?","a":"2010","w":["2008","2011","2012"]},{"id":70,"b":0,"t":1,"q":"What kind of Soundgarden release is Telephantasm?","a":"A compilation album","w":["A live album","A studio album","An EP of covers"]},{"id":71,"b":0,"t":2,"q":"Which previously unreleased Soundgarden song appeared on Telephantasm?","a":"Black Rain","w":["Bleed Together","Live to Rise","Halfway There"]},{"id":72,"b":0,"t":2,"q":"Which video game was associated with the initial release of Telephantasm?","a":"Guitar Hero: Warriors of Rock","w":["Rock Band 3","Guitar Hero 5","Guitar Hero: Metallica"]},{"id":74,"b":0,"t":2,"q":"What year was Live on I-5 released?","a":"2011","w":["2009","2012","2013"]},{"id":75,"b":0,"t":2,"q":"From what year were the performances on Live on I-5 recorded?","a":"1996","w":["1994","1997","1992"]},{"id":76,"b":0,"t":1,"q":"What does the I-5 in Live on I-5 refer to?","a":"Interstate 5","w":["A Seattle radio station","A studio live room","The band's tour bus"]},{"id":78,"b":0,"t":2,"q":"Which studio album was Soundgarden touring behind when Live on I-5 was recorded?","a":"Down on the Upside","w":["Superunknown","Badmotorfinger","King Animal"]},{"id":79,"b":0,"t":1,"q":"Matt Cameron has drummed for Soundgarden and which other Seattle band?","a":"Pearl Jam","w":["Alice in Chains","Mudhoney","Screaming Trees"]},{"id":80,"b":0,"t":2,"q":"In what year did Matt Cameron join Pearl Jam?","a":"1998","w":["1996","2000","2002"]},{"id":81,"b":0,"t":3,"q":"Which drummer did Matt Cameron replace in Soundgarden?","a":"Scott Sundquist","w":["Greg Gilmore","Dave Krusen","Hiro Yamamoto"]},{"id":82,"b":0,"t":2,"q":"Which Soundgarden drummer also recorded with Temple of the Dog?","a":"Matt Cameron","w":["Dave Krusen","Scott Sundquist","Dan Peters"]},{"id":83,"b":0,"t":1,"q":"Which supergroup did Chris Cornell form in tribute to Andrew Wood?","a":"Temple of the Dog","w":["Mad Season","Mother Love Bone","Audioslave"]},{"id":84,"b":0,"t":1,"q":"What was the name of Chris Cornell’s post-Soundgarden band with former Rage Against the Machine members?","a":"Audioslave","w":["Temple of the Dog","Velvet Revolver","Prophets of Rage"]},{"id":85,"b":0,"t":1,"q":"Which James Bond film featured Chris Cornell’s song You Know My Name?","a":"Casino Royale (2006)","w":["Quantum of Solace (2008)","Die Another Day (2002)","Skyfall (2012)"]},{"id":86,"b":0,"t":3,"q":"What was Chris Cornell’s first solo studio album?","a":"Euphoria Morning","w":["Carry On","Scream","Higher Truth"]},{"id":87,"b":0,"t":1,"q":"Which 1991 album featured Cornell singing Hunger Strike with Eddie Vedder?","a":"Temple of the Dog","w":["Ten","Apple","Singles soundtrack"]},{"id":88,"b":0,"t":2,"q":"Which 2007 solo album by Cornell includes You Know My Name?","a":"Carry On","w":["Euphoria Morning","Scream","Higher Truth"]},{"id":89,"b":0,"t":2,"q":"Which 2009 Cornell solo album was produced by Timbaland?","a":"Scream","w":["Carry On","Higher Truth","Euphoria Morning"]},{"id":90,"b":0,"t":2,"q":"Which Seattle musician was the subject of Cornell’s tribute project Temple of the Dog?","a":"Andrew Wood","w":["Layne Staley","Kurt Cobain","Stefanie Sargent"]},{"id":94,"b":0,"t":3,"q":"What was the name of Ben Shepherd’s solo album released in 2013?","a":"In Deep Owl","w":["Shallow Water","Night Owl","Low Ceiling"]},{"id":95,"b":0,"t":3,"q":"Which Soundgarden member formed the band Hater with Matt Cameron?","a":"Ben Shepherd","w":["Kim Thayil","Chris Cornell","Hiro Yamamoto"]},{"id":96,"b":0,"t":1,"q":"Which instrument is Kim Thayil best known for playing?","a":"Lead guitar","w":["Bass","Drums","Keyboards"]},{"id":98,"b":0,"t":3,"q":"Which founding Soundgarden member was born in Seattle to Indian immigrant parents?","a":"Kim Thayil","w":["Hiro Yamamoto","Ben Shepherd","Matt Cameron"]},{"id":100,"b":1,"t":1,"q":"Which label released Nirvana's debut studio album?","a":"Sub Pop","w":["SST Records","K Records","C/Z Records"]},{"id":101,"b":1,"t":2,"q":"Who produced Bleach?","a":"Jack Endino","w":["Butch Vig","Steve Albini","Steve Fisk"]},{"id":102,"b":1,"t":3,"q":"At which Seattle studio were Bleach's main sessions recorded?","a":"Reciprocal Recording","w":["Sound City Studios","Smart Studios","London Bridge Studio"]},{"id":103,"b":1,"t":2,"q":"Which guitarist funded Bleach's recording but did not play on it?","a":"Jason Everman","w":["Chad Channing","Dale Crover","Aaron Burckhard"]},{"id":104,"b":1,"t":2,"q":"Roughly how much did the original Bleach recording sessions cost?","a":"$606.17","w":["$1,606.50","$6,060.00","$160.17"]},{"id":105,"b":1,"t":2,"q":"Who played most of the drums on Bleach?","a":"Chad Channing","w":["Dave Grohl","Dale Crover","Dan Peters"]},{"id":106,"b":1,"t":1,"q":"Which Melvins drummer appears on three Bleach tracks?","a":"Dale Crover","w":["Chad Channing","Dan Peters","Aaron Burckhard"]},{"id":107,"b":1,"t":3,"q":"Which of these Bleach tracks features Melvins drummer Dale Crover?","a":"Floyd the Barber","w":["School","Negative Creep","Blew"]},{"id":108,"b":1,"t":3,"q":"Which song from Bleach was written after Cobain listened to the Beatles' Meet the Beatles!?","a":"About a Girl","w":["Love Buzz","School","Sifting"]},{"id":109,"b":1,"t":1,"q":"Which song on Bleach is a cover originally by Shocking Blue?","a":"Love Buzz","w":["Blew","Negative Creep","Scoff"]},{"id":110,"b":1,"t":3,"q":"Nirvana's first single, \"Love Buzz,\" launched which subscription series?","a":"The Sub Pop Singles Club","w":["The Sub Pop 200 series","K Records' International Pop Underground","SST's Cruz series"]},{"id":111,"b":1,"t":3,"q":"Which Bleach song was left off the original vinyl but added to later editions?","a":"Downer","w":["About a Girl","Swap Meet","Mr. Moustache"]},{"id":112,"b":1,"t":3,"q":"Which early Nirvana song was omitted from Bleach because Cobain felt the album already had enough slow, heavy songs?","a":"Big Long Now","w":["Dive","Sliver","Spank Thru"]},{"id":113,"b":1,"t":2,"q":"Who is pictured and credited on Bleach despite not performing on it?","a":"Jason Everman","w":["Chad Channing","Dale Crover","Dan Peters"]},{"id":114,"b":1,"t":1,"q":"Who produced Nirvana's Nevermind?","a":"Butch Vig","w":["Steve Albini","Jack Endino","Scott Litt"]},{"id":115,"b":1,"t":2,"q":"Who mixed Nevermind?","a":"Andy Wallace","w":["Butch Vig","Scott Litt","Steve Albini"]},{"id":116,"b":1,"t":2,"q":"At which California studio was most of Nevermind recorded?","a":"Sound City Studios","w":["Smart Studios","Pachyderm Studio","Electric Lady Studios"]},{"id":117,"b":1,"t":1,"q":"What was Nirvana's first major-label studio album?","a":"Nevermind","w":["Bleach","In Utero","Incesticide"]},{"id":118,"b":1,"t":2,"q":"Which record label released Nevermind?","a":"DGC Records","w":["Sub Pop","Epic Records","Warner Bros."]},{"id":119,"b":1,"t":1,"q":"Which song opens Nevermind?","a":"Smells Like Teen Spirit","w":["In Bloom","Come as You Are","Breed"]},{"id":120,"b":1,"t":2,"q":"Which song closes the standard twelve-track Nevermind album?","a":"Something in the Way","w":["Lounge Act","On a Plain","Polly"]},{"id":121,"b":1,"t":2,"q":"What hidden track follows Something in the Way on many CD editions of Nevermind?","a":"Endless, Nameless","w":["Marigold","Aneurysm","Even in His Youth"]},{"id":122,"b":1,"t":3,"q":"Which Nevermind track features cello played by Kirk Canning?","a":"Something in the Way","w":["Polly","Lithium","Drain You"]},{"id":123,"b":1,"t":3,"q":"Which drummer from Nirvana's earlier lineup played cymbals on the Nevermind recording of Polly?","a":"Chad Channing","w":["Dale Crover","Dan Peters","Aaron Burckhard"]},{"id":124,"b":1,"t":2,"q":"Who performs the spoken opening of Territorial Pissings on Nevermind?","a":"Krist Novoselic","w":["Dave Grohl","Kurt Cobain","Butch Vig"]},{"id":125,"b":1,"t":2,"q":"Which Nevermind single features a video with the band in suits performing for an audience that grows unruly?","a":"In Bloom","w":["Smells Like Teen Spirit","Come as You Are","Lithium"]},{"id":126,"b":1,"t":3,"q":"Which Nevermind track is the 1990 Smart Studios recording rather than a Sound City take?","a":"Polly","w":["Breed","In Bloom","Lithium"]},{"id":127,"b":1,"t":1,"q":"Who recorded and engineered Nirvana's In Utero?","a":"Steve Albini","w":["Butch Vig","Jack Endino","Scott Litt"]},{"id":128,"b":1,"t":3,"q":"At what Minnesota studio was In Utero recorded?","a":"Pachyderm Studio","w":["Smart Studios","Electrical Audio","Sound City Studios"]},{"id":129,"b":1,"t":2,"q":"Which In Utero song is the album's opening track?","a":"Serve the Servants","w":["Scentless Apprentice","Heart-Shaped Box","Rape Me"]},{"id":130,"b":1,"t":2,"q":"Which song closes the standard In Utero track list?","a":"All Apologies","w":["Tourette's","Radio Friendly Unit Shifter","Pennyroyal Tea"]},{"id":131,"b":1,"t":3,"q":"Which two In Utero tracks were remixed by Scott Litt for the album?","a":"Heart-Shaped Box & All Apologies","w":["Rape Me & Dumb","Pennyroyal Tea & Serve the Servants","Heart-Shaped Box & Milk It"]},{"id":132,"b":1,"t":3,"q":"Which In Utero song is credited to all three band members as writers?","a":"Scentless Apprentice","w":["Milk It","Very Ape","Tourette's"]},{"id":133,"b":1,"t":1,"q":"Which In Utero song refers to a Seattle-born actress who was institutionalized?","a":"Frances Farmer Will Have Her Revenge on Seattle","w":["Dumb","Milk It","Very Ape"]},{"id":134,"b":1,"t":2,"q":"Which In Utero single was pulled from release after Cobain's death?","a":"Pennyroyal Tea","w":["Rape Me","Dumb","Heart-Shaped Box"]},{"id":135,"b":1,"t":1,"q":"Which In Utero song is named for a condition associated with involuntary tics?","a":"Tourette's","w":["Milk It","Very Ape","Dumb"]},{"id":136,"b":1,"t":3,"q":"Who played cello on Dumb and All Apologies?","a":"Kera Schaley","w":["Lori Goldston","Kirk Canning","Melora Creager"]},{"id":137,"b":1,"t":1,"q":"Which In Utero song has a title referencing radio programming?","a":"Radio Friendly Unit Shifter","w":["Serve the Servants","Very Ape","Heart-Shaped Box"]},{"id":138,"b":1,"t":1,"q":"What was Nirvana's third and final studio album?","a":"In Utero","w":["Nevermind","Incesticide","Bleach"]},{"id":139,"b":1,"t":3,"q":"What long-titled bonus track appears on some international In Utero editions?","a":"Gallons of Rubbing Alcohol Flow Through the Strip","w":["Marigold","Sappy","I Hate Myself and Want to Die"]},{"id":140,"b":1,"t":1,"q":"What 1992 Nirvana compilation collects B-sides, demos, and BBC sessions?","a":"Incesticide","w":["With the Lights Out","Sliver: The Best of the Box","From the Muddy Banks of the Wishkah"]},{"id":141,"b":1,"t":2,"q":"Which Nirvana compilation includes both Sliver and Dive?","a":"Incesticide","w":["With the Lights Out","Bleach","From the Muddy Banks of the Wishkah"]},{"id":142,"b":1,"t":3,"q":"Which Incesticide song is a cover of a Devo track?","a":"Turnaround","w":["Molly's Lips","Son of a Gun","Hairspray Queen"]},{"id":143,"b":1,"t":2,"q":"Which Vaselines song did Nirvana cover at MTV Unplugged?","a":"Jesus Doesn't Want Me for a Sunbeam","w":["Molly's Lips","Son of a Gun","Rory Rides Me Raw"]},{"id":144,"b":1,"t":3,"q":"Which two Vaselines covers appear on Incesticide?","a":"Molly's Lips & Son of a Gun","w":["Molly's Lips & Turnaround","Son of a Gun & Aero Zeppelin","Turnaround & Been a Son"]},{"id":145,"b":1,"t":3,"q":"Which Incesticide track first appeared on the 1991 Kill Rock Stars compilation?","a":"Beeswax","w":["Dive","Stain","Aneurysm"]},{"id":146,"b":1,"t":2,"q":"What is the title of Nirvana's 2004 rarities box set?","a":"With the Lights Out","w":["Outcesticide","Icon","From the Muddy Banks of the Wishkah"]},{"id":147,"b":1,"t":3,"q":"Which 2005 compilation condensed material from With the Lights Out?","a":"Sliver: The Best of the Box","w":["Nirvana (2002)","Icon","Incesticide"]},{"id":148,"b":1,"t":2,"q":"Whose daughter helped choose the title and cover photograph for Sliver: The Best of the Box?","a":"Frances Bean Cobain","w":["Courtney Love","Krist Novoselic","Dave Grohl"]},{"id":149,"b":1,"t":3,"q":"Which early pre-Nirvana demo contributes Spank Thru to Sliver: The Best of the Box?","a":"The Fecal Matter demo","w":["The Bleach demo tape","The Smart Studios demos","The Pachyderm outtakes"]},{"id":150,"b":1,"t":3,"q":"Which Nirvana box set includes an early live cover of Led Zeppelin's Heartbreaker?","a":"With the Lights Out","w":["Incesticide","Live at Reading","Sliver: The Best of the Box"]},{"id":151,"b":1,"t":2,"q":"In what month and year was Nirvana's MTV Unplugged performance recorded?","a":"November 1993","w":["December 1993","September 1993","February 1994"]},{"id":152,"b":1,"t":3,"q":"At what New York venue was Nirvana's MTV Unplugged performance taped?","a":"Sony Music Studios","w":["Electric Lady Studios","The Ed Sullivan Theater","Madison Square Garden"]},{"id":153,"b":1,"t":3,"q":"Who played cello during Nirvana's MTV Unplugged performance?","a":"Lori Goldston","w":["Kera Schaley","Kirk Canning","Melora Creager"]},{"id":154,"b":1,"t":1,"q":"Which touring guitarist joined Nirvana for MTV Unplugged?","a":"Pat Smear","w":["Jason Everman","Big John Duncan","Buzz Osborne"]},{"id":155,"b":1,"t":3,"q":"Which instrument did Krist Novoselic play on Jesus Doesn't Want Me for a Sunbeam at MTV Unplugged?","a":"Accordion","w":["Mandolin","Upright bass","Harmonica"]},{"id":156,"b":1,"t":2,"q":"Which band joined Nirvana onstage for three songs during MTV Unplugged?","a":"Meat Puppets","w":["Melvins","Mudhoney","Screaming Trees"]},{"id":157,"b":1,"t":1,"q":"Which David Bowie song did Nirvana cover during MTV Unplugged?","a":"The Man Who Sold the World","w":["Space Oddity","Heroes","Ziggy Stardust"]},{"id":158,"b":1,"t":2,"q":"Which Lead Belly song ended Nirvana's MTV Unplugged set?","a":"Where Did You Sleep Last Night","w":["Goodnight, Irene","Midnight Special","Cotton Fields"]},{"id":159,"b":1,"t":2,"q":"Which of these Meat Puppets songs did Nirvana play at MTV Unplugged?","a":"Lake of Fire","w":["Backwater","Up on the Sun","Comin' Down"]},{"id":160,"b":1,"t":2,"q":"What was the first Nirvana album released after Kurt Cobain's death?","a":"MTV Unplugged in New York","w":["From the Muddy Banks of the Wishkah","With the Lights Out","Incesticide"]},{"id":161,"b":1,"t":3,"q":"What Grammy category did MTV Unplugged in New York win?","a":"Best Alternative Music Performance","w":["Best Rock Album","Best Hard Rock Performance","Album of the Year"]},{"id":162,"b":1,"t":2,"q":"Which Nirvana live album was released in 1996 to contrast the acoustic Unplugged release?","a":"From the Muddy Banks of the Wishkah","w":["Live at Reading","Live! Tonight! Sold Out!!","Live at the Paramount"]},{"id":163,"b":1,"t":3,"q":"Who largely compiled From the Muddy Banks of the Wishkah?","a":"Krist Novoselic","w":["Dave Grohl","Courtney Love","Butch Vig"]},{"id":164,"b":1,"t":3,"q":"What was the planned title of the two-album live project combining electric and acoustic Nirvana performances?","a":"Verse Chorus Verse","w":["Wishkah","Sold Out","Loud & Unplugged"]},{"id":165,"b":1,"t":2,"q":"Which 2009 live album documents Nirvana's famous 1992 British festival set?","a":"Live at Reading","w":["Live at the Paramount","Live and Loud","From the Muddy Banks of the Wishkah"]},{"id":166,"b":1,"t":2,"q":"Which 2019 live album documents Nirvana's 1991 Seattle concert at the Paramount Theatre?","a":"Live at the Paramount","w":["Live at Reading","Live and Loud","Live at the Crocodile Cafe"]},{"id":167,"b":1,"t":1,"q":"In which Washington town did Kurt Cobain and Krist Novoselic form Nirvana?","a":"Aberdeen","w":["Olympia","Tacoma","Seattle"]},{"id":168,"b":1,"t":3,"q":"Which drummer played in Nirvana's earliest lineup with Cobain and Novoselic?","a":"Aaron Burckhard","w":["Chad Channing","Dan Peters","Mark Pickerel"]},{"id":169,"b":1,"t":2,"q":"Which Melvins drummer temporarily played with Nirvana in 1988 and 1990?","a":"Dale Crover","w":["Chad Channing","Dan Peters","Aaron Burckhard"]},{"id":170,"b":1,"t":3,"q":"Who replaced Chad Channing briefly before Dave Grohl joined Nirvana?","a":"Dan Peters","w":["Dave Grohl","Dale Crover","Aaron Burckhard"]},{"id":171,"b":1,"t":2,"q":"Which band did Dan Peters primarily play in?","a":"Mudhoney","w":["Melvins","Screaming Trees","Tad"]},{"id":174,"b":1,"t":3,"q":"Which band had Pat Smear played in before touring with Nirvana?","a":"The Germs","w":["Black Flag","X","Circle Jerks"]},{"id":177,"b":1,"t":3,"q":"Which music video director directed Smells Like Teen Spirit?","a":"Samuel Bayer","w":["Kevin Kerslake","Mark Romanek","Spike Jonze"]},{"id":178,"b":1,"t":2,"q":"In what year was Nirvana inducted into the Rock and Roll Hall of Fame?","a":"2014","w":["2009","2012","2019"]},{"id":179,"b":1,"t":2,"q":"What was the name of Kurt Cobain's pre-Nirvana musical project whose demos later circulated?","a":"Fecal Matter","w":["Mr. Epp and the Calculations","Green River","Malfunkshun"]},{"id":180,"b":1,"t":1,"q":"Which musician did Kurt Cobain marry in 1992?","a":"Courtney Love","w":["Kathleen Hanna","Kim Gordon","Tobi Vail"]},{"id":181,"b":1,"t":1,"q":"What was the name of Kurt Cobain's daughter?","a":"Frances Bean Cobain","w":["Courtney Love Cobain","Bean Novoselic","Frances Farmer Cobain"]},{"id":182,"b":1,"t":2,"q":"Kathleen Hanna, who wrote \"Kurt smells like Teen Spirit\" on Cobain's wall, fronted which band?","a":"Bikini Kill","w":["Bratmobile","Sleater-Kinney","Hole"]},{"id":183,"b":1,"t":2,"q":"Which Melvins frontman was an early friend and musical influence on Cobain?","a":"Buzz Osborne","w":["Mark Arm","Kim Thayil","Tad Doyle"]},{"id":186,"b":1,"t":3,"q":"What type of cover band did Cobain and Novoselic briefly form before Nirvana?","a":"A Creedence Clearwater Revival cover band","w":["A Led Zeppelin cover band","A Black Sabbath cover band","A Beatles cover band"]},{"id":188,"b":1,"t":3,"q":"Which post-Nirvana band did Krist Novoselic form with members including Curt Kirkwood and Bud Gaugh?","a":"Eyes Adrift","w":["Sweet 75","Flipper","No WTO Combo"]},{"id":189,"b":1,"t":3,"q":"Which 1990s band did Krist Novoselic form with singer Yva Las Vegass?","a":"Sweet 75","w":["Eyes Adrift","No WTO Combo","Giants in the Trees"]},{"id":190,"b":1,"t":2,"q":"Which Washington, D.C.-area hardcore band did Dave Grohl play in before Nirvana?","a":"Scream","w":["Minor Threat","Fugazi","Bad Brains"]},{"id":191,"b":1,"t":1,"q":"Which band did Dave Grohl start right after Nirvana ended?","a":"Foo Fighters","w":["Pearl Jam","Mudhoney","Audioslave"]},{"id":193,"b":1,"t":3,"q":"Which Nirvana B-side was written and sung by Dave Grohl?","a":"Marigold","w":["Sappy","Oh, the Guilt","Curmudgeon"]},{"id":194,"b":1,"t":3,"q":"What was Dave Grohl's 1992 solo cassette, released under the alias Late!, called?","a":"Pocketwatch","w":["Probot","Dain Bramage","Medium Rare"]},{"id":196,"b":1,"t":3,"q":"Which drummer was in Nirvana when the band recorded its first John Peel BBC session in 1989?","a":"Chad Channing","w":["Dave Grohl","Dale Crover","Dan Peters"]},{"id":197,"b":1,"t":3,"q":"Which two major Seattle bands briefly included Jason Everman?","a":"Nirvana and Soundgarden","w":["Nirvana and Mudhoney","Soundgarden and Pearl Jam","Nirvana and Alice in Chains"]},{"id":200,"b":2,"t":1,"q":"In which city did Tool form in 1990?","a":"Los Angeles, California","w":["San Francisco, California","Chicago, Illinois","Seattle, Washington"]},{"id":201,"b":2,"t":2,"q":"Who was Tool's original bassist?","a":"Paul D'Amour","w":["Justin Chancellor","Danny Lohner","Billy Howerdel"]},{"id":202,"b":2,"t":3,"q":"Which two founding Tool members first decided to form the group?","a":"Maynard James Keenan & Adam Jones","w":["Maynard James Keenan & Danny Carey","Adam Jones & Danny Carey","Adam Jones & Paul D'Amour"]},{"id":203,"b":2,"t":1,"q":"Which Tool member has directed many of the band's music videos?","a":"Adam Jones","w":["Danny Carey","Maynard James Keenan","Justin Chancellor"]},{"id":204,"b":2,"t":2,"q":"Which Tool album was released immediately before the long gap leading to Fear Inoculum?","a":"10,000 Days","w":["Lateralus","Ænima","Salival"]},{"id":205,"b":2,"t":1,"q":"Which Tool album was released in 1996?","a":"Ænima","w":["Undertow","Lateralus","Opiate"]},{"id":206,"b":2,"t":3,"q":"Which original member left Tool during work on the band's second studio album?","a":"Paul D'Amour","w":["Justin Chancellor","Billy Howerdel","Danny Lohner"]},{"id":207,"b":2,"t":1,"q":"What was the title of Tool's 1992 debut EP?","a":"Opiate","w":["72826","Undertow","Salival"]},{"id":209,"b":2,"t":2,"q":"Which Tool EP takes its name from a Karl Marx quotation about religion?","a":"Opiate","w":["Undertow","72826","Ænima"]},{"id":210,"b":2,"t":3,"q":"Which Opiate song had Tool's first music video?","a":"Hush","w":["Part of Me","Jerk-Off","Sweat"]},{"id":211,"b":2,"t":3,"q":"Which Opiate song hides the secret track \"The Gaping Lotus Experience\"?","a":"Opiate","w":["Cold and Ugly","Hush","Sweat"]},{"id":212,"b":2,"t":3,"q":"What is the title of the hidden track on most editions of Opiate?","a":"The Gaping Lotus Experience","w":["Cesaro Summability","Message to Harry Manback","Disgustipated"]},{"id":213,"b":2,"t":3,"q":"Which two Opiate tracks were live recordings?","a":"Cold and Ugly & Jerk-Off","w":["Hush & Part of Me","Sweat & Opiate","Jerk-Off & Hush"]},{"id":215,"b":2,"t":3,"q":"Who co-produced Opiate alongside Tool and Steve Hansgen?","a":"Sylvia Massy","w":["David Bottrill","Joe Barresi","Steve Albini"]},{"id":217,"b":2,"t":3,"q":"What was the title of Tool's 1991 demo release?","a":"72826","w":["Opiate","Sweat","Toolshed"]},{"id":218,"b":2,"t":2,"q":"Who co-produced Undertow with Tool?","a":"Sylvia Massy","w":["David Bottrill","Joe Barresi","Rick Rubin"]},{"id":219,"b":2,"t":1,"q":"Which Tool album contains the singles Sober and Prison Sex?","a":"Undertow","w":["Opiate","Ænima","Lateralus"]},{"id":220,"b":2,"t":3,"q":"At which Hollywood studio was Undertow recorded?","a":"Grand Master Studios","w":["Sound City Studios","Ocean Way","Sunset Sound"]},{"id":221,"b":2,"t":3,"q":"Which record label released Undertow?","a":"Zoo Entertainment","w":["Volcano Entertainment","Geffen Records","Interscope Records"]},{"id":222,"b":2,"t":2,"q":"Which Tool album was the only full-length studio album to feature Paul D'Amour?","a":"Undertow","w":["Opiate","Ænima","Lateralus"]},{"id":223,"b":2,"t":2,"q":"In what year was Undertow released?","a":"1993","w":["1992","1994","1995"]},{"id":224,"b":2,"t":2,"q":"Which Undertow song features guest vocals by Henry Rollins?","a":"Bottom","w":["Flood","Sober","Intolerance"]},{"id":225,"b":2,"t":2,"q":"Which Tool album features the track Flood?","a":"Undertow","w":["Ænima","Opiate","Lateralus"]},{"id":228,"b":2,"t":3,"q":"Who produced and engineered Ænima?","a":"David Bottrill","w":["Sylvia Massy","Joe Barresi","Rick Rubin"]},{"id":229,"b":2,"t":2,"q":"Which Tool album first featured Justin Chancellor on bass?","a":"Ænima","w":["Undertow","Lateralus","Salival"]},{"id":230,"b":2,"t":2,"q":"Which Tool album contains Forty Six & 2?","a":"Ænima","w":["Lateralus","Undertow","10,000 Days"]},{"id":231,"b":2,"t":1,"q":"Which Tool album contains Stinkfist and Eulogy?","a":"Ænima","w":["Undertow","Lateralus","10,000 Days"]},{"id":232,"b":2,"t":2,"q":"Which Tool album contains the song Third Eye?","a":"Ænima","w":["Lateralus","Undertow","Opiate"]},{"id":233,"b":2,"t":2,"q":"Which late comedian is sampled on Third Eye?","a":"Bill Hicks","w":["George Carlin","Lenny Bruce","Sam Kinison"]},{"id":234,"b":2,"t":1,"q":"Which Ænima track includes a German-language recipe-like spoken performance?","a":"Die Eier von Satan","w":["Cesaro Summability","Message to Harry Manback","Useful Idiot"]},{"id":235,"b":2,"t":2,"q":"What does Die Eier von Satan translate to in English?","a":"The Eggs (or Balls) of Satan","w":["The Ears of Satan","The Hand of Satan","The Kitchen of Satan"]},{"id":236,"b":2,"t":2,"q":"Which Ænima song earned Tool a Grammy for Best Metal Performance in 1998?","a":"Ænema","w":["Stinkfist","Forty Six & 2","Eulogy"]},{"id":237,"b":2,"t":2,"q":"Which Ænima track features a voicemail-style spoken recording?","a":"Message to Harry Manback","w":["Useful Idiot","Cesaro Summability","Intermission"]},{"id":238,"b":2,"t":3,"q":"Which Ænima track follows the instrumental (-) Ions?","a":"Third Eye","w":["Ænema","Stinkfist","H."]},{"id":239,"b":2,"t":3,"q":"Which Ænima track has an organ part by Eban Schletter?","a":"Intermission","w":["Useful Idiot","Die Eier von Satan","Cesaro Summability"]},{"id":241,"b":2,"t":2,"q":"What was the title of Tool's limited-edition 2000 box set?","a":"Salival","w":["72826","Opiate","Tool Box"]},{"id":242,"b":2,"t":1,"q":"Which Tool release came between Ænima and Lateralus?","a":"Salival","w":["72826","Opiate","10,000 Days"]},{"id":243,"b":2,"t":3,"q":"What two video formats were offered in Salival packages?","a":"VHS and DVD","w":["DVD and Blu-ray","LaserDisc and VHS","VHS and Video CD"]},{"id":244,"b":2,"t":3,"q":"How many pages were in the photo booklet included with Salival?","a":"56","w":["24","72","96"]},{"id":248,"b":2,"t":1,"q":"Which Tool album contains Schism and The Grudge?","a":"Lateralus","w":["10,000 Days","Ænima","Fear Inoculum"]},{"id":249,"b":2,"t":2,"q":"Which Tool song won Best Metal Performance at the 2002 Grammy Awards?","a":"Schism","w":["Parabola","Lateralus","Stinkfist"]},{"id":250,"b":2,"t":2,"q":"Which mathematical sequence influenced the lyrics of Lateralus?","a":"The Fibonacci sequence","w":["The digits of pi","The prime numbers","Pascal's triangle"]},{"id":251,"b":2,"t":3,"q":"Which three consecutive time signatures are associated with the main theme of Lateralus?","a":"9/8, 8/8 and 7/8","w":["7/4, 6/4 and 5/4","11/8, 10/8 and 9/8","4/4, 3/4 and 5/4"]},{"id":252,"b":2,"t":3,"q":"Which Lateralus tracks form the three-song sequence often performed together live?","a":"Disposition, Reflection & Triad","w":["Parabol, Parabola & Ticks & Leeches","The Grudge, Eon Blue Apocalypse & The Patient","Mantra, Schism & Lateralus"]},{"id":253,"b":2,"t":1,"q":"Which Tool album includes Parabol and Parabola as separate adjacent tracks?","a":"Lateralus","w":["Ænima","10,000 Days","Fear Inoculum"]},{"id":254,"b":2,"t":3,"q":"Which Lateralus song samples a call to Art Bell's Coast to Coast AM?","a":"Faaip de Oiad","w":["Mantra","Eon Blue Apocalypse","Triad"]},{"id":255,"b":2,"t":3,"q":"What does Faaip de Oiad mean in Enochian?","a":"The Voice of God","w":["The Mouth of Angels","The Word of Light","The Eye of God"]},{"id":256,"b":2,"t":3,"q":"Which Lateralus instrumental sits between The Grudge and The Patient?","a":"Eon Blue Apocalypse","w":["Mantra","Parabol","Faaip de Oiad"]},{"id":257,"b":2,"t":2,"q":"What unusual sound was slowed down to create the track Mantra?","a":"Maynard squeezing one of his cats","w":["A slowed-down whale song","Danny Carey's gong","A baby's cry played backwards"]},{"id":258,"b":2,"t":2,"q":"Which producer returned after Ænima to work on Lateralus?","a":"David Bottrill","w":["Sylvia Massy","Joe Barresi","Butch Vig"]},{"id":261,"b":2,"t":2,"q":"Which Tool album contains the instrumental Triad?","a":"Lateralus","w":["Ænima","10,000 Days","Fear Inoculum"]},{"id":262,"b":2,"t":1,"q":"Which Tool album contains Vicarious, The Pot and Jambi?","a":"10,000 Days","w":["Lateralus","Fear Inoculum","Ænima"]},{"id":263,"b":2,"t":3,"q":"Which Tool album debuted at number one with about 564,000 US first-week sales?","a":"10,000 Days","w":["Lateralus","Fear Inoculum","Ænima"]},{"id":264,"b":2,"t":2,"q":"Who created the artwork for 10,000 Days?","a":"Alex Grey","w":["Adam Jones","Cam de Leon","H.R. Giger"]},{"id":265,"b":2,"t":2,"q":"Which Tool album's physical packaging includes stereoscopic lenses?","a":"10,000 Days","w":["Lateralus","Ænima","Fear Inoculum"]},{"id":266,"b":2,"t":3,"q":"Which Tool album won a Grammy for Best Recording Package in 2007?","a":"10,000 Days","w":["Lateralus","Fear Inoculum","Salival"]},{"id":267,"b":2,"t":2,"q":"Which Tool album includes Wings for Marie (Pt 1) and 10,000 Days (Wings Pt 2)?","a":"10,000 Days","w":["Lateralus","Fear Inoculum","Ænima"]},{"id":268,"b":2,"t":2,"q":"Which Tool album includes the track Rosetta Stoned?","a":"10,000 Days","w":["Lateralus","Fear Inoculum","Undertow"]},{"id":269,"b":2,"t":3,"q":"Which 10,000 Days track features Danny Carey playing tabla?","a":"Right in Two","w":["Vicarious","The Pot","Lost Keys (Blame Hofmann)"]},{"id":270,"b":2,"t":3,"q":"Which producer/engineer mixed 10,000 Days after the band's work with David Bottrill?","a":"Joe Barresi","w":["David Bottrill","Sylvia Massy","Bob Ludwig"]},{"id":271,"b":2,"t":3,"q":"Which 10,000 Days song was released as a single in 2007?","a":"Jambi","w":["Vicarious","The Pot","Rosetta Stoned"]},{"id":272,"b":2,"t":2,"q":"Which Tool album was released in North America on May 2, 2006?","a":"10,000 Days","w":["Lateralus","Fear Inoculum","Ænima"]},{"id":274,"b":2,"t":2,"q":"Which Tool album includes Pneuma, Invincible and Descending?","a":"Fear Inoculum","w":["10,000 Days","Lateralus","Ænima"]},{"id":275,"b":2,"t":3,"q":"Which Tool album debuted new material at Welcome to Rockville in 2019?","a":"Fear Inoculum","w":["10,000 Days","Lateralus","Salival"]},{"id":276,"b":2,"t":3,"q":"Which two new songs did Tool debut live in May 2019 before Fear Inoculum was released?","a":"Descending & Invincible","w":["Pneuma & 7empest","Culling Voices & Chocolate Chip Trip","Fear Inoculum & Invincible"]},{"id":277,"b":2,"t":2,"q":"Which Tool album's deluxe edition included a built-in video screen and speaker?","a":"Fear Inoculum","w":["10,000 Days","Lateralus","Salival"]},{"id":279,"b":2,"t":2,"q":"Who created the cover art for Fear Inoculum?","a":"Alex Grey","w":["Adam Jones","Cam de Leon","H.R. Giger"]},{"id":280,"b":2,"t":3,"q":"Who handled recording and mixing on Fear Inoculum?","a":"Joe Barresi","w":["David Bottrill","Sylvia Massy","Bob Ludwig"]},{"id":281,"b":2,"t":1,"q":"Which Tool album was released on August 30, 2019?","a":"Fear Inoculum","w":["10,000 Days","Lateralus","Ænima"]},{"id":282,"b":2,"t":3,"q":"Which Tool song became the longest track ever to enter the Billboard Hot 100 in 2019?","a":"Fear Inoculum","w":["Pneuma","Invincible","7empest"]},{"id":283,"b":2,"t":1,"q":"Which Tool album includes the track 7empest?","a":"Fear Inoculum","w":["10,000 Days","Lateralus","Ænima"]},{"id":284,"b":2,"t":2,"q":"Which Tool song won Best Metal Performance at the 2020 Grammy Awards?","a":"7empest","w":["Pneuma","Invincible","Descending"]},{"id":286,"b":2,"t":3,"q":"Which future Rage Against the Machine guitarist played with Adam Jones in Electric Sheep?","a":"Tom Morello","w":["Billy Howerdel","Brad Wilk","Jerry Cantrell"]},{"id":287,"b":2,"t":3,"q":"Which classical instrument did Adam Jones study in the Suzuki program?","a":"Violin","w":["Cello","Piano","Trumpet"]},{"id":288,"b":2,"t":2,"q":"In what industry did Adam Jones work on special effects and set design?","a":"Hollywood film special effects","w":["Video game design","Comic book illustration","Theme park animatronics"]},{"id":290,"b":2,"t":3,"q":"In which Kansas city was Danny Carey born?","a":"Lawrence","w":["Wichita","Topeka","Kansas City"]},{"id":291,"b":2,"t":2,"q":"Which percussion tradition did Danny Carey study with Aloke Dutta?","a":"Tabla","w":["Gamelan","Taiko","Djembe"]},{"id":292,"b":2,"t":3,"q":"Which Tool drummer also played with Pigmy Love Circus and Volto!?","a":"Danny Carey","w":["Adam Jones","Justin Chancellor","Paul D'Amour"]},{"id":293,"b":2,"t":3,"q":"Which band featured Danny Carey under the name Danny Longlegs?","a":"Green Jellö","w":["Electric Sheep","Volto!","Pigmy Love Circus"]},{"id":294,"b":2,"t":2,"q":"Which English band did Justin Chancellor play in before joining Tool?","a":"Peach","w":["Swervedriver","Ride","Catherine Wheel"]},{"id":295,"b":2,"t":3,"q":"What was the title of Peach's 1994 album featuring Justin Chancellor?","a":"Giving Birth to a Stone","w":["Peach Fuzz","Stone Garden","Sunflower Static"]},{"id":296,"b":2,"t":3,"q":"Which side project did Justin Chancellor form with Piotr 'Glaca' Mohammed?","a":"MTVoid","w":["Tomahawk","Volto!","Puscifer"]},{"id":298,"b":2,"t":1,"q":"Which Tool vocalist also leads the project Puscifer?","a":"Maynard James Keenan","w":["Adam Jones","Danny Carey","Justin Chancellor"]},{"id":299,"b":2,"t":1,"q":"Which Tool vocalist is also associated with A Perfect Circle?","a":"Maynard James Keenan","w":["Billy Howerdel","Adam Jones","Danny Carey"]},{"id":300,"b":3,"t":2,"q":"Which label originally released Pretty Hate Machine?","a":"TVT Records","w":["Interscope Records","Nothing Records","Wax Trax! Records"]},{"id":301,"b":3,"t":1,"q":"Which NIN album features Head Like a Hole and Sin?","a":"Pretty Hate Machine","w":["Broken","The Downward Spiral","The Fragile"]},{"id":302,"b":3,"t":3,"q":"Which single from Pretty Hate Machine was released before Head Like a Hole?","a":"Down in It","w":["Sin","Terrible Lie","Something I Can Never Have"]},{"id":303,"b":3,"t":3,"q":"Which NIN album was remastered and reissued in 2010?","a":"Pretty Hate Machine","w":["The Downward Spiral","Broken","The Fragile"]},{"id":304,"b":3,"t":2,"q":"In which year was Pretty Hate Machine released?","a":"1989","w":["1988","1990","1991"]},{"id":305,"b":3,"t":2,"q":"Which album includes Terrible Lie and Something I Can Never Have?","a":"Pretty Hate Machine","w":["Broken","The Downward Spiral","With Teeth"]},{"id":306,"b":3,"t":2,"q":"Which song opens Pretty Hate Machine?","a":"Head Like a Hole","w":["Terrible Lie","Down in It","Kinda I Want To"]},{"id":307,"b":3,"t":3,"q":"Which song closes the original Pretty Hate Machine?","a":"Ringfinger","w":["Sin","That's What I Get","The Only Time"]},{"id":308,"b":3,"t":1,"q":"What is the title of NIN's 1992 EP?","a":"Broken","w":["Fixed","The Slip","Not the Actual Events"]},{"id":309,"b":3,"t":2,"q":"Which NIN EP includes Wish and Gave Up?","a":"Broken","w":["Fixed","Add Violence","Not the Actual Events"]},{"id":310,"b":3,"t":2,"q":"Which Broken track won a Grammy for Best Metal Performance?","a":"Wish","w":["Happiness in Slavery","Gave Up","Last"]},{"id":313,"b":3,"t":2,"q":"Which Adam and the Ants song did NIN cover for Broken?","a":"Physical (You're So)","w":["Stand and Deliver","Antmusic","Goody Two Shoes"]},{"id":315,"b":3,"t":2,"q":"What is the title of the remix companion EP to Broken?","a":"Fixed","w":["Further Down the Spiral","Things Falling Apart","Broken 2"]},{"id":316,"b":3,"t":2,"q":"Who co-produced The Downward Spiral with Trent Reznor?","a":"Flood","w":["Alan Moulder","Atticus Ross","Rick Rubin"]},{"id":317,"b":3,"t":1,"q":"Which NIN album contains Closer, Hurt and March of the Pigs?","a":"The Downward Spiral","w":["The Fragile","Pretty Hate Machine","With Teeth"]},{"id":318,"b":3,"t":2,"q":"Which NIN album was recorded partly at the house known as Le Pig?","a":"The Downward Spiral","w":["Pretty Hate Machine","The Fragile","Broken"]},{"id":319,"b":3,"t":2,"q":"Which NIN album tells the story of a protagonist's self-destruction?","a":"The Downward Spiral","w":["Year Zero","The Fragile","Pretty Hate Machine"]},{"id":320,"b":3,"t":1,"q":"Which Downward Spiral song was later famously covered by Johnny Cash?","a":"Hurt","w":["Closer","Something I Can Never Have","A Warm Place"]},{"id":321,"b":3,"t":2,"q":"Which track opens The Downward Spiral?","a":"Mr. Self Destruct","w":["Piggy","Heresy","March of the Pigs"]},{"id":322,"b":3,"t":2,"q":"Which track closes The Downward Spiral?","a":"Hurt","w":["The Downward Spiral","Reptile","Eraser"]},{"id":323,"b":3,"t":3,"q":"Which NIN album contains the instrumental A Warm Place?","a":"The Downward Spiral","w":["The Fragile","Ghosts I–IV","Year Zero"]},{"id":324,"b":3,"t":3,"q":"Which album artwork was created by Russell Mills?","a":"The Downward Spiral","w":["The Fragile","Year Zero","With Teeth"]},{"id":325,"b":3,"t":2,"q":"Which 1994 NIN single features a music video directed by Mark Romanek?","a":"Closer","w":["March of the Pigs","Hurt","Piggy"]},{"id":326,"b":3,"t":1,"q":"Which NIN album was released as a double CD in 1999?","a":"The Fragile","w":["The Downward Spiral","Year Zero","Ghosts I–IV"]},{"id":327,"b":3,"t":3,"q":"Which producer was a major collaborator with Reznor on The Fragile?","a":"Alan Moulder","w":["Flood","Butch Vig","Steve Albini"]},{"id":328,"b":3,"t":2,"q":"In which city was much of The Fragile recorded?","a":"New Orleans","w":["Los Angeles","Cleveland","Chicago"]},{"id":329,"b":3,"t":3,"q":"Which NIN album contains We're in This Together?","a":"The Fragile","w":["With Teeth","The Downward Spiral","Year Zero"]},{"id":330,"b":3,"t":2,"q":"Which album contains The Day the World Went Away?","a":"The Fragile","w":["The Downward Spiral","With Teeth","Broken"]},{"id":331,"b":3,"t":3,"q":"Which album contains Into the Void?","a":"The Fragile","w":["The Downward Spiral","With Teeth","Year Zero"]},{"id":332,"b":3,"t":3,"q":"Which album contains Starfuckers, Inc.?","a":"The Fragile","w":["The Downward Spiral","Year Zero","Broken"]},{"id":333,"b":3,"t":2,"q":"Which album contains the instrumental Just Like You Imagined?","a":"The Fragile","w":["The Downward Spiral","Ghosts I–IV","With Teeth"]},{"id":334,"b":3,"t":2,"q":"Which NIN album debuted at number one on the Billboard 200 in 1999?","a":"The Fragile","w":["The Downward Spiral","With Teeth","Year Zero"]},{"id":335,"b":3,"t":3,"q":"What was the name of the tour supporting The Fragile?","a":"Fragility Tour","w":["Wave Goodbye Tour","Self Destruct Tour","Lights in the Sky Tour"]},{"id":336,"b":3,"t":2,"q":"Which remix album followed The Fragile in 2000?","a":"Things Falling Apart","w":["Fixed","Further Down the Spiral","Y34RZ3R0R3M1X3D"]},{"id":337,"b":3,"t":3,"q":"Which alternate instrumental-focused edition of The Fragile appeared in 2016?","a":"The Fragile: Deviations 1","w":["The Fragile: Definitive Edition","The Fragile: Reconstructed","The Fragile: Halo 16"]},{"id":338,"b":3,"t":1,"q":"Which NIN album marked the band's studio return in 2005?","a":"With Teeth","w":["Year Zero","The Fragile","The Slip"]},{"id":339,"b":3,"t":2,"q":"Which album includes The Hand That Feeds and Only?","a":"With Teeth","w":["Year Zero","The Fragile","Hesitation Marks"]},{"id":340,"b":3,"t":2,"q":"Which NIN album contains Every Day Is Exactly the Same?","a":"With Teeth","w":["Year Zero","The Slip","The Fragile"]},{"id":341,"b":3,"t":2,"q":"Which Foo Fighters frontman played drums on several With Teeth tracks?","a":"Dave Grohl","w":["Josh Freese","Chris Vrenna","Taylor Hawkins"]},{"id":342,"b":3,"t":3,"q":"Which album debuted at number one on the Billboard 200 in 2005?","a":"With Teeth","w":["Year Zero","The Fragile","The Slip"]},{"id":343,"b":3,"t":2,"q":"Which album contains the song Right Where It Belongs?","a":"With Teeth","w":["The Fragile","Year Zero","Hesitation Marks"]},{"id":344,"b":3,"t":1,"q":"Which NIN album was released after The Fragile?","a":"With Teeth","w":["Year Zero","The Slip","Hesitation Marks"]},{"id":345,"b":3,"t":1,"q":"Which 2007 NIN album is a dystopian concept record?","a":"Year Zero","w":["With Teeth","The Slip","Hesitation Marks"]},{"id":346,"b":3,"t":3,"q":"Which Year Zero single was released before Capital G?","a":"Survivalism","w":["Me, I'm Not","HYPERPOWER!","The Great Destroyer"]},{"id":347,"b":3,"t":2,"q":"Which album features the tracks The Good Soldier and Vessel?","a":"Year Zero","w":["With Teeth","The Slip","Hesitation Marks"]},{"id":348,"b":3,"t":1,"q":"Which album was promoted through an elaborate alternate reality game?","a":"Year Zero","w":["With Teeth","The Fragile","Ghosts I–IV"]},{"id":349,"b":3,"t":3,"q":"What unusual feature did the Year Zero CD have?","a":"Heat-sensitive printing that changed appearance","w":["A hidden lenticular 3D image","A built-in LED light","A scratch-off panel"]},{"id":350,"b":3,"t":2,"q":"Which year is the dystopian setting of Year Zero?","a":"2022","w":["2012","2032","2050"]},{"id":351,"b":3,"t":3,"q":"Which art director designed the Year Zero artwork?","a":"Rob Sheridan","w":["Russell Mills","David Carson","Storm Thorgerson"]},{"id":352,"b":3,"t":2,"q":"Which musician co-produced Year Zero with Reznor?","a":"Atticus Ross","w":["Alan Moulder","Flood","Charlie Clouser"]},{"id":355,"b":3,"t":2,"q":"Which song opens Year Zero?","a":"HYPERPOWER!","w":["The Beginning of the End","Survivalism","My Violent Heart"]},{"id":356,"b":3,"t":3,"q":"Which song closes Year Zero?","a":"Zero-Sum","w":["In This Twilight","The Great Destroyer","Another Version of the Truth"]},{"id":357,"b":3,"t":1,"q":"Which 2008 NIN release consists entirely of instrumental pieces?","a":"Ghosts I–IV","w":["The Slip","Still","Not the Actual Events"]},{"id":358,"b":3,"t":3,"q":"How many tracks are on Ghosts I–IV?","a":"36","w":["12","24","48"]},{"id":359,"b":3,"t":2,"q":"Which NIN instrumental album was initially released under a Creative Commons license?","a":"Ghosts I–IV","w":["The Slip","Year Zero","Still"]},{"id":361,"b":3,"t":2,"q":"Which musician was a key collaborator on Ghosts I–IV alongside Reznor?","a":"Atticus Ross","w":["Alan Moulder","Alessandro Cortini","Charlie Clouser"]},{"id":362,"b":3,"t":2,"q":"Which NIN instrumental release was followed by Ghosts V and VI in 2020?","a":"Ghosts I–IV","w":["The Slip","Still","Year Zero"]},{"id":363,"b":3,"t":1,"q":"Which NIN album was released as a free download in 2008?","a":"The Slip","w":["Ghosts I–IV","Year Zero","Hesitation Marks"]},{"id":364,"b":3,"t":2,"q":"Which 2008 NIN album includes Discipline?","a":"The Slip","w":["Year Zero","Hesitation Marks","With Teeth"]},{"id":365,"b":3,"t":3,"q":"Which album includes 1,000,000 and Echoplex?","a":"The Slip","w":["Year Zero","With Teeth","Hesitation Marks"]},{"id":366,"b":3,"t":3,"q":"Which album includes the instrumental Corona Radiata?","a":"The Slip","w":["Ghosts I–IV","Year Zero","Hesitation Marks"]},{"id":367,"b":3,"t":3,"q":"Which album closes with Demon Seed?","a":"The Slip","w":["Year Zero","Hesitation Marks","With Teeth"]},{"id":368,"b":3,"t":2,"q":"Which album was promoted with the single Discipline?","a":"The Slip","w":["Year Zero","Hesitation Marks","Bad Witch"]},{"id":369,"b":3,"t":1,"q":"Which 2013 NIN album includes Came Back Haunted?","a":"Hesitation Marks","w":["The Slip","Bad Witch","With Teeth"]},{"id":370,"b":3,"t":2,"q":"Which album includes Copy of A?","a":"Hesitation Marks","w":["The Slip","Year Zero","Bad Witch"]},{"id":371,"b":3,"t":3,"q":"Which album includes Everything and Satellite?","a":"Hesitation Marks","w":["The Slip","Year Zero","Add Violence"]},{"id":372,"b":3,"t":2,"q":"Which NIN album came out on Columbia Records in 2013?","a":"Hesitation Marks","w":["The Slip","Bad Witch","Year Zero"]},{"id":373,"b":3,"t":3,"q":"Which album's artwork reunited NIN with Russell Mills?","a":"Hesitation Marks","w":["The Slip","Year Zero","Bad Witch"]},{"id":374,"b":3,"t":3,"q":"Which album includes the track In Two?","a":"Hesitation Marks","w":["The Slip","With Teeth","Year Zero"]},{"id":375,"b":3,"t":1,"q":"What is the title of NIN's 2016 EP?","a":"Not the Actual Events","w":["Add Violence","Bad Witch","Broken"]},{"id":376,"b":3,"t":2,"q":"Which 2016 EP began a trilogy completed by Bad Witch?","a":"Not the Actual Events","w":["Add Violence","Broken","Fixed"]},{"id":377,"b":3,"t":3,"q":"Which 2016 EP includes Burning Bright (Field on Fire)?","a":"Not the Actual Events","w":["Add Violence","Bad Witch","Broken"]},{"id":378,"b":3,"t":3,"q":"Which NIN EP includes She's Gone Away?","a":"Not the Actual Events","w":["Add Violence","Bad Witch","Fixed"]},{"id":379,"b":3,"t":2,"q":"Which NIN EP was released in 2017?","a":"Add Violence","w":["Not the Actual Events","Bad Witch","Broken"]},{"id":380,"b":3,"t":3,"q":"Which NIN EP includes Less Than?","a":"Add Violence","w":["Not the Actual Events","Bad Witch","Broken"]},{"id":381,"b":3,"t":3,"q":"Which NIN EP contains The Background World?","a":"Add Violence","w":["Not the Actual Events","Bad Witch","Fixed"]},{"id":382,"b":3,"t":2,"q":"Which EP is the second installment of NIN's 2016–2018 trilogy?","a":"Add Violence","w":["Not the Actual Events","Bad Witch","Broken"]},{"id":383,"b":3,"t":2,"q":"Which NIN album completed the trilogy begun with Not the Actual Events?","a":"Bad Witch","w":["Add Violence","Hesitation Marks","The Slip"]},{"id":384,"b":3,"t":2,"q":"Which 2018 NIN album includes God Break Down the Door?","a":"Bad Witch","w":["Add Violence","Not the Actual Events","Hesitation Marks"]},{"id":385,"b":3,"t":3,"q":"Which Bad Witch track features saxophone prominently?","a":"God Break Down the Door","w":["Shit Mirror","Ahead of Ourselves","I'm Not from This World"]},{"id":386,"b":3,"t":2,"q":"Which 2018 album includes Shit Mirror?","a":"Bad Witch","w":["Add Violence","Not the Actual Events","Hesitation Marks"]},{"id":387,"b":3,"t":3,"q":"Which album contains Over and Out?","a":"Bad Witch","w":["Add Violence","Not the Actual Events","Hesitation Marks"]},{"id":388,"b":3,"t":1,"q":"Who founded Nine Inch Nails?","a":"Trent Reznor","w":["Atticus Ross","Chris Vrenna","Richard Patrick"]},{"id":389,"b":3,"t":2,"q":"Who became NIN's second official member in 2016?","a":"Atticus Ross","w":["Alan Moulder","Robin Finck","Alessandro Cortini"]},{"id":390,"b":3,"t":2,"q":"Which original touring NIN guitarist later founded Filter?","a":"Richard Patrick","w":["Robin Finck","Danny Lohner","Aaron North"]},{"id":391,"b":3,"t":2,"q":"Which NIN touring guitarist also performed with Guns N' Roses?","a":"Robin Finck","w":["Richard Patrick","Aaron North","Danny Lohner"]},{"id":392,"b":3,"t":3,"q":"Which former NIN drummer created the project Tweaker?","a":"Chris Vrenna","w":["Charlie Clouser","Jerome Dillon","Josh Freese"]},{"id":393,"b":3,"t":3,"q":"Which NIN live keyboardist later became a film and television composer, including the Saw scores?","a":"Charlie Clouser","w":["Alessandro Cortini","Chris Vrenna","Danny Lohner"]},{"id":394,"b":3,"t":3,"q":"Which NIN touring musician founded the electronic project SONOIO?","a":"Alessandro Cortini","w":["Charlie Clouser","Danny Lohner","Jeordie White"]},{"id":395,"b":3,"t":3,"q":"Which NIN touring drummer also played with A Perfect Circle?","a":"Josh Freese","w":["Ilan Rubin","Jerome Dillon","Chris Vrenna"]},{"id":396,"b":3,"t":3,"q":"Which drummer replaced Josh Freese in NIN's live band in 2009?","a":"Ilan Rubin","w":["Jerome Dillon","Chris Vrenna","Matt Cameron"]},{"id":398,"b":3,"t":3,"q":"Which NIN live bassist played with Marilyn Manson under the name Twiggy Ramirez?","a":"Jeordie White","w":["Danny Lohner","Justin Meldal-Johnsen","Robin Finck"]},{"id":399,"b":3,"t":3,"q":"Which NIN touring bassist previously played in Beck's band?","a":"Justin Meldal-Johnsen","w":["Jeordie White","Danny Lohner","Charlie Clouser"]}]</script>
+
+<script>
+/* =====================================================================
+   DEEP CUTS — game code (plain JS, no libraries, no build step)
+   ---------------------------------------------------------------------
+   Architecture (kept this way on purpose so online play can be added):
+   - All game rules live in reduce(state, action). It is pure: no clock,
+     no randomness, no DOM. Time ("now") and shuffles arrive inside the
+     action. Online mode will run the same reducer on the host and
+     mirror the state to every player.
+   - The UI only ever calls dispatch(action) and re-renders from state.
+   - Storage writes to localStorage under deepcuts:<uid>:*, uid = "guest"
+     until sign-in exists.
+   ===================================================================== */
+(function(){
+'use strict';
+
+/* ---------- data ---------- */
+var BANDS=[
+  {name:'Soundgarden',color:'var(--sg)'},
+  {name:'Nirvana',color:'var(--nv)'},
+  {name:'Tool',color:'var(--tl)'},
+  {name:'Nine Inch Nails',color:'var(--ni)'}
+];
+var PCOLORS=['#ffd36b','#5fd39a','#ff86b4','#7cc4ff'];
+var PKEYS=['Q','P','Z','M'];
+var BANK=[], BY_ID={};
+var ROUNDS=[
+  {name:'Side A',values:[200,400,600,800,1000,1200],tiers:[1,1,2,2,3,3],deep:1},
+  {name:'Side B',values:[400,800,1200,1600,2000,2400],tiers:[1,2,2,3,3,3],deep:2}
+];
+var TIME={open:15000,answer:10000,direct:20000,deep:25000};
+
+/* ---------- utils ---------- */
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function fmt(n){return (n<0?'−':'')+Math.abs(n).toLocaleString('en-US')}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function uid(){return Math.random().toString(36).slice(2,10)}
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function hashRot(i){var x=Math.sin(i*12.9898)*43758.5453;return ((x-Math.floor(x))-.5)*1.6}
+function norm(s){return String(s).toLowerCase().replace(/[^a-z0-9]/g,'')}
+
+/* ---------- storage (localStorage, namespaced by uid) ---------- */
+var CURRENT_UID='guest';
+function key(k){return 'deepcuts:'+CURRENT_UID+':'+k}
+var store={
+  get:function(k,d){try{var v=localStorage.getItem(key(k));return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set:function(k,v){try{localStorage.setItem(key(k),JSON.stringify(v))}catch(e){}},
+  del:function(k){try{localStorage.removeItem(key(k))}catch(e){}}
+};
+
+/* =====================================================================
+   DEALING — picks a fresh set of questions for one game.
+   Unseen questions are preferred; no two clues in a game share an answer.
+   ===================================================================== */
+function makeDeal(length,seen){
+  seen=seen||{};
+  var usedAns={}, usedQ={};
+  function candidates(b,t){
+    var list=BANK.filter(function(q){return q.b===b&&q.t===t&&!usedQ[q.id]&&!usedAns[norm(q.a)]});
+    var fresh=shuffle(list.filter(function(q){return !seen[q.id]}));
+    var old=shuffle(list.filter(function(q){return seen[q.id]}));
+    return fresh.concat(old);
+  }
+  function take(b,t){
+    var order=t===1?[1,2,3]:t===2?[2,1,3]:[3,2,1];
+    for(var i=0;i<order.length;i++){var c=candidates(b,order[i]);if(c.length){var q=c[0];usedQ[q.id]=1;usedAns[norm(q.a)]=1;return q}}
+    return null;
+  }
+  function options(q){var o=shuffle([q.a].concat(q.w));return {o:o,k:o.indexOf(q.a)}}
+  var nRounds=length==='quick'?1:2, rounds=[];
+  for(var r=0;r<nRounds;r++){
+    var R=ROUNDS[r], tiles=[];
+    for(var row=0;row<6;row++)for(var c=0;c<4;c++){
+      var q=take(c,R.tiers[row]); var op=options(q);
+      tiles.push({c:c,r:row,v:R.values[row],q:q.id,o:op.o,k:op.k,dd:false,used:false});
+    }
+    // hide Deep Cuts in rows 3-6, never two in one column
+    var cols=shuffle([0,1,2,3]).slice(0,R.deep);
+    cols.forEach(function(c){var row=2+Math.floor(Math.random()*4);tiles[row*4+c].dd=true});
+    rounds.push(tiles);
+  }
+  var fb=Math.floor(Math.random()*4), fq=take(fb,3), fo=options(fq);
+  return {rounds:rounds,final:{b:fb,q:fq.id,o:fo.o,k:fo.k}};
+}
+
+/* =====================================================================
+   REDUCER — every rule of the game. Pure function.
+   ===================================================================== */
+function newState(){return {v:1,phase:'lobby'}}
+function tileOf(s){return s.rounds[s.round][s.clue.t]}
+function roundLeft(s){return s.rounds[s.round].filter(function(t){return !t.used}).length}
+function lowestScorer(s){var m=0;s.players.forEach(function(p,i){if(p.score<s.players[m].score)m=i});return m}
+function deepMax(s,p){return Math.max(s.players[p].score,ROUNDS[s.round].values[5])}
+function finalMax(s,p){return Math.max(0,s.players[p].score)}
+
+function reduce(s0,a){
+  var s=clone(s0), now=a.now||0, P, t, c;
+  switch(a.type){
+  case 'NEW_GAME':
+    return {v:1,id:a.id,phase:'intro',settings:a.settings,
+      players:a.players.map(function(p,i){return {id:i,name:p.name,color:PCOLORS[i],score:0}}),
+      control:a.control||0,round:0,rounds:a.deal.rounds,final:{b:a.deal.final.b,q:a.deal.final.q,o:a.deal.final.o,k:a.deal.final.k,wagers:{},answers:{},step:0,order:[]},
+      clue:null,seq:0};
+
+  case 'CONTINUE':
+    if(s.phase==='intro'){s.phase='board';return s}
+    if(s.phase==='reveal'){
+      tileOf(s).used=true; s.clue=null;
+      if(roundLeft(s)>0){s.phase='board';return s}
+      if(s.round+1<s.rounds.length){s.phase='roundEnd';return s}
+      s.phase='finalIntro';return s;
+    }
+    if(s.phase==='roundEnd'){s.round++;s.control=lowestScorer(s);s.phase='intro';return s}
+    if(s.phase==='finalIntro'){s.phase='finalWager';return s}
+    if(s.phase==='finalReveal'){
+      if(s.final.step<s.final.order.length-1){s.final.step++;applyFinal(s);return s}
+      s.phase='over';return s;
+    }
+    return s0;
+
+  case 'PICK':
+    if(s.phase!=='board')return s0;
+    t=s.rounds[s.round][a.tile]; if(!t||t.used)return s0;
+    s.seq++;
+    s.clue={t:a.tile,token:s.seq,value:t.v,dd:t.dd,mode:null,buzzed:null,locked:[],struck:[],picked:null,result:null,deadline:null,timed:!!s.settings.timer};
+    if(t.dd){s.phase='wager';return s}
+    s.clue.mode=s.players.length>1?'buzz':'direct';
+    s.clue.deadline=s.settings.timer?now+(s.clue.mode==='buzz'?TIME.open:TIME.direct):null;
+    s.phase='clue';return s;
+
+  case 'WAGER':
+    if(s.phase!=='wager')return s0;
+    var max=deepMax(s,s.control), w=Math.round(Math.max(5,Math.min(max,a.amount|0)));
+    s.clue.value=w; s.clue.mode='solo'; s.seq++; s.clue.token=s.seq;
+    s.clue.deadline=s.settings.timer?now+TIME.deep:null;
+    s.phase='clue';return s;
+
+  case 'BUZZ':
+    c=s.clue;
+    if(s.phase!=='clue'||!c||c.mode!=='buzz'||c.buzzed!=null||c.locked.indexOf(a.pid)>=0)return s0;
+    c.buzzed=a.pid; s.seq++; c.token=s.seq;
+    c.deadline=s.settings.timer?now+TIME.answer:null;
+    return s;
+
+  case 'ANSWER':
+    c=s.clue; if(s.phase!=='clue'||!c)return s0;
+    var who = c.mode==='buzz'?c.buzzed:(c.mode==='solo'?s.control:0);
+    if(who==null)return s0;
+    if(c.struck.indexOf(a.opt)>=0)return s0;
+    t=tileOf(s); P=s.players[who];
+    if(a.opt===t.k){
+      P.score+=c.value; s.control=who; c.picked=a.opt;
+      c.result={pid:who,correct:true,delta:c.value}; s.phase='reveal';
+    }else{
+      P.score-=c.value;
+      if(c.mode==='buzz'){
+        c.struck.push(a.opt); c.locked.push(who); c.buzzed=null; c.last={pid:who,delta:-c.value,opt:a.opt};
+        if(c.locked.length>=s.players.length||c.struck.length>=3){c.result={pid:null,correct:false,delta:0};s.phase='reveal'}
+        else{s.seq++;c.token=s.seq;c.deadline=s.settings.timer?now+TIME.open:null}
+      }else{
+        c.picked=a.opt; c.result={pid:who,correct:false,delta:-c.value}; s.phase='reveal';
+      }
+    }
+    return s;
+
+  case 'TIMEOUT':
+    c=s.clue; if(s.phase!=='clue'||!c||a.token!==c.token)return s0;
+    if(c.mode==='buzz'){
+      if(c.buzzed!=null){
+        s.players[c.buzzed].score-=c.value; c.locked.push(c.buzzed); c.last={pid:c.buzzed,delta:-c.value,opt:null}; c.buzzed=null;
+        if(c.locked.length>=s.players.length){c.result={pid:null,correct:false,delta:0};s.phase='reveal';return s}
+        s.seq++;c.token=s.seq;c.deadline=s.settings.timer?now+TIME.open:null;return s;
+      }
+      c.result={pid:null,correct:false,delta:0,timeout:true}; s.phase='reveal'; return s;
+    }
+    var w2=c.mode==='solo'?s.control:0;
+    s.players[w2].score-=c.value; c.result={pid:w2,correct:false,delta:-c.value,timeout:true}; s.phase='reveal'; return s;
+
+  case 'GIVE_UP':
+    c=s.clue; if(s.phase!=='clue'||!c||c.mode!=='buzz'||c.buzzed!=null)return s0;
+    c.result={pid:null,correct:false,delta:0}; s.phase='reveal'; return s;
+
+  case 'FINAL_WAGER':
+    if(s.phase!=='finalWager')return s0;
+    s.final.wagers[a.pid]=Math.max(0,Math.min(finalMax(s,a.pid),a.amount|0));
+    if(Object.keys(s.final.wagers).length>=s.players.length){s.phase='finalQ'}
+    return s;
+
+  case 'FINAL_ANSWER':
+    if(s.phase!=='finalQ'||s.final.answers[a.pid]!=null)return s0;
+    s.final.answers[a.pid]=a.opt;
+    if(Object.keys(s.final.answers).length>=s.players.length){
+      s.final.order=s.players.map(function(p,i){return i}).sort(function(x,y){return s.players[x].score-s.players[y].score});
+      s.final.step=0; s.phase='finalReveal'; applyFinal(s);
+    }
+    return s;
+
+  case 'ADJUST':
+    if(!s.players||!s.players[a.pid])return s0;
+    s.players[a.pid].score+=a.delta; return s;
+
+  case 'RESUME':
+    if(s.clue&&s.clue.deadline&&s.phase==='clue'){
+      var span=s.clue.mode==='buzz'?(s.clue.buzzed!=null?TIME.answer:TIME.open):(s.clue.mode==='solo'?TIME.deep:TIME.direct);
+      s.seq++;s.clue.token=s.seq;s.clue.deadline=now+span;
+    }
+    return s;
+
+  case 'SET_TIMER':
+    if(!s.settings)return s0;
+    s.settings.timer=!!a.on;
+    if(s.clue){s.clue.timed=!!a.on; s.clue.deadline=a.on&&s.phase==='clue'?now+TIME.open:null; s.seq++; s.clue.token=s.seq}
+    return s;
+  }
+  return s0;
+}
+function applyFinal(s){
+  var pid=s.final.order[s.final.step], ok=s.final.answers[pid]===s.final.k, w=s.final.wagers[pid]||0;
+  s.players[pid].score+=ok?w:-w;
+}
+
+/* =====================================================================
+   SOUND — tiny WebAudio synth, no audio files
+   ===================================================================== */
+var Sfx={ctx:null,on:true,
+  init:function(){if(this.ctx)return;try{var C=window.AudioContext||window.webkitAudioContext;if(C)this.ctx=new C()}catch(e){this.ctx=null}},
+  t:function(f,d,type,g,delay,slide){var x=this.ctx;if(!x||!this.on)return;try{
+    var o=x.createOscillator(),v=x.createGain(),st=x.currentTime+(delay||0);
+    o.type=type||'sine';o.frequency.setValueAtTime(f,st);if(slide)o.frequency.exponentialRampToValueAtTime(slide,st+d);
+    v.gain.setValueAtTime(0.0001,st);v.gain.exponentialRampToValueAtTime(g||.15,st+.01);v.gain.exponentialRampToValueAtTime(0.0001,st+d);
+    o.connect(v);v.connect(x.destination);o.start(st);o.stop(st+d+.05)}catch(e){}},
+  n:function(d,g,f,q,delay,sweep){var x=this.ctx;if(!x||!this.on)return;try{
+    var len=Math.floor(x.sampleRate*d),b=x.createBuffer(1,len,x.sampleRate),ch=b.getChannelData(0);for(var i=0;i<len;i++)ch[i]=Math.random()*2-1;
+    var src=x.createBufferSource(),fl=x.createBiquadFilter(),v=x.createGain(),st=x.currentTime+(delay||0);
+    src.buffer=b;fl.type='bandpass';fl.frequency.setValueAtTime(f||800,st);if(sweep)fl.frequency.exponentialRampToValueAtTime(sweep,st+d);fl.Q.value=q||1;
+    v.gain.setValueAtTime(g||.2,st);v.gain.exponentialRampToValueAtTime(0.0001,st+d);
+    src.connect(fl);fl.connect(v);v.connect(x.destination);src.start(st)}catch(e){}},
+  play:function(name){
+    if(!this.ctx||!this.on)return;
+    if(this.ctx.state==='suspended'){try{this.ctx.resume()}catch(e){}}
+    switch(name){
+      case 'pick':this.n(.12,.35,300,1.2);this.t(98,.12,'square',.06);break;
+      case 'buzz':this.t(196,.28,'sawtooth',.09);this.t(201,.28,'sawtooth',.09);break;
+      case 'right':[523,659,784,1047].forEach(function(f,i){Sfx.t(f,.22,'triangle',.14,i*.07)});break;
+      case 'wrong':this.t(220,.45,'sawtooth',.1,0,92);this.t(226,.45,'sawtooth',.07,0,95);break;
+      case 'deep':this.n(.18,.5,1800,3,0,500);this.n(.22,.5,500,3,.2,2200);this.t(110,.9,'sawtooth',.06,.35,440);break;
+      case 'tick':this.t(1400,.03,'square',.04);break;
+      case 'stamp':this.n(.08,.6,180,.8);break;
+      case 'win':[392,523,659,784,659,784,1047].forEach(function(f,i){Sfx.t(f,.3,'triangle',.13,i*.11)});break;
+    }
+  }
+};
+
+/* =====================================================================
+   APP / UI STATE
+   ===================================================================== */
+var S=newState();
+var UI={menu:false,lastEvent:null,prevScores:null,priv:null,wagerAmt:null,setup:null,flipFrom:null,lastTick:-1};
+
+function saveGame(){ if(S.phase&&S.phase!=='lobby') store.set('game',S); else store.del('game'); }
+function markSeen(qid){var seen=store.get('seen',{});seen[qid]=1;
+  if(Object.keys(seen).length>BANK.length*0.8)seen={};seen[qid]=1;store.set('seen',seen)}
+
+function dispatch(a){
+  a.now=a.now||Date.now();
+  var before=S, next=reduce(S,a);
+  if(next===before)return;
+  UI.prevScores=before.players?before.players.map(function(p){return p.score}):null;
+  UI.lastEvent=eventFor(before,next,a);
+  S=next; saveGame(); sideEffects(before,next,a); render();
+}
+function eventFor(b,n,a){
+  if(a.type==='NEW_GAME'||(a.type==='CONTINUE'&&b.phase==='intro'))return {dealt:true};
+  if(a.type==='ANSWER'||a.type==='TIMEOUT'){
+    if(n.phase==='reveal'&&n.clue.result&&n.clue.result.pid!=null)return {stamp:true,opt:a.opt};
+    if(n.clue&&n.clue.last&&(!b.clue.last||n.clue.token!==b.clue.token))return {wrong:true,opt:a.opt};
+  }
+  if(a.type==='CONTINUE'&&n.phase==='finalReveal')return {finalStep:true};
+  if(a.type==='FINAL_ANSWER'&&n.phase==='finalReveal')return {finalStep:true};
+  return null;
+}
+function sideEffects(b,n,a){
+  if(a.type==='PICK'){var t=n.rounds[n.round][a.tile];markSeen(t.q);Sfx.play(t.dd?'deep':'pick')}
+  if(a.type==='BUZZ')Sfx.play('buzz');
+  if(n.phase==='reveal'&&b.phase==='clue'){var r=n.clue.result;Sfx.play(r.correct?'right':'wrong');if(r.pid!=null)setTimeout(function(){Sfx.play('stamp')},120)}
+  else if(UI.lastEvent&&UI.lastEvent.wrong)Sfx.play('wrong');
+  if(UI.lastEvent&&UI.lastEvent.finalStep){var pid=n.final.order[n.final.step];Sfx.play(n.final.answers[pid]===n.final.k?'right':'wrong')}
+  if(n.phase==='over'&&b.phase!=='over')setTimeout(function(){Sfx.play('win')},200);
+  if(n.phase==='finalQ'&&b.phase!=='finalQ'){UI.priv=null}
+  if(n.phase==='finalWager'&&b.phase!=='finalWager'){UI.priv=null}
+}
+
+/* =====================================================================
+   RENDER
+   ===================================================================== */
+var app=document.getElementById('app');
+var ICON={
+  menu:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+  on:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>',
+  off:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>'
+};
+
+function render(){
+  try{
+    if(S.phase==='lobby'){app.innerHTML=lobbyHTML();return}
+    app.innerHTML=gameHTML()+overlayHTML()+(UI.menu?menuHTML():'');
+    afterRender();
+  }catch(e){showFatal(e)}
+  finally{UI.lastEvent=null}
+}
+
+/* ---------- lobby ---------- */
+function defaultSetup(){
+  var saved=store.get('setup',null);
+  return saved||{names:['Player 1','Player 2'],length:'full',timer:true};
+}
+function lobbyHTML(){
+  var st=UI.setup||(UI.setup=defaultSetup());
+  var saved=store.get('game',null), canResume=saved&&saved.phase&&saved.phase!=='lobby'&&saved.phase!=='over';
+  var rows=st.names.map(function(n,i){
+    return '<div class="prow"><i class="swatch" style="background:'+PCOLORS[i]+'"></i>'+
+      '<input data-name="'+i+'" value="'+esc(n)+'" maxlength="16" aria-label="Player '+(i+1)+' name" autocomplete="off">'+
+      (st.names.length>1?'<button class="x" data-act="rmp" data-i="'+i+'" aria-label="Remove player '+(i+1)+'">&times;</button>':'')+'</div>';
+  }).join('');
+  var resumeTxt='';
+  if(canResume){var left=0;try{left=saved.rounds[saved.round].filter(function(t){return !t.used}).length}catch(e){}
+    resumeTxt=saved.phase.indexOf('final')===0?'The Encore':ROUNDS[saved.round].name+', '+left+' clues left';}
+  return '<main class="lobby"><div class="lobby-inner">'+
+    '<section class="hero"><div class="record" aria-hidden="true"></div>'+
+      '<h1 class="logo"><span>Deep</span><span>Cuts</span></h1>'+
+      '<p class="tagline">A trivia board for people who own the B-sides. Pick a clue, wager on the hidden Deep Cuts, then bet it all in the Encore.</p>'+
+      '<div class="bandlist">'+BANDS.map(function(b){return '<b style="color:'+b.color+'">'+b.name+'</b>'}).join('')+'</div>'+
+    '</section>'+
+    '<section class="setup paper" aria-label="Game setup">'+
+      '<h2>Who’s playing?</h2><p class="hint">1 to 4 players on this screen.</p>'+
+      '<div class="plist">'+rows+'</div>'+
+      (st.names.length<4?'<button class="addp" data-act="addp">Add a player</button>':'')+
+      '<div class="opts">'+
+        '<div class="seg" role="group" aria-label="Game length">'+
+          '<button data-act="len" data-v="full" aria-pressed="'+(st.length==='full')+'">Full show<small>Side A, Side B, Encore</small></button>'+
+          '<button data-act="len" data-v="quick" aria-pressed="'+(st.length==='quick')+'">Quick set<small>Side A, Encore</small></button>'+
+        '</div>'+
+        '<div class="optrow">Answer timer<button class="switch" role="switch" data-act="tmr" aria-checked="'+(!!st.timer)+'" aria-label="Answer timer"></button></div>'+
+      '</div>'+
+      '<div class="actions"><button class="btn" data-act="start">Start game</button>'+
+        (canResume?'<button class="btn ghost" data-act="resume">Resume ('+esc(resumeTxt)+')</button>':'')+'</div>'+
+      (st.names.length>1?'<p class="keys">Buzzers: tap your color, or press '+st.names.map(function(n,i){return '<kbd>'+PKEYS[i]+'</kbd>'}).join(' ')+'. Answer with <kbd>1</kbd>–<kbd>4</kbd>.</p>':'<p class="keys">Answer with <kbd>1</kbd>–<kbd>4</kbd>, continue with <kbd>Space</kbd>.</p>')+
+      '<div class="online"><button class="btn ghost" disabled>Host online</button><button class="btn ghost" disabled>Join with code</button><span>Online rooms turn on once Firebase is connected.</span></div>'+
+    '</section></div></main>';
+}
+
+/* ---------- game chrome ---------- */
+function gameHTML(){
+  var R=ROUNDS[S.round], tiles=S.rounds[S.round], locked=S.phase!=='board';
+  var heads=BANDS.map(function(b){return '<div class="head" style="--bc:'+b.color+'"><span>'+b.name+'</span></div>'}).join('');
+  var cells=tiles.map(function(t,i){
+    var b=BANDS[t.c];
+    return '<button class="tile'+(t.used?' used':' paper')+'" style="--bc:'+b.color+';--rot:'+hashRot(i+S.round*31).toFixed(2)+'deg;--i:'+i+'" '+
+      (t.used?'disabled aria-label="Played"':'data-act="pick" data-t="'+i+'" aria-label="'+esc(b.name)+' for '+t.v+'"')+
+      (locked&&!t.used?' tabindex="-1"':'')+'><span class="val">'+(t.used?'':t.v)+'</span></button>';
+  }).join('');
+  var finalish=S.phase.indexOf('final')===0||S.phase==='over';
+  var status='';
+  if(S.phase==='board'){
+    status=S.players.length>1?'<b>'+esc(S.players[S.control].name)+'</b> picks the next clue':'Pick a clue';
+  }
+  return '<header class="top"><span class="mark">Deep Cuts</span><span class="round">'+(finalish?'The Encore':R.name)+'</span>'+
+    '<span class="spacer"></span><span class="left">'+(finalish?'':roundLeft(S)+' left')+'</span>'+
+    '<button class="iconbtn" data-act="mute" aria-label="'+(Sfx.on?'Mute sound':'Turn sound on')+'">'+(Sfx.on?ICON.on:ICON.off)+'</button>'+
+    '<button class="iconbtn" data-act="menu" aria-label="Game menu">'+ICON.menu+'</button></header>'+
+    '<div class="stage"><div class="board'+(locked?' locked':'')+(UI.lastEvent&&UI.lastEvent.dealt?' dealing':'')+'">'+heads+cells+'</div>'+
+    '<div class="status" aria-live="polite">'+status+'</div></div>'+
+    playersHTML();
+}
+function playersHTML(){
+  var multi=S.players.length>1;
+  return '<footer class="players" style="--n:'+S.players.length+'">'+S.players.map(function(p,i){
+    var bump=UI.prevScores&&UI.prevScores[i]!==p.score;
+    return '<div class="pl'+(multi&&S.control===i&&S.phase==='board'?' ctrl':'')+(bump?' bump':'')+'" style="--pc:'+p.color+'">'+
+      (multi&&S.control===i&&S.phase==='board'?'<span class="tag">Picking</span>':'')+
+      '<div class="nm">'+esc(p.name)+'</div><div class="sc'+(p.score<0?' neg':'')+'" data-score="'+i+'">'+fmt(p.score)+'</div></div>';
+  }).join('')+'</footer>';
+}
+
+/* ---------- overlays ---------- */
+function overlayHTML(){
+  switch(S.phase){
+    case 'intro': return introHTML();
+    case 'wager': return wagerHTML();
+    case 'clue': case 'reveal': return clueHTML();
+    case 'roundEnd': return roundEndHTML();
+    case 'finalIntro': return finalIntroHTML();
+    case 'finalWager': return finalWagerHTML();
+    case 'finalQ': return finalQHTML();
+    case 'finalReveal': return finalRevealHTML();
+    case 'over': return overHTML();
+  }
+  return '';
+}
+function introHTML(){
+  var R=ROUNDS[S.round], first=S.players[S.control];
+  var sub=S.round===0
+    ? 'Twenty-four clues. '+(R.deep===1?'One hidden Deep Cut':'Hidden Deep Cuts')+' lets you wager.'
+    : 'Values double. Two Deep Cuts are hiding on this board.';
+  return '<div class="ov fade"><div class="bigcard drop"><h2>'+R.name+'</h2><p>'+sub+'</p>'+
+    (S.players.length>1?'<p><b>'+esc(first.name)+'</b> picks first.</p>':'')+
+    '<button class="btn hot" data-act="cont">Start '+R.name+'</button></div></div>';
+}
+function wagerHTML(){
+  var t=tileOf(S), b=BANDS[t.c], p=S.players[S.control], max=deepMax(S,S.control);
+  if(UI.wagerAmt==null||UI.wagerAmt>max)UI.wagerAmt=Math.min(max,Math.max(5,Math.round(max/2/100)*100||5));
+  return '<div class="ov fade"><div class="bigcard drop" style="--bc:'+b.color+'"><div class="vinyl" aria-hidden="true"></div><h2>Deep Cut</h2>'+
+    '<p>'+(S.players.length>1?'<b>'+esc(p.name)+'</b>, this one’s yours alone. ':'This one’s worth a wager. ')+'Category: <b style="color:'+b.color+'">'+b.name+'</b>. How much do you want to risk?</p>'+
+    wagerControls(5,max)+'<button class="btn hot" data-act="wager">Lock in wager</button></div></div>';
+}
+function wagerControls(min,max){
+  var v=UI.wagerAmt;
+  return '<div class="wager"><div class="amt" id="wamt">'+fmt(v)+'</div>'+
+    '<input type="range" id="wrange" min="'+min+'" max="'+max+'" step="5" value="'+v+'" aria-label="Wager amount">'+
+    '<div class="quick"><button data-act="wq" data-v="'+min+'">Minimum</button><button data-act="wq" data-v="'+Math.round(max/2)+'">Half</button><button data-act="wq" data-v="'+max+'">Everything</button></div>'+
+    '<div class="range">'+fmt(min)+' to '+fmt(max)+'</div></div>';
+}
+function clueHTML(){
+  var c=S.clue, t=tileOf(S), q=BY_ID[t.q], b=BANDS[t.c], reveal=S.phase==='reveal';
+  var multi=c.mode==='buzz', answerer=multi?c.buzzed:(c.mode==='solo'?S.control:0);
+  var canAnswer=!reveal&&answerer!=null;
+  var ev=UI.lastEvent||{};
+  var choices=t.o.map(function(o,i){
+    var cls='choice';
+    if(c.struck.indexOf(i)>=0)cls+=' struck';
+    if(reveal&&i===t.k)cls+=' right';
+    if(reveal&&c.picked===i&&i!==t.k)cls+=' picked-wrong';
+    if(ev.wrong&&ev.opt===i)cls+=' shake';
+    var dis=!canAnswer||c.struck.indexOf(i)>=0;
+    return '<button class="'+cls+'" data-act="ans" data-o="'+i+'"'+(dis?' disabled':'')+'><span class="k">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>';
+  }).join('');
+  var who='';
+  if(!reveal){
+    if(multi){
+      if(c.buzzed!=null){var bp=S.players[c.buzzed];who='<b style="--pc:'+bp.color+'">'+esc(bp.name)+'</b> buzzed in. Pick an answer.'}
+      else if(c.last){var lp=S.players[c.last.pid];who='<span>'+esc(lp.name)+' '+(c.last.opt==null?'ran out of time':'missed')+' ('+fmt(c.last.delta)+'). Anyone else?</span>'}
+      else who='<span>Buzz in when you know it.</span>';
+    }else if(c.mode==='solo'&&S.players.length>1){var sp=S.players[S.control];who='<b style="--pc:'+sp.color+'">'+esc(sp.name)+'</b> wagered '+fmt(c.value)+'.'}
+    else if(c.dd)who='<span>You wagered '+fmt(c.value)+'.</span>';
+  }else{
+    var r=c.result;
+    if(r.pid==null)who='<span>'+(r.timeout?'Time’s up. ':'')+'Nobody got it.</span>';
+    else{var rp=S.players[r.pid];who='<b style="--pc:'+rp.color+'">'+esc(rp.name)+'</b><span>'+(r.correct?'got it':(r.timeout?'ran out of time':'missed'))+', '+(r.delta>=0?'+':'')+fmt(r.delta)+'</span>'}
+  }
+  var stamp='';
+  if(reveal&&c.result.pid!=null){
+    var ok=c.result.correct;
+    stamp='<div class="stamp '+(ok?'ok':'no')+(ev.stamp?' slam':'')+'">'+(ok?'Correct':'Wrong')+'<small>'+(c.result.delta>=0?'+':'')+fmt(c.result.delta)+'</small></div>';
+  }
+  var foot='';
+  if(reveal)foot='<button class="btn" data-act="cont">Continue</button>';
+  else if(multi&&c.buzzed==null)foot='<button class="btn ghost small" data-act="giveup">Nobody knows</button>';
+  var pads='';
+  if(multi&&!reveal){
+    pads='<div class="pads" style="--n:'+S.players.length+'">'+S.players.map(function(p,i){
+      var dis=c.buzzed!=null||c.locked.indexOf(i)>=0;
+      return '<button class="pad'+(c.buzzed===i?' live':'')+'" style="--pc:'+p.color+'" data-act="buzz" data-p="'+i+'"'+(dis?' disabled':'')+'>'+esc(p.name)+'<small>Buzz with '+PKEYS[i]+'</small></button>';
+    }).join('')+'</div>';
+  }
+  var timer=c.deadline&&!reveal?'<div class="timer" aria-hidden="true"><i id="tbar"></i></div>':'';
+  return '<div class="ov'+(UI.flipFrom?'':' fade')+'" id="clueov"><article class="card paper" id="cluecard" style="--bc:'+b.color+'">'+timer+stamp+
+    '<div class="meta"><span class="band">'+b.name+'</span><span class="worth">'+fmt(c.value)+(c.dd?'<small>Deep Cut</small>':'')+'</span></div>'+
+    '<h2 class="qtext">'+esc(q.q)+'</h2>'+
+    '<div class="choices'+(canAnswer||reveal?'':' wait')+'">'+choices+'</div>'+
+    '<div class="who" aria-live="polite">'+who+'</div>'+
+    (foot?'<div class="foot">'+foot+'</div>':'')+
+    '</article>'+pads+'</div>';
+}
+function standingsHTML(){
+  var order=S.players.map(function(p,i){return i}).sort(function(a,b){return S.players[b].score-S.players[a].score});
+  return '<ol class="standings">'+order.map(function(i,k){var p=S.players[i];
+    return '<li class="'+(k===0?'first':'')+'" style="--pc:'+p.color+'"><span class="pos">'+(k+1)+'</span><span class="nm">'+esc(p.name)+'</span><span class="sc">'+fmt(p.score)+'</span></li>'}).join('')+'</ol>';
+}
+function roundEndHTML(){
+  return '<div class="ov fade"><div class="bigcard drop"><h2>Flip it</h2><p>Side A is done. Side B doubles every value'+(S.players.length>1?', and whoever is trailing picks first':'')+'.</p>'+
+    standingsHTML()+'<button class="btn hot" data-act="cont">Play Side B</button></div></div>';
+}
+function finalIntroHTML(){
+  var b=BANDS[S.final.b];
+  return '<div class="ov fade"><div class="bigcard drop" style="--bc:'+b.color+'"><div class="vinyl" aria-hidden="true"></div><h2>The Encore</h2>'+
+    '<p>One last question, and it’s about <b style="color:'+b.color+'">'+b.name+'</b>. '+(S.players.length>1?'Everyone wagers in secret, then answers in secret.':'Wager what you dare.')+'</p>'+
+    standingsHTML()+'<button class="btn hot" data-act="cont">Place wagers</button></div></div>';
+}
+function nextPending(map){for(var i=0;i<S.players.length;i++)if(map[i]==null)return i;return -1}
+function privacyGate(pid,what){
+  var p=S.players[pid];
+  return '<div class="ov fade"><div class="bigcard privacy"><h2 style="font-size:clamp(48px,10vw,88px)">Pass it</h2>'+
+    '<p>Hand the screen to <b style="color:'+p.color+'">'+esc(p.name)+'</b>. Everyone else, look away.</p>'+
+    '<button class="btn hot" data-act="privok" data-p="'+pid+'">I’m '+esc(p.name)+', show my '+what+'</button></div></div>';
+}
+function finalWagerHTML(){
+  var pid=nextPending(S.final.wagers); if(pid<0)return '';
+  var multi=S.players.length>1;
+  if(multi&&UI.priv!==pid)return privacyGate(pid,'wager');
+  var p=S.players[pid], b=BANDS[S.final.b], max=finalMax(S,pid);
+  if(max<=0){
+    return '<div class="ov fade"><div class="bigcard"><h2 style="font-size:clamp(48px,10vw,88px)">'+esc(p.name)+'</h2>'+
+      '<p>You’re at '+fmt(p.score)+', so there’s nothing to wager. You still get to answer.</p>'+
+      '<button class="btn hot" data-act="fwager" data-p="'+pid+'" data-zero="1">Continue</button></div></div>';
+  }
+  if(UI.wagerAmt==null||UI.wagerAmt>max)UI.wagerAmt=Math.round(max/2);
+  return '<div class="ov fade"><div class="bigcard" style="--bc:'+b.color+'"><h2 style="font-size:clamp(48px,10vw,88px)">'+esc(p.name)+'</h2>'+
+    '<p>Category: <b style="color:'+b.color+'">'+b.name+'</b>. You have '+fmt(p.score)+'.</p>'+wagerControls(0,max)+
+    '<button class="btn hot" data-act="fwager" data-p="'+pid+'">Lock in wager</button></div></div>';
+}
+function finalQHTML(){
+  var pid=nextPending(S.final.answers); if(pid<0)return '';
+  var multi=S.players.length>1;
+  if(multi&&UI.priv!==pid)return privacyGate(pid,'question');
+  var q=BY_ID[S.final.q], b=BANDS[S.final.b], p=S.players[pid];
+  var choices=S.final.o.map(function(o,i){return '<button class="choice" data-act="fans" data-p="'+pid+'" data-o="'+i+'"><span class="k">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>'}).join('');
+  return '<div class="ov fade"><article class="card paper" style="--bc:'+b.color+'">'+
+    '<div class="meta"><span class="band">'+b.name+'</span><span class="worth">Encore<small>'+esc(p.name)+' wagered '+fmt(S.final.wagers[pid]||0)+'</small></span></div>'+
+    '<h2 class="qtext">'+esc(q.q)+'</h2><div class="choices">'+choices+'</div>'+
+    '<div class="who">'+(multi?'<span>Your answer stays hidden until the reveal.</span>':'')+'</div></article></div>';
+}
+function finalRevealHTML(){
+  var pid=S.final.order[S.final.step], p=S.players[pid], q=BY_ID[S.final.q], b=BANDS[S.final.b];
+  var pick=S.final.answers[pid], ok=pick===S.final.k, w=S.final.wagers[pid]||0, last=S.final.step>=S.final.order.length-1;
+  return '<div class="ov fade"><div class="bigcard" style="--bc:'+b.color+'"><h2 style="font-size:clamp(44px,9vw,80px)">The Encore</h2>'+
+    '<p>'+esc(q.q)+'</p><p>Answer: <b>'+esc(S.final.o[S.final.k])+'</b></p>'+
+    '<div class="reveal-row" style="--pc:'+p.color+'"><div class="nm">'+esc(p.name)+'</div>'+
+      '<div class="ln">Answered <b>'+esc(S.final.o[pick])+'</b>, wagered <b>'+fmt(w)+'</b></div>'+
+      '<div class="res '+(ok?'ok':'no')+'">'+(ok?'Right, ':'Wrong, ')+(ok?'+':'−')+fmt(w).replace('−','')+' → '+fmt(p.score)+'</div></div>'+
+    '<button class="btn hot" data-act="cont">'+(last?'Final scores':'Next reveal')+'</button></div></div>';
+}
+function overHTML(){
+  var order=S.players.map(function(p,i){return i}).sort(function(a,b){return S.players[b].score-S.players[a].score});
+  var top=S.players[order[0]], tie=order.length>1&&S.players[order[1]].score===top.score;
+  var title=S.players.length===1?fmt(top.score):(tie?'A tie':esc(top.name)+' wins');
+  var sub=S.players.length===1?(top.score>0?'That’s your final score.':'Rough night. Run it back?'):(tie?'Settle it with a rematch.':'Final standings:');
+  return '<div class="ov fade"><div class="bigcard drop"><h2 style="font-size:clamp(56px,11vw,110px)">'+title+'</h2><p>'+sub+'</p>'+
+    (S.players.length>1?standingsHTML():'')+
+    '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn hot" data-act="again">Play again</button><button class="btn ghost" data-act="tolobby">Change players</button></div></div></div>';
+}
+function menuHTML(){
+  var rows=S.players.map(function(p,i){return '<div class="row"><span class="nm" style="border-left:5px solid '+p.color+';padding-left:8px">'+esc(p.name)+' <small style="font-family:var(--f-body)">'+fmt(p.score)+'</small></span>'+
+    '<span class="adj"><button data-act="adj" data-p="'+i+'" data-d="-100">−100</button><button data-act="adj" data-p="'+i+'" data-d="100">+100</button></span></div>'}).join('');
+  return '<div class="ov fade menu-ov" data-act="closemenu-bg"><div class="sheet paper" role="dialog" aria-label="Game menu">'+
+    '<h3>Game menu</h3>'+
+    '<div class="row">Answer timer<button class="switch" role="switch" data-act="mtimer" aria-checked="'+(!!S.settings.timer)+'" aria-label="Answer timer"></button></div>'+
+    '<div class="row">Sound<button class="switch" role="switch" data-act="mute" aria-checked="'+Sfx.on+'" aria-label="Sound"></button></div>'+
+    '<p style="margin:14px 0 2px;font-weight:600">Fix a score</p>'+rows+
+    '<div class="btns"><button class="btn danger" data-act="endgame">'+(UI.confirmEnd?'Tap again to end':'End game')+'</button><button class="btn" data-act="closemenu">Back to game</button></div>'+
+    '</div></div>';
+}
+
+/* ---------- post-render: flip animation, score tween, focus ---------- */
+function afterRender(){
+  var card=document.getElementById('cluecard');
+  if(card&&UI.flipFrom&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var f=UI.flipFrom, r=card.getBoundingClientRect();
+    var sx=f.width/r.width, sy=f.height/r.height, dx=(f.left+f.width/2)-(r.left+r.width/2), dy=(f.top+f.height/2)-(r.top+r.height/2);
+    card.style.transition='none';card.style.transform='translate('+dx+'px,'+dy+'px) scale('+sx+','+sy+')';card.style.opacity='.6';
+    card.getBoundingClientRect();
+    card.style.transition='transform .42s cubic-bezier(.2,.85,.25,1), opacity .2s';card.style.transform='';card.style.opacity='';
+    var ov=document.getElementById('clueov');if(ov){ov.style.background='rgba(12,4,7,0)';ov.getBoundingClientRect();ov.style.transition='background .3s';ov.style.background=''}
+  }
+  UI.flipFrom=null;
+  // tween changed scores
+  if(UI.prevScores){var prev=UI.prevScores;S.players.forEach(function(p,i){
+    if(prev[i]===p.score)return;var el=app.querySelector('[data-score="'+i+'"]');if(!el)return;tween(el,prev[i],p.score)});UI.prevScores=null}
+  var hot=app.querySelector('.ov .btn.hot, .ov .card .foot .btn:not(.ghost)');
+  if(hot&&!UI.menu)try{hot.focus({preventScroll:true})}catch(e){}
+  var rng=document.getElementById('wrange');
+  if(rng)rng.addEventListener('input',function(){UI.wagerAmt=+rng.value;var a=document.getElementById('wamt');if(a)a.textContent=fmt(UI.wagerAmt)});
+}
+function tween(el,from,to){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=fmt(to);return}
+  var t0=performance.now(),d=550;
+  (function step(t){var k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3),v=Math.round(from+(to-from)*e);el.textContent=fmt(v);el.classList.toggle('neg',v<0);if(k<1)requestAnimationFrame(step)})(t0);
+}
+
+/* ---------- timer loop (UI only; rules see TIMEOUT action) ---------- */
+setInterval(function(){
+  if(S.phase!=='clue'||!S.clue||!S.clue.deadline||UI.menu)return;
+  var left=S.clue.deadline-Date.now();
+  var c=S.clue, span=c.mode==='buzz'?(c.buzzed!=null?TIME.answer:TIME.open):(c.mode==='solo'?TIME.deep:TIME.direct);
+  var bar=document.getElementById('tbar');
+  if(bar){bar.style.setProperty('--t',Math.max(0,left/span).toFixed(3));bar.parentNode.classList.toggle('low',left<4000)}
+  var sec=Math.ceil(left/1000);
+  if(left<4000&&left>0&&sec!==UI.lastTick){UI.lastTick=sec;Sfx.play('tick')}
+  if(left<=0)dispatch({type:'TIMEOUT',token:c.token});
+},100);
+// pause timers while the menu is open by pushing the deadline forward
+var lastMenuTick=Date.now();
+setInterval(function(){var n=Date.now();if(UI.menu&&S.clue&&S.clue.deadline){S.clue.deadline+=n-lastMenuTick}lastMenuTick=n},250);
+
+/* =====================================================================
+   INPUT
+   ===================================================================== */
+function startGame(names,settings){
+  var seen=store.get('seen',{});
+  var deal=makeDeal(settings.length,seen);
+  UI.wagerAmt=null;UI.priv=null;UI.menu=false;
+  dispatch({type:'NEW_GAME',id:uid(),players:names.map(function(n,i){return {name:(n||'').trim()||('Player '+(i+1))}}),settings:settings,deal:deal,control:Math.floor(Math.random()*names.length)});
+}
+document.addEventListener('input',function(e){
+  var i=e.target.getAttribute&&e.target.getAttribute('data-name');
+  if(i!=null&&UI.setup){UI.setup.names[+i]=e.target.value;store.set('setup',UI.setup)}
+});
+document.addEventListener('click',function(e){
+  Sfx.init();
+  var el=e.target.closest('[data-act]'); if(!el||el.disabled)return;
+  var act=el.getAttribute('data-act');
+  if(act==='closemenu-bg'&&e.target!==el)return;
+  var st=UI.setup;
+  switch(act){
+    case 'addp': if(st.names.length<4){st.names.push('Player '+(st.names.length+1));store.set('setup',st);render();var ins=app.querySelectorAll('[data-name]');ins[ins.length-1].select()}break;
+    case 'rmp': st.names.splice(+el.getAttribute('data-i'),1);store.set('setup',st);render();break;
+    case 'len': st.length=el.getAttribute('data-v');store.set('setup',st);render();break;
+    case 'tmr': st.timer=!st.timer;store.set('setup',st);render();break;
+    case 'start': startGame(st.names.slice(),{length:st.length,timer:!!st.timer});break;
+    case 'resume': var g=store.get('game',null);if(g){S=g;UI.menu=false;dispatch({type:'RESUME'});render()}break;
+    case 'pick':
+      var r=el.getBoundingClientRect();UI.flipFrom={left:r.left,top:r.top,width:r.width,height:r.height};
+      UI.wagerAmt=null;dispatch({type:'PICK',tile:+el.getAttribute('data-t')});
+      if(S.phase!=='clue')UI.flipFrom=null;break;
+    case 'wager': dispatch({type:'WAGER',amount:UI.wagerAmt});break;
+    case 'wq': UI.wagerAmt=+el.getAttribute('data-v');var rg=document.getElementById('wrange');if(rg){rg.value=UI.wagerAmt;document.getElementById('wamt').textContent=fmt(UI.wagerAmt)}break;
+    case 'buzz': dispatch({type:'BUZZ',pid:+el.getAttribute('data-p')});break;
+    case 'ans': dispatch({type:'ANSWER',opt:+el.getAttribute('data-o')});break;
+    case 'giveup': dispatch({type:'GIVE_UP'});break;
+    case 'cont': UI.wagerAmt=null;dispatch({type:'CONTINUE'});break;
+    case 'privok': UI.priv=+el.getAttribute('data-p');UI.wagerAmt=null;render();break;
+    case 'fwager': var pid=+el.getAttribute('data-p');dispatch({type:'FINAL_WAGER',pid:pid,amount:el.getAttribute('data-zero')?0:UI.wagerAmt});UI.wagerAmt=null;UI.priv=null;render();break;
+    case 'fans': UI.priv=null;dispatch({type:'FINAL_ANSWER',pid:+el.getAttribute('data-p'),opt:+el.getAttribute('data-o')});render();break;
+    case 'again': var names=S.players.map(function(p){return p.name});startGame(names,S.settings);break;
+    case 'tolobby': S=newState();store.del('game');UI.menu=false;render();break;
+    case 'mute': Sfx.on=!Sfx.on;store.set('sound',Sfx.on);render();break;
+    case 'menu': UI.menu=true;UI.confirmEnd=false;render();break;
+    case 'closemenu': case 'closemenu-bg': UI.menu=false;UI.confirmEnd=false;render();break;
+    case 'mtimer': dispatch({type:'SET_TIMER',on:!S.settings.timer});break;
+    case 'adj': dispatch({type:'ADJUST',pid:+el.getAttribute('data-p'),delta:+el.getAttribute('data-d')});break;
+    case 'endgame': if(!UI.confirmEnd){UI.confirmEnd=true;render();break}
+      UI.menu=false;UI.confirmEnd=false;S=newState();store.del('game');render();break;
+  }
+});
+document.addEventListener('keydown',function(e){
+  if(e.target&&e.target.tagName==='INPUT'&&e.target.type!=='range')return;
+  Sfx.init();
+  if(UI.menu){if(e.key==='Escape'){UI.menu=false;render()}return}
+  var k=e.key.toUpperCase();
+  if(S.phase==='clue'&&S.clue){
+    var pi=PKEYS.indexOf(k);
+    if(pi>=0&&pi<S.players.length&&S.clue.mode==='buzz'){dispatch({type:'BUZZ',pid:pi});e.preventDefault();return}
+    var oi='1234'.indexOf(e.key); if(oi<0)oi='ABCD'.indexOf(k);
+    if(oi>=0&&!(S.clue.mode==='buzz'&&S.clue.buzzed==null)){dispatch({type:'ANSWER',opt:oi});e.preventDefault();return}
+  }
+  if(S.phase==='finalQ'&&(S.players.length===1||UI.priv!=null)){
+    var fo='1234'.indexOf(e.key); var fp=nextPending(S.final.answers);
+    if(fo>=0&&fp>=0){UI.priv=null;dispatch({type:'FINAL_ANSWER',pid:fp,opt:fo});render();return}
+  }
+  if(e.key==='Escape'&&S.phase!=='lobby'){UI.menu=true;render()}
+});
+
+/* =====================================================================
+   BOOT
+   ===================================================================== */
+function showFatal(e){
+  app.innerHTML='<div class="fatal"><h2 style="font-family:var(--f-display)">Something broke while loading.</h2><p>Reload the page. If it keeps happening, starting a new game usually fixes it.</p><pre>'+esc(e&&e.stack||e)+'</pre><button class="btn" id="fatalreset">Clear saved game and reload</button></div>';
+  var b=document.getElementById('fatalreset');if(b)b.onclick=function(){store.del('game');location.reload()};
+  if(window.console)console.error('[deepcuts]',e);
+}
+function boot(){
+  BANK=JSON.parse(document.getElementById('bank').textContent);
+  BANK.forEach(function(q){BY_ID[q.id]=q});
+  Sfx.on=store.get('sound',true)!==false;
+  // a saved game from an older build (question removed) shouldn't crash the lobby
+  var g=store.get('game',null);
+  if(g&&g.rounds){var ok=g.rounds.every(function(r){return r.every(function(t){return BY_ID[t.q]})})&&BY_ID[g.final.q];if(!ok)store.del('game')}
+  render();
+}
+window.__deepcuts={reduce:reduce,makeDeal:makeDeal,getState:function(){return S},dispatch:dispatch,BANK:function(){return BANK}};
+try{boot()}catch(e){showFatal(e)}
+})();
+</script>
+</body>
+</html>
